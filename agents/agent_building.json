@@ -1,0 +1,991 @@
+[
+  {
+    "useCaseId": "001",
+    "agentName": "Email Reply Drafter",
+    "toolSelection": [
+      "Gmail: Get Unread Email",
+      "Gmail: Summarize Email Thread",
+      "Gmail: Create Draft",
+      "Microsoft Outlook Email: Search Emails",
+      "Microsoft Outlook Email: Create Draft"
+    ],
+    "conversation": [
+      {
+        "request": "I want to build an agent that can autodraft a reply for unread emails in my inbox.",
+        "response": "Understood. To start, which email application should I connect to, Gmail or Outlook?"
+      },
+      {
+        "request": "Let's use Gmail.",
+        "response": "Okay. I'll connect to your Gmail, go through the unread messages, and draft a reply for each one based on the conversation's context. The drafts will be saved in your Gmail folder for you to review. How does that sound?"
+      },
+      {
+        "request": "Yes, that's correct.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "002",
+    "agentName": "Exit Interview Analyzer",
+    "toolSelection": [
+      "Google Drive: Search Content",
+      "Google Drive: Download File",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to go through the exit interview transcripts in our Drive folder, find the top 3 reasons people left last quarter, and create a Confluence page summarizing the findings.",
+        "response": "I can do that. Can you provide the name of the folder in Google Drive where the transcripts are stored?"
+      },
+      {
+        "request": "They're in a folder named 'Exit Interviews - FY25'.",
+        "response": "Noted. And in which Confluence space should the summary page be created?"
+      },
+      {
+        "request": "Please put it in the 'People Analytics' space.",
+        "response": "Okay. I'll look through the files in that Drive folder from last quarter, figure out the top three reasons for departure, and then create a new page in your 'People Analytics' space in Confluence with the summary. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "003",
+    "agentName": "Salary Band Comparator",
+    "toolSelection": [
+      "Google Drive: Search Content",
+      "Google Drive: Download File",
+      "Gmail: Send Email",
+      "Slack: Send Direct Message"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to compare our internal 'Software Engineer' salary bands in Google Sheets against the latest industry survey PDFs stored in our 'Comp Surveys' Drive folder. It should flag any roles where we are more than 5% below the market average.",
+        "response": "Understood. Can you confirm the name of the Google Sheet with the salary bands?"
+      },
+      {
+        "request": "It's called 'Engineering Comp Bands 2025'.",
+        "response": "Thank you. I will read that sheet and process the PDF surveys from the 'Comp Surveys' folder in Drive. When I identify roles more than 5% below market, how should I notify you? Via a Slack message or an email?"
+      },
+      {
+        "request": "Send me an email.",
+        "response": "Okay. I'll access your Google Sheet, analyze the survey PDFs from Drive, and then email you a list of any roles that are flagged. Is that correct?"
+      },
+      {
+        "request": "Yes, it is.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "004",
+    "agentName": "Case Investigator",
+    "toolSelection": [
+      "Gmail: Search Emails",
+      "Slack: Search Messages",
+      "Google Drive: Create Document/Sheet/Slide"
+    ],
+    "conversation": [
+      {
+        "request": "I need to look into a case. I need an agent to gather all emails between John Doe and Jane Smith from the last 60 days, and find any Slack DMs between them.",
+        "response": "I can do that. To proceed, what are the email addresses for John Doe and Jane Smith?"
+      },
+      {
+        "request": "john.doe@example.com and jane.smith@example.com.",
+        "response": "Thank you. Where should I compile the results?"
+      },
+      {
+        "request": "Put them in a new Google Doc and share it with me. Title it 'Doe/Smith Communication Log'.",
+        "response": "Got it. I'll search their emails and Slack messages for the last 60 days and put all the findings into a new Google Doc called 'Doe/Smith Communication Log' for you. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the complete task.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "005",
+    "agentName": "D&I Dashboard Refresher",
+    "toolSelection": [
+      "Workday: Find Colleague",
+      "Google Sheets"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to update our monthly D&I dashboard. It should pull the latest headcount data from Workday and refresh the charts in our 'D&I Metrics' Google Sheet.",
+        "response": "I can set that up. To pull the right data from Workday, what specific fields do I need? For example, department, level, or location?"
+      },
+      {
+        "request": "It needs to pull the current headcount broken down by department and self-identified gender.",
+        "response": "Okay. I will query Workday for that data. I assume the charts in the 'D&I Metrics' Google Sheet are set up to auto-update from a raw data tab?"
+      },
+      {
+        "request": "Yes, that's correct. The agent just needs to paste the new data into the 'Raw Data' tab.",
+        "response": "The plan is: I'll get the latest headcount data from Workday and use it to overwrite the 'Raw Data' tab in your Google Sheet. How does that sound?"
+      },
+      {
+        "request": "Yes, it does.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "006",
+    "agentName": "Training Course Suggester",
+    "toolSelection": [
+      "Workday: Get My Profile",
+      "Confluence: Get Page Content",
+      "Web Search"
+    ],
+    "conversation": [
+      {
+        "request": "Based on my role as a 'Product Manager' in Workday and the company's skill priorities listed in the 'PM Career Path' Confluence page, suggest three relevant training courses for me to take this quarter.",
+        "response": "I can do that. I'll get your job details from Workday and the required skills from the Confluence page. To find the courses, should I search the public web, or is there an internal training catalog to use?"
+      },
+      {
+        "request": "Search the public web for now.",
+        "response": "Understood. I'll get your role from Workday, find the skill priorities in Confluence, and then search the web to suggest three relevant courses. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "007",
+    "agentName": "Talent Sourcer",
+    "toolSelection": [
+      "LinkedIn: Search Profiles",
+      "GitHub: Search for Issues",
+      "Salesforce: Search for Records",
+      "Salesforce: Create Lead"
+    ],
+    "conversation": [
+      {
+        "request": "I want to search LinkedIn and GitHub for software engineers with Python skills who are not at our competitor companies, and add any new potential candidates to our 'Passive Talent' list in Salesforce.",
+        "response": "I can run this search. To ensure it's accurate, I need the list of competitor companies that should be excluded."
+      },
+      {
+        "request": "Exclude 'Competitor A' and 'Competitor B'.",
+        "response": "Noted. I will search LinkedIn and GitHub for the right profiles, check if they're already in Salesforce, and add any new ones to your 'Passive Talent' list. Does this sound correct?"
+      },
+      {
+        "request": "Yes, that's the right workflow.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "008",
+    "agentName": "Competitive Offer Analyst",
+    "toolSelection": [
+      "Web Search",
+      "Confluence: Search for Pages",
+      "Confluence: Get Page Content",
+      "Google Drive: Search Content"
+    ],
+    "conversation": [
+      {
+        "request": "A candidate for the Senior PM role has an offer from 'Competitor X'. I need talking points on our strengths vs. theirs, a summary of recent news about them, and comp talking points from our internal Moma page.",
+        "response": "I can gather that competitive intelligence. You mentioned an internal 'Moma page' for compensation talking points. Is that page in Confluence, or is it a file in Google Drive or SharePoint?"
+      },
+      {
+        "request": "It's a Confluence page.",
+        "response": "Thank you. I'll search the web for news about 'Competitor X', find that Moma page in Confluence, and pull it all together into a set of talking points for you. Does that cover your request?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "009",
+    "agentName": "Talent Map Refresher",
+    "toolSelection": [
+      "LinkedIn: Search Profiles",
+      "LinkedIn: Search for Companies",
+      "Gmail: Create Draft",
+      "Microsoft Outlook Email: Create Draft"
+    ],
+    "conversation": [
+      {
+        "request": "I need to refresh our talent map for 'Target Company Y'. Identify key engineers who recently left and where they went, then create personalized outreach email drafts for 5 high-potential individuals who still work there.",
+        "response": "I can do that. What criteria should I use to define a 'key engineer' or 'high-potential individual'? For example, seniority or specific skills?"
+      },
+      {
+        "request": "Let's define it as anyone with 'Senior' or 'Principal' in their title and skills in 'distributed systems'.",
+        "response": "Okay. And for the email drafts, should they be created in Gmail or Outlook?"
+      },
+      {
+        "request": "Create them in Gmail.",
+        "response": "The plan is: I'll search LinkedIn for the right people at 'Target Company Y', identify those who recently left, and then draft personalized emails in Gmail to 5 high-potential people who are still there. Is this correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "010",
+    "agentName": "Resume Ranker & Skill Analyzer",
+    "toolSelection": [
+      "Dropbox: Search Content",
+      "Dropbox: Download File",
+      "Google Drive: Get Page Content",
+      "Google Sheets"
+    ],
+    "conversation": [
+      {
+        "request": "I need to parse all 100 resumes from the 'New Applicants' Dropbox folder, rank them against the job description in the Google Doc, and identify any new trending skills to create a new boolean search string for LinkedIn.",
+        "response": "I can set up that workflow. Can you provide the name of or a link to the Google Doc with the job description?"
+      },
+      {
+        "request": "The doc is named 'Senior Backend Engineer JD'.",
+        "response": "Got it. After I rank the candidates and generate the new search string, where should I place that output?"
+      },
+      {
+        "request": "Create a new Google Sheet named 'Applicant Ranking - Senior Backend' and put the results there.",
+        "response": "Understood. I'll get the resumes from Dropbox, read the job description from your Google Doc, then rank the candidates and identify trending skills. I'll put all the results in a new Google Sheet for you. Is the plan correct?"
+      },
+      {
+        "request": "Yes, it is.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "011",
+    "agentName": "Candidate Nurture Assistant",
+    "toolSelection": [
+      "Salesforce: Search for Records",
+      "Salesforce: Get Record Details",
+      "Confluence: Get Page Content",
+      "Gmail: Create Draft",
+      "Microsoft Outlook Email: Create Draft"
+    ],
+    "conversation": [
+      {
+        "request": "I need to reach out to the 10 candidates in my 'Cloud Architect - Nurture' list in Salesforce. Draft personalized emails to each, referencing their skills and our latest blog post on multi-cloud strategy.",
+        "response": "I can do that. First, where is the blog post located? Is it on a public website or a Confluence page?"
+      },
+      {
+        "request": "It's a page in Confluence.",
+        "response": "Okay. And should the draft emails be created in Gmail or Outlook?"
+      },
+      {
+        "request": "Gmail.",
+        "response": "I'll get the candidate details from Salesforce, grab the blog post from Confluence, and then create a personalized draft in Gmail for each person. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "012",
+    "agentName": "Competitor Recruiter",
+    "toolSelection": [
+      "LinkedIn: Search Profiles",
+      "LinkedIn: Send LinkedIn Message"
+    ],
+    "conversation": [
+      {
+        "request": "I need to find 10 software engineers in Austin, TX with experience in 'Go' and 'Kubernetes' who work at our competitors. Then, send the top 5 a personalized connection request about our open 'Senior Cloud Engineer' role.",
+        "response": "I can do that. To start, I need the list of competitor companies to search within."
+      },
+      {
+        "request": "Search for people at 'Competitor A', 'Competitor B', and 'Competitor C'.",
+        "response": "Got it. What should the connection request message say?"
+      },
+      {
+        "request": "Just say: 'Hi [Name], I saw your experience with Go and Kubernetes and was impressed. We have an open Senior Cloud Engineer role at [My Company] that seems like a great fit. Are you open to a brief chat?'",
+        "response": "Okay. I'll search LinkedIn for people who match your criteria and send that connection request to the top 5 results. Is that correct?"
+      },
+      {
+        "request": "Yes, proceed.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "013",
+    "agentName": "Org Chart Builder",
+    "toolSelection": [
+      "LinkedIn: Search Profiles",
+      "LinkedIn: Search for Companies",
+      "Google Drive: Create Document/Sheet/Slide",
+      "Canva: Create Design"
+    ],
+    "conversation": [
+      {
+        "request": "I need to map out the 'AI Research' team at 'Competitor Z'. I want the reporting structure, their LinkedIn profiles, and a visual chart.",
+        "response": "I can gather that information using public LinkedIn data. For the final output, where should I create the visual chart? I can use Google Slides or Canva."
+      },
+      {
+        "request": "Use Google Slides.",
+        "response": "Understood. I'll search LinkedIn for the team members at 'Competitor Z' to figure out the reporting structure, then create a presentation in Google Drive with the org chart and profile links. Does that sound right?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "014",
+    "agentName": "Alumni Recruiter",
+    "toolSelection": [
+      "LinkedIn: Search Profiles",
+      "Gmail: Create Draft",
+      "Microsoft Outlook Email: Create Draft"
+    ],
+    "conversation": [
+      {
+        "request": "Find former employees on LinkedIn who left 2-4 years ago, are now Directors of Product in London, and draft a message to them about our new VP of Product role.",
+        "response": "I can run that search. For the outreach, should I create the draft message in Gmail or Outlook?"
+      },
+      {
+        "request": "Gmail, please.",
+        "response": "Okay. What should the draft message say?"
+      },
+      {
+        "request": "Something like: 'Hi [Name], hope you're doing well. I see you've been doing great things since your time here. We're currently looking for a VP of Product and thought of you. Would you be open to a confidential conversation?'",
+        "response": "I'll search LinkedIn for people matching your criteria and then create a draft in Gmail with your message for each person found. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "015",
+    "agentName": "Referral Finder",
+    "toolSelection": [
+      "LinkedIn: Search Profiles",
+      "Slack: Send Direct Message"
+    ],
+    "conversation": [
+      {
+        "request": "The hiring manager for our open 'UX Design' role is 'Jane Doe'. I need to scan her first-degree LinkedIn connections for anyone with 'Figma' and 'User Research' who doesn't work here, and then send me a Slack message with the top 3 profiles.",
+        "response": "I can run that search. A clarification: I can't directly access a user's private list of connections on LinkedIn. However, I can search for public profiles that match the skills, and you can cross-reference if they are a connection of Jane's. Is that approach acceptable?"
+      },
+      {
+        "request": "Yes, that works.",
+        "response": "Okay. I'll search LinkedIn for public profiles with those skills, filter out anyone at our company, and then send the top 3 profiles to you in a Slack message. How does that sound?"
+      },
+      {
+        "request": "Yes, it does.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "016",
+    "agentName": "Talent Pool Generator",
+    "toolSelection": [
+      "LinkedIn: Search Profiles",
+      "Salesforce: Create Lead",
+      "Google Sheets"
+    ],
+    "conversation": [
+      {
+        "request": "I need a list of all 'Account Executives' at 'Company A', 'Company B', and 'Company C' in the New York area to build a talent pool.",
+        "response": "I can do that. After I find these profiles on LinkedIn, where should I put the list? I can create a Google Sheet or add them directly to Salesforce as leads."
+      },
+      {
+        "request": "Create a Google Sheet for now.",
+        "response": "Understood. I'll search LinkedIn for profiles matching your criteria and compile the results into a new Google Sheet. Is that the full request?"
+      },
+      {
+        "request": "Yes, thank you.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "017",
+    "agentName": "Vendor Spend Analyzer",
+    "toolSelection": [
+      "Box: Search Content",
+      "Salesforce: Search for Records",
+      "Google Sheets"
+    ],
+    "conversation": [
+      {
+        "request": "Scan our vendor contracts in Box and our purchase orders in Salesforce for the last year. I need a Google Sheet with our top 10 vendors by spend, with renewal dates in the next 90 days flagged.",
+        "response": "I can do that. I'll need to connect to both Box and Salesforce. I will search for contract files in Box and PO records in Salesforce from the last 12 months, then aggregate the data to determine spend. Does that sound right?"
+      },
+      {
+        "request": "Yes, that's the right approach.",
+        "response": "Okay. I'll search across Box and Salesforce, calculate the top 10 vendors by spend, and create a Google Sheet with the results, highlighting the upcoming renewals. Is that correct?"
+      },
+      {
+        "request": "Perfect.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "018",
+    "agentName": "Expense Receipt Chaser",
+    "toolSelection": [
+      "Google Sheets",
+      "Slack: Send Direct Message"
+    ],
+    "conversation": [
+      {
+        "request": "Check our expense tracking sheet and for any row where 'Receipt Attached' is 'No', send the employee a reminder on Slack.",
+        "response": "I can do that. Is the expense tracking sheet a Google Sheet or an Excel file in Drive/SharePoint?"
+      },
+      {
+        "request": "It's a Google Sheet.",
+        "response": "Thank you. Can you provide the name of the sheet?"
+      },
+      {
+        "request": "'Q3 Expense Reports'.",
+        "response": "Understood. I'll read the 'Q3 Expense Reports' sheet, find all rows that are missing a receipt, and send a reminder on Slack to the employee listed in that row. Is that the correct workflow?"
+      },
+      {
+        "request": "Yes, it is.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "019",
+    "agentName": "Cash Flow Forecaster",
+    "toolSelection": [
+      "Salesforce: Search for Records",
+      "Google Sheets"
+    ],
+    "conversation": [
+      {
+        "request": "I need an updated cash flow forecast. Pull open opportunities from Salesforce and combine them with our 'Accounts Payable' Google Sheet.",
+        "response": "I can generate that forecast. I will get the open opportunities from Salesforce. For the Google Sheet, is there a specific tab I should be looking at for the accounts payable data?"
+      },
+      {
+        "request": "Yes, use the 'AP-Master' tab.",
+        "response": "Okay. After I combine the data, where should I place the final forecast?"
+      },
+      {
+        "request": "Create a new tab in the same Google Sheet and call it 'Cash Flow Forecast'.",
+        "response": "Understood. I'll pull the data from Salesforce, combine it with the 'AP-Master' tab in your Google Sheet, and create a new 'Cash Flow Forecast' tab with the result. Correct?"
+      },
+      {
+        "request": "Yes, that's correct.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "020",
+    "agentName": "Earnings Call Prep Assistant",
+    "toolSelection": [
+      "Google Drive: Search Content",
+      "Gmail: Search Emails",
+      "Gmail: Summarize Email Thread",
+      "Google Drive: Create Document/Sheet/Slide"
+    ],
+    "conversation": [
+      {
+        "request": "I need to prepare for the quarterly earnings call. Find the final financial reports in our 'Finance Reports' Drive folder and summarize email threads from analysts in my Gmail.",
+        "response": "I can help with that. Are there specific analysts whose emails I should focus on, or should I search for keywords?"
+      },
+      {
+        "request": "Search for any emails with 'earnings estimate' or 'Q3 guidance' in the subject line from the last month.",
+        "response": "Okay. I will find the reports in the Drive folder and search Gmail for those emails. Where should I put the final summary?"
+      },
+      {
+        "request": "Create a new Google Doc called 'Earnings Call Prep' and put everything in there.",
+        "response": "Got it. I'll find the reports in Drive, summarize the analyst emails from Gmail, and compile everything in a new Google Doc for you. Is that the plan?"
+      },
+      {
+        "request": "Yes, it is.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "021",
+    "agentName": "Project Updates Listener",
+    "toolSelection": [
+      "Google Calendar: Get Events",
+      "Gmail: Search Emails",
+      "Gmail: Summarize Email Thread",
+      "Google Drive: Search Content",
+      "Slack: Search Messages",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can give me a summary of all my project updates.",
+        "response": "I can do that. To give you a complete summary, I'll need to look at a few things. I assume I should check your Google Calendar for meetings, Gmail for emails, and Slack for messages. Is that right?"
+      },
+      {
+        "request": "Yes, and also check Google Drive for any documents that have been updated recently.",
+        "response": "Okay. So I'll check all four of those sources. How far back should I look for updates? For example, the last day, or the last week?"
+      },
+      {
+        "request": "Give me a summary for the last 7 days.",
+        "response": "Got it. I'll scan your Google Calendar, Gmail, Slack, and Google Drive for project-related updates from the last 7 days and give you a consolidated summary. How does that sound?"
+      },
+      {
+        "request": "That's perfect.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "022",
+    "agentName": "PO Status Monitor",
+    "toolSelection": [
+      "Jira: Search for Issues",
+      "Jira: Get Issue Details",
+      "Slack: Send Direct Message"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to check on my PO requests in Buganizer and give me status updates.",
+        "response": "I can help with that. Just to confirm, when you say Buganizer, are the PO requests tracked as issues in Jira?"
+      },
+      {
+        "request": "Yes, they are.",
+        "response": "Okay. When I find the status of a PO, what should I do? Should I just report the status back to you, or also suggest a next step?"
+      },
+      {
+        "request": "Give me the status and suggest a next step, like who to ping.",
+        "response": "Understood. I'll check Jira for your PO-related issues, get their current status, and then suggest a next action for you here in our chat. What do you think?"
+      },
+      {
+        "request": "That works for me.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "023",
+    "agentName": "User Story Generator",
+    "toolSelection": [
+      "Jira: Create Issue",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can help me write user stories for my team based on my ideas.",
+        "response": "I can do that. As you describe an idea, I can rephrase it into a standard user story format, like 'As a [persona], I want to [action], so that [benefit]'. Where should I put the user story once it's created?"
+      },
+      {
+        "request": "Create a new issue in Jira for the engineering team.",
+        "response": "Okay. So if you say something like, 'Is there a way to create a banner ad on the website to promote my event to certain customers?', I would create an issue in Jira with the story 'As a marketer, I want to have a dynamic web banner that I can update and target to specific customers to promote my campaign.' Does that sound right?"
+      },
+      {
+        "request": "Yes, that's exactly it.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "024",
+    "agentName": "Professional Growth Coach",
+    "toolSelection": [
+      "Google Calendar: Get Events",
+      "Google Drive"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can give me feedback on how I come across in meetings.",
+        "response": "I can help with that. I can analyze meeting transcripts to provide feedback on things like assertiveness, tone, or grammar. To do this, I'll need access to the transcripts. Are they typically saved as Google Docs in your Drive?"
+      },
+      {
+        "request": "Yes, after every meeting, a transcript is saved to a 'Meeting Notes' folder in my Drive.",
+        "response": "Okay. So you can ask me to review a specific transcript, and I'll provide feedback. For example, you could say 'Review my feedback on the Q3 planning meeting'. What do you think?"
+      },
+      {
+        "request": "That sounds very useful.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "025",
+    "agentName": "Training Program Manager",
+    "toolSelection": [
+      "Google Calendar: Create Event",
+      "Google Calendar: Find Available Time",
+      "Google Drive: Create Document/Sheet/Slide",
+      "Google Drive: Create Folder",
+      "Gmail: Create Draft",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help manage the lifecycle of a new training program.",
+        "response": "I can certainly help with that. What's the first step? Do you need to brainstorm topics, or do you already have a topic and need to schedule prep meetings?"
+      },
+      {
+        "request": "I have the topic, 'Advanced Presentation Skills'. I need to schedule a prep meeting with the presenter, Jane Doe.",
+        "response": "Okay. I'll find a time that works for you and Jane Doe and get that on your calendars. Once we schedule that, I can also create a shared Google Drive folder for materials, draft an introductory email in Gmail, and create a planning page in Confluence. Does that sound like a good plan?"
+      },
+      {
+        "request": "Yes, that covers all the setup work.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "026",
+    "agentName": "Scheduled Reporter",
+    "toolSelection": [
+      "Salesforce: Search for Records",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want to build an agent that runs our weekly sales report every Monday morning and emails it to the leadership team.",
+        "response": "I can definitely set up an agent to run that report and draft the email. However, I can't run it automatically on a schedule. As a chat-based assistant, I can only perform tasks when you ask me to. Would it work if you just asked me to 'run the weekly sales report' on Monday mornings?"
+      },
+      {
+        "request": "Okay, that's fine. I can just remember to ask.",
+        "response": "Great. I'll configure the agent to get the sales data from Salesforce and then draft the email in Gmail with the report attached. You can then just tell it to run when you're ready. What do you think?"
+      },
+      {
+        "request": "That works.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "027",
+    "agentName": "Design File Notifier (Workaround Accepted)",
+    "toolSelection": [
+      "Slack: Set Reminder",
+      "Jira: Create Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that notifies me in Slack whenever a Figma file is updated.",
+        "response": "I understand the goal, but unfortunately, I don't have a direct connection to Figma, so I can't see when files are updated. Can you tell me a bit more about what you want to happen after an update? Are you trying to kick off a review process?"
+      },
+      {
+        "request": "Yes, when a designer says a file is ready, I need to create a Jira ticket for an engineer to review it.",
+        "response": "Okay, I can suggest a good workaround. While I can't see Figma, you could have the designer post the Figma link in a Slack channel. Then, you could ask me to 'create a review ticket for this design', and I can create the Jira issue with the link included. Would that workflow help?"
+      },
+      {
+        "request": "That's a clever idea. Let's do that.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "028",
+    "agentName": "Design File Notifier (Workaround Rejected)",
+    "toolSelection": [
+      "None"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that notifies me in Slack whenever a Figma file is updated.",
+        "response": "I understand the goal, but unfortunately, I don't have a direct connection to Figma, so I can't see when files are updated. Can you tell me a bit more about what you want to happen after an update? Are you trying to kick off a review process?"
+      },
+      {
+        "request": "Yes, when a designer says a file is ready, I need to create a Jira ticket for an engineer to review it.",
+        "response": "Okay, I can suggest a good workaround. While I can't see Figma, you could have the designer post the Figma link in a Slack channel. Then, you could ask me to 'create a review ticket for this design', and I can create the Jira issue with the link included. Would that workflow help?"
+      },
+      {
+        "request": "No, that's too manual for our team. We really need it to be automatic.",
+        "response": "I understand. Since the direct Figma connection isn't available yet, I can't build the agent exactly as you've described. However, I can take this as a feature request. Would you like me to notify you when I'm able to connect to Figma?"
+      },
+      {
+        "request": "Yes, please do.",
+        "response": "Sounds good"
+      }
+    ]
+  },
+  {
+    "useCaseId": "029",
+    "agentName": "Secure Data Room Creator",
+    "toolSelection": [
+      "Box: Create Folder",
+      "Dropbox: Search Content",
+      "Box: Copy File/Folder"
+    ],
+    "conversation": [
+      {
+        "request": "For our new M&A project, create a secure data room folder in Box. Then, search the target's shared Dropbox for all files containing 'customer contracts' and copy them to our new Box folder.",
+        "response": "I can handle that. What should I name the new secure folder in Box?"
+      },
+      {
+        "request": "Call it 'Project Nightingale Dataroom'.",
+        "response": "Okay. I'll create the 'Project Nightingale Dataroom' folder in Box, then search the target's Dropbox for 'customer contracts', and copy what I find into the new Box folder. Is that correct?"
+      },
+      {
+        "request": "Yes, exactly.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "030",
+    "agentName": "Budget Exception Reporter",
+    "toolSelection": [
+      "Jira: Search for Issues",
+      "Jira: Get Issue Details",
+      "Google Sheets"
+    ],
+    "conversation": [
+      {
+        "request": "Find all CapEx requests submitted in Jira this quarter with the label 'over-budget'. Pull their details and list them in a Google Sheet for our review meeting.",
+        "response": "I can do that. What should I name the Google Sheet?"
+      },
+      {
+        "request": "Name it 'Q3 Over-Budget CapEx'.",
+        "response": "Got it. I'll search Jira for those issues from this quarter, get the details for each one, and put them into a new Google Sheet called 'Q3 Over-Budget CapEx'. How does that sound?"
+      },
+      {
+        "request": "Perfect.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "031",
+    "agentName": "Sales Reconciliation Assistant",
+    "toolSelection": [
+      "Salesforce: Search for Records",
+      "Google Sheets"
+    ],
+    "conversation": [
+      {
+        "request": "Help me with the month-end close. Search our Salesforce records for all 'Closed Won' opportunities this month and compare the list against the 'Revenue Recognition' Google Sheet to find any discrepancies.",
+        "response": "I can help with that. After I find the discrepancies, where should I put the list?"
+      },
+      {
+        "request": "Create a new tab in the 'Revenue Recognition' sheet and call it 'Discrepancies for Review'.",
+        "response": "Okay. I'll get the 'Closed Won' deals from Salesforce for this month, compare them against your Google Sheet, and list any discrepancies in a new tab for you. Is that right?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "032",
+    "agentName": "Commission Verifier",
+    "toolSelection": [
+      "Salesforce: Get Record Details",
+      "Confluence: Get Page Content"
+    ],
+    "conversation": [
+      {
+        "request": "Verify the commission for deal #SFDC-98765. Get the deal details from Salesforce and check it against our commission rules in the 'Comp Plan' Confluence page.",
+        "response": "I can do that. I'll get the details for that deal from Salesforce and the rules from the Confluence page. How would you like me to present the verification?"
+      },
+      {
+        "request": "Just tell me if the commission is correct or not based on the rules, and show me the calculation.",
+        "response": "Understood. I'll pull the data from both Salesforce and Confluence, perform the calculation, and report back here with the result and the breakdown. Sound good?"
+      },
+      {
+        "request": "Yes, sounds good.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "033",
+    "agentName": "Procurement Assistant",
+    "toolSelection": [
+      "Google Sheets",
+      "Jira: Create Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I have a PO request for 50 new laptops. Can you check our current inventory in the 'Asset Tracker' sheet and create a Jira ticket for procurement if we have fewer than 10 in stock?",
+        "response": "I can do that. Is the 'Asset Tracker' a Google Sheet?"
+      },
+      {
+        "request": "Yes, it is.",
+        "response": "Okay. I'll check that sheet for the current laptop inventory. If it's below 10, I'll create a procurement ticket in Jira. Is that correct?"
+      },
+      {
+        "request": "Yes, that's right.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "034",
+    "agentName": "Contract Reviewer",
+    "toolSelection": [
+      "Google Drive: Search Content",
+      "Confluence: Get Page Content",
+      "Google Drive: Create Document/Sheet/Slide"
+    ],
+    "conversation": [
+      {
+        "request": "Review this draft sales contract in Google Drive. Compare it against our 'Standard T&Cs' Confluence page and create a new Google Doc for me that highlights the non-standard clauses for legal review.",
+        "response": "I can do that. Can you give me the name of the draft contract file in Google Drive?"
+      },
+      {
+        "request": "It's called 'Draft_Contract_ABC_Corp.docx'.",
+        "response": "Thank you. I'll compare that document against the T&Cs in Confluence and create a new Google Doc for you with any non-standard clauses highlighted. What do you think?"
+      },
+      {
+        "request": "That would be a great help.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "035",
+    "agentName": "MBR Deck Builder",
+    "toolSelection": [
+      "Google Drive: Create Document/Sheet/Slide",
+      "Salesforce: Search for Records",
+      "Jira: Search for Issues"
+    ],
+    "conversation": [
+      {
+        "request": "Start building our MBR deck. Create a new Google Slides presentation. The first slide should summarize our top 5 'Closed Won' deals from Salesforce. The second should list any high-priority finance-related Jira tickets.",
+        "response": "I can get that started. What should I name the new Google Slides presentation?"
+      },
+      {
+        "request": "Call it 'Q3 MBR Draft'.",
+        "response": "Okay. I'll create a new presentation in Google Slides called 'Q3 MBR Draft'. I'll add a slide with the top 5 deals from Salesforce and a second slide with high-priority finance tickets from Jira. Is that right?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "036",
+    "agentName": "New Hire Onboarding Assistant",
+    "toolSelection": [
+      "Workday: Find Colleague",
+      "Jira: Create Issue",
+      "Google Calendar: Create Event"
+    ],
+    "conversation": [
+      {
+        "request": "Kick off onboarding for new hire Jane Doe, starting next Monday.",
+        "response": "I can do that. I'll start the standard onboarding workflow. This typically includes creating IT setup tickets in Jira and scheduling orientation meetings. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's right. Also, schedule a 1-on-1 with her manager, John Smith.",
+        "response": "Okay. I will kick off the standard onboarding in our system, create the necessary Jira tickets, and schedule a 1-on-1 for Jane Doe with John Smith for sometime next week. How does that sound?"
+      },
+      {
+        "request": "Sounds great.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "037",
+    "agentName": "Incident Response Coordinator",
+    "toolSelection": [
+      "Slack: Send Message to Channel",
+      "Jira: Create Issue",
+      "Google Calendar: Create Event"
+    ],
+    "conversation": [
+      {
+        "request": "Acknowledge the new incident in the #incidents channel, create a Jira ticket, a new Slack channel for the incident, and a war room meeting.",
+        "response": "Understood. This is a high-priority action. I will immediately post an acknowledgement in #incidents. What should I name the new Slack channel for this incident?"
+      },
+      {
+        "request": "Name it #inc-login-service-failure.",
+        "response": "Okay. I am acknowledging the incident, creating the #inc-login-service-failure Slack channel, creating a corresponding P0 Jira ticket, and putting a 30-minute war room meeting on the calendar for the on-call engineering team right now. Is that correct?"
+      },
+      {
+        "request": "Yes, execute immediately.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "038",
+    "agentName": "Deal Closing Assistant",
+    "toolSelection": [
+      "Salesforce: Get Record Details",
+      "Slack: Send Message to Channel",
+      "Google Drive: Create Document/Sheet/Slide"
+    ],
+    "conversation": [
+      {
+        "request": "When a deal closes in Salesforce, I want an agent to generate a closing report and notify the sales team in Slack.",
+        "response": "I can set up an agent to do that when you ask. I can't automatically detect when a deal closes, but you can tell me the deal name or ID. For the report, should I use a standard template?"
+      },
+      {
+        "request": "Yes, use the 'Standard Closing Report' template in Google Drive.",
+        "response": "Okay. So when you give me a closed deal ID, I'll get the details from Salesforce, create a new report in Google Drive from your template, and then post a notification with a link to the report in the #sales channel on Slack. What do you think?"
+      },
+      {
+        "request": "That's exactly what I need.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "039",
+    "agentName": "Lead Enrichment Assistant",
+    "toolSelection": [
+      "Salesforce: Update Record",
+      "HubSpot: Search for Contacts/Deals",
+      "Web Search",
+      "Google Drive: Create Document/Sheet/Slide",
+      "Jira: Create Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to enrich new high-value leads in Salesforce with web and HubSpot data, create a briefing doc, and assign a review task to the AE.",
+        "response": "I can configure that. How do you define a 'high-value' lead? Is there a specific field in Salesforce, like 'Lead Score' > 90?"
+      },
+      {
+        "request": "Yes, any lead with a score over 90.",
+        "response": "Okay. For those leads, I'll search HubSpot for matching contacts and do a web search for recent company news. I'll compile this into a briefing doc in Google Drive. Then, should I create the review task in Jira or Salesforce?"
+      },
+      {
+        "request": "Create the task in Jira.",
+        "response": "Got it. I'll find high-value leads in Salesforce, enrich them with data from HubSpot and the web, create a briefing doc in Drive, and then create a Jira task for the assigned AE. Sound good?"
+      },
+      {
+        "request": "Perfect.",
+        "response": null
+      }
+    ]
+  },
+  {
+    "useCaseId": "040",
+    "agentName": "QBR Prep Assistant",
+    "toolSelection": [
+      "Salesforce: Search for Records",
+      "Zendesk: Search for Tickets",
+      "Google Drive: Create Document/Sheet/Slide"
+    ],
+    "conversation": [
+      {
+        "request": "Prep the QBR deck for Acme Corp.",
+        "response": "I can do that. I'll gather the standard information: open opportunities and recent activity from Salesforce, and any support tickets from Zendesk. Is there anything specific you want to include for this QBR?"
+      },
+      {
+        "request": "Yes, also pull the usage stats from our 'Product Analytics' Google Sheet.",
+        "response": "Okay. I'll get the data from Salesforce and Zendesk, and also incorporate the usage stats from your Google Sheet. I'll put it all into a new Google Slides presentation for you. How does that sound?"
+      },
+      {
+        "request": "That's great, thanks.",
+        "response": null
+      }
+    ]
+  }
+]

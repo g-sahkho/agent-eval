@@ -1,0 +1,836 @@
+[
+  {
+    "useCaseId": "001",
+    "agentName": "Email Reply Drafter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Draft replies to my unread emails.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to draft replies. I need to check their unread emails. I know from my configuration that they use Gmail.",
+            "action": "Call `Gmail: Get Unread Email`"
+          },
+          {
+            "observation": "Found 2 unread emails. Email 1 from 'teammate@example.com', Subject: 'Project Update', Body: 'Hey, can you send me the latest status report for Project X?'. Email 2 from 'client@example.com', Subject: 'Quick Question', Body: 'Hi, just wanted to confirm our meeting is still on for 3 PM tomorrow.'"
+          },
+          {
+            "thought": "I will process the first email. It's a request for a status report. I should draft a reply saying I will send it shortly.",
+            "action": "Call `Gmail: Create Draft` (To: 'teammate@example.com', Subject: 'Re: Project Update', Body: 'Hi! Absolutely, I'll send that over to you in a few minutes.')"
+          },
+          {
+            "thought": "Now for the second email. It's a meeting confirmation. I should draft a reply confirming the time.",
+            "action": "Call `Gmail: Create Draft` (To: 'client@example.com', Subject: 'Re: Quick Question', Body: 'Hi there - yes, absolutely. Looking forward to chatting at 3 PM tomorrow.')"
+          }
+        ],
+        "finalResponse": "Okay, I've drafted replies for your 2 unread emails. They are saved in your Gmail drafts folder for you to review."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Draft replies to my unread emails, but ignore any marketing newsletters.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to draft replies but with an exception: ignore marketing newsletters. I'll need to identify and filter those out.",
+            "action": "Call `Gmail: Get Unread Email`"
+          },
+          {
+            "observation": "Found 3 unread emails. Email 1 from 'manager@example.com', Subject: 'Urgent: Q3 Planning'. Email 2 from 'promo@retailer.com', Subject: '🔥 50% Off Summer Sale! 🔥'. Email 3 from 'newsletter@tech.com', Subject: 'This Week in AI'"
+          },
+          {
+            "thought": "I will analyze the sender and subject lines. Email 2 and Email 3 appear to be marketing or newsletters. I will skip them and only process Email 1.",
+            "action": "Call `Gmail: Create Draft` (To: 'manager@example.com', Subject: 'Re: Urgent: Q3 Planning', Body: 'Thanks for sending this over. I'll review the planning document today and get back to you with my feedback.')"
+          }
+        ],
+        "finalResponse": "Done. I found 3 unread emails, ignored 2 that looked like newsletters, and drafted a reply to the one from your manager. It's in your drafts."
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Draft replies to my unread emails.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to draft replies. I need to connect to their Gmail.",
+            "action": "Call `Gmail: Get Unread Email`"
+          },
+          {
+            "observation": "Received an `AUTH_TOKEN_EXPIRED` error from the Gmail API."
+          },
+          {
+            "thought": "I can't access the user's email because my authorization has expired. I need to inform the user so they can re-authenticate the tool."
+          }
+        ],
+        "finalResponse": "It looks like my permission to access your Gmail account has expired. Please re-authorize the connection, and then I can get right to it."
+      }
+    ]
+  },
+  {
+    "useCaseId": "002",
+    "agentName": "Exit Interview Analyzer",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Analyze the latest exit interviews and create the summary page.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to run the exit interview analysis. My configuration states the files are in the 'Exit Interviews - FY25' folder in Google Drive and the output goes to the 'People Analytics' space in Confluence.",
+            "action": "Call `Google Drive: Search Content` (Query: folder='Exit Interviews - FY25', timeRange='lastQuarter')"
+          },
+          {
+            "observation": "Found 15 transcript documents."
+          },
+          {
+            "thought": "Now I need to process these 15 documents to find the top 3 themes. Based on my analysis, the top themes are: 1. Compensation, 2. Lack of Growth Opportunities, 3. Management Style.",
+            "action": "Call `Confluence: Create Page` (Space: 'People Analytics', Title: 'Q3 2025 Attrition Analysis', Content: 'Summary of findings...')"
+          }
+        ],
+        "finalResponse": "I've analyzed the 15 exit interviews from last quarter and created a summary page in Confluence titled 'Q3 2025 Attrition Analysis'. The top three reasons for departure were Compensation, Lack of Growth Opportunities, and Management Style."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Analyze the latest exit interviews and create the summary page.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to run the exit interview analysis.",
+            "action": "Call `Google Drive: Search Content` (Query: folder='Exit Interviews - FY25', timeRange='lastQuarter')"
+          },
+          {
+            "observation": "Found 0 transcript documents for the last quarter."
+          },
+          {
+            "thought": "No documents were found for the specified period. I should inform the user instead of creating a blank page."
+          }
+        ],
+        "finalResponse": "I checked the 'Exit Interviews - FY25' folder in Google Drive, but I couldn't find any new transcripts from the last quarter to analyze."
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Analyze the latest exit interviews and create the summary page.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to run the exit interview analysis.",
+            "action": "Call `Google Drive: Search Content` (Query: folder='Exit Interviews - FY25', timeRange='lastQuarter')"
+          },
+          {
+            "observation": "Received a `FOLDER_NOT_FOUND` error from the Google Drive API."
+          },
+          {
+            "thought": "The configured folder doesn't seem to exist anymore. I need to ask the user to confirm the location."
+          }
+        ],
+        "finalResponse": "I couldn't seem to find the 'Exit Interviews - FY25' folder in Google Drive. Has it been moved or renamed?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "003",
+    "agentName": "Salary Band Comparator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Run the salary comparison against the latest market data.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to run the salary comparison. I need to get our bands from 'Engineering Comp Bands 2025' and the market data from PDFs in the 'Comp Surveys' Drive folder.",
+            "action": "Call `Google Drive: Search Content` (Query: folder='Comp Surveys')"
+          },
+          {
+            "observation": "Found 3 new survey PDFs."
+          },
+          {
+            "thought": "I will process the PDFs and our Google Sheet. My analysis shows two roles, 'Software Engineer II' and 'Senior Software Engineer', are 6% and 8% below market average, respectively.",
+            "action": "Call `Gmail: Send Email` (To: user, Subject: 'Salary Band Alert', Body: 'Flagged Roles: SE II (6% below), Senior SE (8% below)...')"
+          }
+        ],
+        "finalResponse": "I've completed the analysis. Two roles were found to be more than 5% below the market average. I've sent you an email with the details."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Run the salary comparison against the latest market data.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to run the salary comparison.",
+            "action": "Call `Google Drive: Search Content` (Query: folder='Comp Surveys')"
+          },
+          {
+            "observation": "Found 3 survey PDFs."
+          },
+          {
+            "thought": "I will process the PDFs and our Google Sheet. My analysis shows no roles are more than 5% below the market average."
+          }
+        ],
+        "finalResponse": "I've completed the analysis and all engineering roles are within 5% of the market average. No roles were flagged."
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Run the salary comparison against the latest market data.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to run the salary comparison. I need to access the 'Engineering Comp Bands 2025' Google Sheet.",
+            "action": "Access Google Sheet 'Engineering Comp Bands 2025'"
+          },
+          {
+            "observation": "Received a `PERMISSION_DENIED` error from the Google Sheets API."
+          },
+          {
+            "thought": "I don't have permission to view the salary band sheet. I need to ask the user to grant me access."
+          }
+        ],
+        "finalResponse": "I'm sorry, but I don't have permission to access the 'Engineering Comp Bands 2025' Google Sheet. Could you please grant my service account viewer access and try again?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "004",
+    "agentName": "Case Investigator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Run the communication search for John Doe and Jane Smith.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to run the pre-configured search for John Doe and Jane Smith. I need to search Gmail and Slack.",
+            "action": "Call `Gmail: Search Emails` (Query: from:john.doe@example.com to:jane.smith@example.com, last 60 days)"
+          },
+          {
+            "observation": "Found 12 email threads."
+          },
+          {
+            "thought": "Now I will search Slack.",
+            "action": "Call `Slack: Search Messages` (Query: between:@john.doe and @jane.smith, last 60 days)"
+          },
+          {
+            "observation": "Found 5 Slack conversations."
+          },
+          {
+            "thought": "I will compile all 17 conversations into a new Google Doc.",
+            "action": "Call `Google Drive: Create Document/Sheet/Slide` (Title: 'Doe/Smith Communication Log', Content: '...')"
+          }
+        ],
+        "finalResponse": "I have finished the search. I found 12 email threads and 5 Slack conversations and compiled them into a new Google Doc named 'Doe/Smith Communication Log'. It has been shared with you."
+      }
+    ]
+  },
+  {
+    "useCaseId": "005",
+    "agentName": "D&I Dashboard Refresher",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Update the D&I dashboard now.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to refresh the D&I dashboard. I need to get data from Workday and paste it into the 'D&I Metrics' Google Sheet.",
+            "action": "Call Workday API for headcount data (segmented by department and gender)."
+          },
+          {
+            "observation": "Retrieved current headcount data."
+          },
+          {
+            "thought": "Now I will overwrite the 'Raw Data' tab in the Google Sheet.",
+            "action": "Update Google Sheet 'D&I Metrics', tab 'Raw Data' with new headcount data."
+          }
+        ],
+        "finalResponse": "The D&I dashboard has been updated with the latest headcount data from Workday."
+      }
+    ]
+  },
+  {
+    "useCaseId": "006",
+    "agentName": "Training Course Suggester",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Suggest some training courses for me.",
+        "agentTrace": [
+          {
+            "thought": "The user wants training suggestions. I need to get their role from Workday and skill priorities from the 'PM Career Path' Confluence page.",
+            "action": "Call `Workday: Get My Profile`"
+          },
+          {
+            "observation": "User role is 'Product Manager'."
+          },
+          {
+            "thought": "Now get the skills from Confluence.",
+            "action": "Call `Confluence: Get Page Content` (Page: 'PM Career Path')"
+          },
+          {
+            "observation": "Key skills are 'Data Analysis', 'User Research', 'Technical Acumen'."
+          },
+          {
+            "thought": "I will search the web for courses related to these skills.",
+            "action": "Web Search for 'Product Manager training data analysis', 'user research courses', etc."
+          }
+        ],
+        "finalResponse": "Based on your role and our company's priorities, here are three course suggestions: 1. 'Advanced SQL for Product Managers' on Coursera, 2. 'Pragmatic Institute - Foundations, Focus, Build', 3. 'MIT's AI for Product Innovation'."
+      }
+    ]
+  },
+  {
+    "useCaseId": "007",
+    "agentName": "Talent Sourcer",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Run the talent search for Python engineers.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to run the Python engineer search, excluding Competitor A and B, and add new finds to Salesforce.",
+            "action": "Call `LinkedIn: Search Profiles` (Query: 'software engineer', 'Python', NOT 'Competitor A', NOT 'Competitor B')"
+          },
+          {
+            "observation": "Found 50 profiles."
+          },
+          {
+            "thought": "Now I'll check these 50 against Salesforce to find net new candidates.",
+            "action": "Call `Salesforce: Search for Records` for each of the 50 profiles."
+          },
+          {
+            "observation": "12 of the 50 profiles are not in Salesforce."
+          },
+          {
+            "thought": "I will add these 12 new candidates to the 'Passive Talent' list.",
+            "action": "Call `Salesforce: Create Lead` for each of the 12 new candidates."
+          }
+        ],
+        "finalResponse": "I've finished the search. I found 12 new candidates and added them to your 'Passive Talent' list in Salesforce."
+      }
+    ]
+  },
+  {
+    "useCaseId": "008",
+    "agentName": "Competitive Offer Analyst",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Prep me for my call with the candidate who has an offer from Competitor X.",
+        "agentTrace": [
+          {
+            "thought": "The user needs talking points for a candidate with an offer from Competitor X. I need to search the web and our internal Confluence 'Moma page'.",
+            "action": "Web Search for 'Competitor X company news'"
+          },
+          {
+            "observation": "Found recent articles about their new product launch and a leadership change."
+          },
+          {
+            "thought": "Now I'll get our internal talking points from Confluence.",
+            "action": "Call `Confluence: Get Page Content` (Page: 'Moma page')"
+          },
+          {
+            "observation": "Retrieved compensation talking points and our competitive advantages."
+          },
+          {
+            "thought": "I will synthesize this into a summary for the user."
+          }
+        ],
+        "finalResponse": "Here are your talking points for the call:\n- **Recent News:** Competitor X just announced a major leadership change, which could lead to instability. Their new product has received mixed reviews.\n- **Our Strengths:** Emphasize our stable leadership and clear product roadmap.\n- **Compensation:** According to our internal guide, our equity offering is significantly more generous..."
+      }
+    ]
+  },
+  {
+    "useCaseId": "009",
+    "agentName": "Talent Map Refresher",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Refresh the talent map for Target Company Y and draft the outreach emails.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to refresh the talent map for Target Company Y. I need to find Senior/Principal engineers with 'distributed systems' skills and draft emails.",
+            "action": "Call `LinkedIn: Search Profiles` (Query: company='Target Company Y', title='Senior OR Principal', skills='distributed systems')"
+          },
+          {
+            "observation": "Found 8 matching profiles. Identified 2 who recently left."
+          },
+          {
+            "thought": "Now I will draft personalized emails for 5 of the remaining high-potential individuals.",
+            "action": "Call `Gmail: Create Draft` 5 times with personalized messages."
+          }
+        ],
+        "finalResponse": "I've refreshed the talent map. I found 8 key engineers, 2 of whom recently left. I have also drafted personalized outreach emails to 5 high-potential individuals who are still there. They are in your Gmail drafts."
+      }
+    ]
+  },
+  {
+    "useCaseId": "010",
+    "agentName": "Resume Ranker & Skill Analyzer",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Rank the latest batch of resumes for the Senior Backend Engineer role.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to rank resumes from the 'New Applicants' Dropbox folder against the 'Senior Backend Engineer JD' Google Doc.",
+            "action": "Call `Dropbox: Search Content` (Query: folder='New Applicants')"
+          },
+          {
+            "observation": "Found 100 resume files."
+          },
+          {
+            "thought": "Now I'll get the job description.",
+            "action": "Call `Google Drive: Get Page Content` (File: 'Senior Backend Engineer JD')"
+          },
+          {
+            "observation": "Retrieved JD content."
+          },
+          {
+            "thought": "I will now process all 100 resumes, rank them, and identify trending skills. The top new skill is 'temporal.io'. I will create the Google Sheet.",
+            "action": "Call `Google Sheets: Create Document/Sheet/Slide` with ranked list and new boolean search string."
+          }
+        ],
+        "finalResponse": "I've processed the 100 resumes. The ranked list has been created in a new Google Sheet called 'Applicant Ranking - Senior Backend'. I also identified 'temporal.io' as a new trending skill and have added a suggested LinkedIn boolean search string to the sheet."
+      }
+    ]
+  },
+  {
+    "useCaseId": "011",
+    "agentName": "Candidate Nurture Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Draft the follow-up emails for the Cloud Architect nurture list.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to draft emails for the 'Cloud Architect - Nurture' list in Salesforce, referencing our blog post.",
+            "action": "Call `Salesforce: Search for Records` (Query: list='Cloud Architect - Nurture')"
+          },
+          {
+            "observation": "Retrieved 10 candidate records."
+          },
+          {
+            "thought": "Now I'll get the blog post content from Confluence.",
+            "action": "Call `Confluence: Get Page Content` (Page: 'Multi-Cloud Strategy Blog Post')"
+          },
+          {
+            "observation": "Retrieved blog content."
+          },
+          {
+            "thought": "I will now draft a personalized email for each of the 10 candidates.",
+            "action": "Call `Gmail: Create Draft` 10 times."
+          }
+        ],
+        "finalResponse": "I have drafted personalized follow-up emails for the 10 candidates on your nurture list. They are ready for your review in your Gmail drafts."
+      }
+    ]
+  },
+  {
+    "useCaseId": "012",
+    "agentName": "Competitor Recruiter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Find and contact 5 Go/Kubernetes engineers at our competitors.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to find 10 engineers and contact the top 5. I will search LinkedIn for profiles at Competitor A, B, and C.",
+            "action": "Call `LinkedIn: Search Profiles` (Query: 'Go', 'Kubernetes', company='Competitor A' OR 'Competitor B' OR 'Competitor C', location='Austin, TX')"
+          },
+          {
+            "observation": "Found 12 matching profiles."
+          },
+          {
+            "thought": "I will now send the pre-configured connection request to the top 5 most relevant profiles.",
+            "action": "Call `LinkedIn: Send LinkedIn Message` 5 times with the personalized template."
+          }
+        ],
+        "finalResponse": "I found 12 matching engineers and have sent connection requests to the top 5. I've saved the full list of 12 to a Google Sheet for your reference."
+      }
+    ]
+  },
+  {
+    "useCaseId": "013",
+    "agentName": "Org Chart Builder",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Build the org chart for Competitor Z's AI Research team.",
+        "agentTrace": [
+          {
+            "thought": "The user wants an org chart for Competitor Z's AI team. I will search LinkedIn for employees and their roles.",
+            "action": "Call `LinkedIn: Search Profiles` (Query: company='Competitor Z', department='AI Research')"
+          },
+          {
+            "observation": "Found 25 profiles, including a VP, 3 Directors, and various researchers."
+          },
+          {
+            "thought": "Based on titles and reporting structures mentioned in profiles, I can assemble an org chart. I will now create the Google Slides presentation.",
+            "action": "Call `Google Drive: Create Document/Sheet/Slide` (Type: Slides, Title: 'Competitor Z - AI Org Chart')"
+          }
+        ],
+        "finalResponse": "I've created the org chart for Competitor Z's AI Research team. A new Google Slides presentation named 'Competitor Z - AI Org Chart' has been created and shared with you."
+      }
+    ]
+  },
+  {
+    "useCaseId": "014",
+    "agentName": "Alumni Recruiter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Find and draft messages to our alumni for the VP of Product role.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to find former employees who are now Directors of Product in London and left 2-4 years ago.",
+            "action": "Call `LinkedIn: Search Profiles` (Query: pastCompany='Our Company', title='Director of Product', location='London')"
+          },
+          {
+            "observation": "Found 4 matching profiles."
+          },
+          {
+            "thought": "I will now draft the pre-configured message to these 4 individuals in Gmail.",
+            "action": "Call `Gmail: Create Draft` 4 times."
+          }
+        ],
+        "finalResponse": "I found 4 former employees who match your criteria. I've drafted a personalized outreach message to each of them in your Gmail drafts."
+      }
+    ]
+  },
+  {
+    "useCaseId": "015",
+    "agentName": "Referral Finder",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Find me some potential referrals from Jane Doe's network for the UX Design role.",
+        "agentTrace": [
+          {
+            "thought": "The user wants potential referrals from Jane Doe's network with 'Figma' and 'User Research' skills. I will search public LinkedIn profiles and send the top 3 to the user on Slack.",
+            "action": "Call `LinkedIn: Search Profiles` (Query: skills='Figma' AND 'User Research')"
+          },
+          {
+            "observation": "Found many profiles. I will filter out current employees and rank the rest by relevance."
+          },
+          {
+            "thought": "I have identified the top 3 potential candidates. I will now send them to the user via Slack.",
+            "action": "Call `Slack: Send Direct Message` (To: user, Message: 'Here are 3 potential referrals for the UX role to ask Jane about: [Profile 1], [Profile 2], [Profile 3]')"
+          }
+        ],
+        "finalResponse": "I've sent you a Slack message with the top 3 profiles I found. You can ask Jane if she knows them."
+      }
+    ]
+  },
+  {
+    "useCaseId": "016",
+    "agentName": "Talent Pool Generator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Generate the talent pool list for NY Account Executives.",
+        "agentTrace": [
+          {
+            "thought": "The user wants a list of AEs in NY from Company A, B, and C, and wants the output in a Google Sheet.",
+            "action": "Call `LinkedIn: Search Profiles` (Query: title='Account Executive', company='Company A' OR 'Company B' OR 'Company C', location='New York')"
+          },
+          {
+            "observation": "Found 150 profiles."
+          },
+          {
+            "thought": "I will compile these profiles into a new Google Sheet.",
+            "action": "Call `Google Sheets: Create Document/Sheet/Slide` with the list of 150 profiles."
+          }
+        ],
+        "finalResponse": "I've created a new Google Sheet named 'NY AE Talent Pool' with the 150 profiles I found. It has been shared with you."
+      }
+    ]
+  },
+  {
+    "useCaseId": "017",
+    "agentName": "Vendor Spend Analyzer",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Run the vendor spend analysis for the last year.",
+        "agentTrace": [
+          {
+            "thought": "The user wants the top 10 vendors by spend from Box contracts and Salesforce POs, with upcoming renewals flagged.",
+            "action": "Call `Box: Search Content` (Query: folder='Vendor Contracts')"
+          },
+          {
+            "observation": "Retrieved all contract files."
+          },
+          {
+            "thought": "Now get purchase orders from Salesforce for the last year.",
+            "action": "Call `Salesforce: Search for Records` (Query: type='Purchase Order', date='last 365 days')"
+          },
+          {
+            "observation": "Retrieved all PO records."
+          },
+          {
+            "thought": "I will now process the data, calculate spend, identify renewals, and create the Google Sheet.",
+            "action": "Call `Google Sheets: Create Document/Sheet/Slide` with the final report."
+          }
+        ],
+        "finalResponse": "I have analyzed the vendor data from Box and Salesforce. The report of the top 10 vendors by spend is ready in a new Google Sheet, with renewals in the next 90 days highlighted."
+      }
+    ]
+  },
+  {
+    "useCaseId": "018",
+    "agentName": "Expense Receipt Chaser",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Send the receipt reminders for the Q3 expense report.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to check the 'Q3 Expense Reports' Google Sheet and send Slack reminders for rows missing receipts.",
+            "action": "Read Google Sheet 'Q3 Expense Reports'"
+          },
+          {
+            "observation": "Found 4 rows where 'Receipt Attached' is 'No'. The employees are @alex, @brian, @casey, @drew."
+          },
+          {
+            "thought": "I will now send a Slack DM to each of these 4 employees.",
+            "action": "Call `Slack: Send Direct Message` 4 times with a reminder message."
+          }
+        ],
+        "finalResponse": "I've sent Slack reminders to the 4 employees who are missing receipts on the Q3 expense report."
+      }
+    ]
+  },
+  {
+    "useCaseId": "019",
+    "agentName": "Cash Flow Forecaster",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Update the cash flow forecast.",
+        "agentTrace": [
+          {
+            "thought": "The user wants an updated cash flow forecast. I need to get opportunities from Salesforce and combine them with the 'AP-Master' tab in the Google Sheet.",
+            "action": "Call `Salesforce: Search for Records` (Query: type='Opportunity', status='Open')"
+          },
+          {
+            "observation": "Retrieved all open opportunities."
+          },
+          {
+            "thought": "Now I'll get the data from the Google Sheet.",
+            "action": "Read Google Sheet 'Accounts Payable', tab 'AP-Master'"
+          },
+          {
+            "observation": "Retrieved accounts payable data."
+          },
+          {
+            "thought": "I will now combine the data and create the 'Cash Flow Forecast' tab.",
+            "action": "Update Google Sheet 'Accounts Payable' with a new tab containing the forecast."
+          }
+        ],
+        "finalResponse": "I have updated the 'Accounts Payable' Google Sheet with a new tab called 'Cash Flow Forecast' containing the latest projection."
+      }
+    ]
+  },
+  {
+    "useCaseId": "020",
+    "agentName": "Earnings Call Prep Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Prepare the earnings call prep doc.",
+        "agentTrace": [
+          {
+            "thought": "The user wants the earnings call prep doc. I need to find reports in the 'Finance Reports' Drive folder and summarize relevant analyst emails from Gmail.",
+            "action": "Call `Google Drive: Search Content` (Query: folder='Finance Reports')"
+          },
+          {
+            "observation": "Found the final financial reports."
+          },
+          {
+            "thought": "Now I'll search Gmail for analyst emails with 'earnings estimate' or 'Q3 guidance'.",
+            "action": "Call `Gmail: Search Emails` (Query: 'earnings estimate' OR 'Q3 guidance', last 30 days)"
+          },
+          {
+            "observation": "Found 8 relevant email threads."
+          },
+          {
+            "thought": "I will summarize these threads and compile everything into a new Google Doc.",
+            "action": "Call `Google Drive: Create Document/Sheet/Slide` (Title: 'Earnings Call Prep', Content: '...')"
+          }
+        ],
+        "finalResponse": "I've created the 'Earnings Call Prep' document. It contains links to the final financial reports and summaries of 8 relevant analyst emails."
+      }
+    ]
+  },
+  {
+    "useCaseId": "021",
+    "agentName": "Project Updates Listener",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Give me my project summary for the last week.",
+        "agentTrace": [
+          {
+            "thought": "The user wants a project summary from the last 7 days. I need to check Calendar, Gmail, Slack, and Drive.",
+            "action": "Call `Google Calendar: Get Events` (last 7 days)"
+          },
+          {
+            "observation": "Found 15 meetings."
+          },
+          {
+            "thought": "Now checking other sources.",
+            "action": "Call `Gmail: Search Emails`, `Slack: Search Messages`, `Google Drive: Search Content` for the same period."
+          },
+          {
+            "observation": "Found multiple relevant emails, messages, and document updates."
+          },
+          {
+            "thought": "I will now synthesize all of this information into a consolidated summary."
+          }
+        ],
+        "finalResponse": "Here is your project summary for the last 7 days:\n- **Project Phoenix:** The design review was completed, and the spec doc was updated with the latest feedback.\n- **Project Titan:** Met with the marketing team to align on launch dates. Key decisions are summarized in the meeting notes.\n- ..."
+      }
+    ]
+  },
+  {
+    "useCaseId": "022",
+    "agentName": "PO Status Monitor",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "What's the status of my PO requests?",
+        "agentTrace": [
+          {
+            "thought": "The user wants the status of their PO requests from Jira.",
+            "action": "Call `Jira: Search for Issues` (Query: reporter=currentUser, type='Purchase Order', status!=Closed)"
+          },
+          {
+            "observation": "Found 2 open PO requests: PO-123 (Status: VMO Approval) and PO-456 (Status: Finance Review)."
+          },
+          {
+            "thought": "I will report the status and suggest a next step for each."
+          }
+        ],
+        "finalResponse": "You have 2 open PO requests:\n- **PO-123:** The status is 'VMO Approval'. It has been with the VMO team for 3 days. You could ping the approver in that ticket to move it along.\n- **PO-456:** The status is 'Finance Review'. It was just updated today, so no action is needed yet."
+      }
+    ]
+  },
+  {
+    "useCaseId": "023",
+    "agentName": "User Story Generator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I need a way for our blog authors to see how many people are reading their articles.",
+        "agentTrace": [
+          {
+            "thought": "The user is describing an idea. I need to rephrase this as a user story and create a Jira issue.",
+            "action": "Rephrase idea into user story format."
+          },
+          {
+            "observation": "Generated Story: 'As a blog author, I want to see view counts on my articles, so that I can understand what content resonates with our audience.'"
+          },
+          {
+            "thought": "Now I will create the Jira issue.",
+            "action": "Call `Jira: Create Issue` (Project: 'Website', Title: 'Display View Counts on Blog Articles', Body: 'As a blog author...')"
+          }
+        ],
+        "finalResponse": "Okay, I've created a new user story in the 'Website' Jira project: 'As a blog author, I want to see view counts on my articles, so that I can understand what content resonates with our audience.' Does that capture your idea correctly?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "024",
+    "agentName": "Professional Growth Coach",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Review my performance in the 'Q3 Planning' meeting from yesterday.",
+        "agentTrace": [
+          {
+            "thought": "The user wants feedback on a specific meeting. I need to find the transcript in their 'Meeting Notes' folder in Google Drive.",
+            "action": "Call `Google Drive: Search Content` (Query: folder='Meeting Notes', title='Q3 Planning')"
+          },
+          {
+            "observation": "Found the transcript document."
+          },
+          {
+            "thought": "I will now analyze the transcript for tone, assertiveness, and clarity."
+          }
+        ],
+        "finalResponse": "I've reviewed the transcript from the 'Q3 Planning' meeting. Here's some feedback:\n- **Clarity:** Your main points were clear and well-articulated.\n- **Assertiveness:** There were two instances where you were interrupted. Next time, you could try saying 'I'd like to finish my thought' to hold the floor.\n- **Tone:** Your tone was collaborative and positive throughout."
+      }
+    ]
+  },
+  {
+    "useCaseId": "025",
+    "agentName": "Training Program Manager",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Let's set up the 'Advanced Presentation Skills' training with Jane Doe.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to kick off the training program setup. The first step is to schedule the prep meeting with Jane Doe.",
+            "action": "Call `Google Calendar: Find Available Time` (Attendees: user, 'Jane Doe')"
+          },
+          {
+            "observation": "Found an open slot next Tuesday at 10 AM."
+          },
+          {
+            "thought": "I will propose this time to the user and then proceed with the other setup tasks if they agree.",
+            "action": "Propose time to user."
+          }
+        ],
+        "finalResponse": "Okay, I found an open time for you and Jane Doe next Tuesday at 10 AM. Shall I book it? Once confirmed, I'll also create the Drive folder, Confluence page, and draft the welcome email."
+      }
+    ]
+  },
+  {
+    "useCaseId": "026",
+    "agentName": "Scheduled Reporter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Run the weekly sales report.",
+        "agentTrace": [
+          {
+            "thought": "The user wants the weekly sales report. I need to get data from Salesforce and draft an email.",
+            "action": "Call `Salesforce: Search for Records` (Query: 'Weekly Sales Report')"
+          },
+          {
+            "observation": "Retrieved the report data."
+          },
+          {
+            "thought": "Now I will draft the email to the leadership team.",
+            "action": "Call `Gmail: Create Draft` (To: 'leadership-dl@example.com', Subject: 'Weekly Sales Report', Body: '...')"
+          }
+        ],
+        "finalResponse": "I've run the weekly sales report and drafted the summary email to the leadership team. It's in your drafts folder ready to be sent."
+      }
+    ]
+  },
+  {
+    "useCaseId": "027",
+    "agentName": "Design File Notifier (Workaround Accepted)",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Create a review ticket for this design: figma.com/file/xyz",
+        "agentTrace": [
+          {
+            "thought": "The user is using the workaround for Figma reviews. They've provided a link and want a Jira ticket.",
+            "action": "Call `Jira: Create Issue` (Project: 'Design Review', Title: 'New Design for Review', Body: 'Please review the design at figma.com/file/xyz')"
+          }
+        ],
+        "finalResponse": "I've created a new ticket in the 'Design Review' project in Jira for the engineering team to review that Figma file."
+      }
+    ]
+  },
+  {
+    "useCaseId": "028",
+    "agentName": "Design File Notifier (Workaround Rejected)",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Any update on that Figma integration?",
+        "agentTrace": [
+          {
+            "thought": "The user is asking about the Figma feature request. I need to check my internal log for this user's requests.",
+            "action": "Check internal feature request log."
+          },
+          {
+            "observation": "The Figma integration is still in the 'Requested' state. No updates yet."
+          }
+        ],
+        "finalResponse": "I checked on your request, and the direct Figma integration is not available yet. I still have you on the list and will let you know as soon as it's ready."
+      }
+    ]
+  }
+]
