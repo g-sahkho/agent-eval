@@ -22,7 +22,8 @@
         "request": "Yes, that's correct.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Email Reply Drafter agent helps you manage your inbox. When you receive an email, the agent will: 1. Use `Gmail: Get Unread Email` to read the new message. 2. Use `Gmail: Summarize Email Thread` to understand the context. 3. Use `Gmail: Create Draft` to compose a reply. For Outlook, it will use `Microsoft Outlook Email: Search Emails` and `Microsoft Outlook Email: Create Draft`. The agent will save the draft for you to review and send."
   },
   {
     "useCaseId": "002",
@@ -49,7 +50,8 @@
         "request": "Yes, that's what I need.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Exit Interview Analyzer agent helps you understand employee attrition. The agent will: 1. Use `Google Drive: Search Content` to find exit interview transcripts. 2. Use `Google Drive: Download File` to read the transcripts. 3. Use `Confluence: Create Page` to create a summary of the top reasons for departure. Ensure the agent has access to the correct Google Drive folder and Confluence space."
   },
   {
     "useCaseId": "003",
@@ -77,7 +79,8 @@
         "request": "Yes, it is.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Salary Band Comparator agent helps you stay competitive with market salaries. The agent will: 1. Use `Google Drive: Search Content` and `Google Drive: Download File` to access your internal salary bands and industry survey PDFs. 2. Compare your salary bands to the market data. 3. Use `Gmail: Send Email` or `Slack: Send Direct Message` to notify you of any roles that are below market average. Ensure the agent has access to the correct files and knows how to notify you."
   },
   {
     "useCaseId": "004",
@@ -104,7 +107,8 @@
         "request": "Yes, that's the complete task.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Case Investigator agent helps you gather information for internal investigations. The agent will: 1. Use `Gmail: Search Emails` and `Slack: Search Messages` to find all communications between the specified individuals. 2. Use `Google Drive: Create Document/Sheet/Slide` to compile the findings into a new document. Ensure you provide the correct email addresses and names for the search."
   },
   {
     "useCaseId": "005",
@@ -130,7 +134,8 @@
         "request": "Yes, it does.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The D&I Dashboard Refresher agent helps you keep your diversity and inclusion metrics up to date. The agent will: 1. Use `Workday: Find Colleague` to pull the latest headcount data. 2. Use `Google Sheets` to update your D&I dashboard. Ensure the agent has access to the correct Workday data and Google Sheet."
   },
   {
     "useCaseId": "006",
@@ -153,7 +158,8 @@
         "request": "Yes, that's the plan.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Training Course Suggester agent helps you with your professional development. The agent will: 1. Use `Workday: Get My Profile` to understand your role. 2. Use `Confluence: Get Page Content` to review your company's skill priorities. 3. Use `Web Search` to find relevant training courses. Ensure the agent has access to the correct Confluence page."
   },
   {
     "useCaseId": "007",
@@ -177,7 +183,8 @@
         "request": "Yes, that's the right workflow.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Talent Sourcer agent helps you find qualified candidates. The agent will: 1. Use `LinkedIn: Search Profiles` and `GitHub: Search for Issues` to find candidates with the right skills. 2. Use `Salesforce: Search for Records` to check if they are already in your system. 3. Use `Salesforce: Create Lead` to add new candidates to your talent pipeline. Ensure you provide the correct search criteria and Salesforce list."
   },
   {
     "useCaseId": "008",
@@ -201,7 +208,8 @@
         "request": "Yes, that's what I need.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Competitive Offer Analyst agent helps you win talent. The agent will: 1. Use `Web Search` to find recent news about your competitor. 2. Use `Confluence: Search for Pages` and `Confluence: Get Page Content` to find internal talking points. 3. Use `Google Drive: Search Content` to find any other relevant documents. The agent will compile all of this information into a set of talking points for you."
   },
   {
     "useCaseId": "009",
@@ -229,7 +237,8 @@
         "request": "Yes, that's the process.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Talent Map Refresher agent helps you understand the talent landscape at a competitor. The agent will: 1. Use `LinkedIn: Search Profiles` and `LinkedIn: Search for Companies` to identify key employees and where they are moving. 2. Use `Gmail: Create Draft` or `Microsoft Outlook Email: Create Draft` to create personalized outreach emails to high-potential candidates. Ensure you provide the correct criteria for identifying key employees."
   },
   {
     "useCaseId": "010",
@@ -257,7 +266,8 @@
         "request": "Yes, it is.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Resume Ranker & Skill Analyzer agent helps you screen candidates more efficiently. The agent will: 1. Use `Dropbox: Search Content` and `Dropbox: Download File` to access resumes. 2. Use `Google Drive: Get Page Content` to read the job description. 3. Use `Google Sheets` to rank the candidates and identify trending skills. Ensure the agent has access to the correct Dropbox folder and Google Doc."
   },
   {
     "useCaseId": "011",
@@ -286,7 +296,8 @@
         "request": "Yes, that's the workflow.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Candidate Nurture Assistant agent helps you stay in touch with potential candidates. The agent will: 1. Use `Salesforce: Search for Records` and `Salesforce: Get Record Details` to get information about your candidates. 2. Use `Confluence: Get Page Content` to find relevant content to share. 3. Use `Gmail: Create Draft` or `Microsoft Outlook Email: Create Draft` to compose personalized emails. Ensure you provide the correct Salesforce list and Confluence page."
   },
   {
     "useCaseId": "012",
@@ -312,7 +323,8 @@
         "request": "Yes, proceed.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Competitor Recruiter agent helps you recruit talent from your competitors. The agent will: 1. Use `LinkedIn: Search Profiles` to find qualified candidates at competitor companies. 2. Use `LinkedIn: Send LinkedIn Message` to send personalized connection requests. Ensure you provide the correct search criteria and message content."
   },
   {
     "useCaseId": "013",
@@ -336,7 +348,8 @@
         "request": "Yes, that's the plan.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Org Chart Builder agent helps you understand the structure of a competitor's team. The agent will: 1. Use `LinkedIn: Search Profiles` and `LinkedIn: Search for Companies` to find team members and their reporting structure. 2. Use `Google Drive: Create Document/Sheet/Slide` or `Canva: Create Design` to create a visual org chart. Ensure you specify where the final chart should be created."
   },
   {
     "useCaseId": "014",
@@ -363,7 +376,8 @@
         "request": "Yes, that's it.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Alumni Recruiter agent helps you re-recruit former employees. The agent will: 1. Use `LinkedIn: Search Profiles` to find former employees who meet your criteria. 2. Use `Gmail: Create Draft` or `Microsoft Outlook Email: Create Draft` to compose a personalized outreach message. Ensure you provide the correct search criteria and message content."
   },
   {
     "useCaseId": "015",
@@ -385,7 +399,8 @@
         "request": "Yes, it does.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Referral Finder agent helps you find potential referrals in your network. The agent will: 1. Use `LinkedIn: Search Profiles` to find people with the skills you need. 2. Use `Slack: Send Direct Message` to send you the top profiles. Note that the agent cannot directly access a user's private connections."
   },
   {
     "useCaseId": "016",
@@ -408,7 +423,8 @@
         "request": "Yes, thank you.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Talent Pool Generator agent helps you build a pipeline of potential candidates. The agent will: 1. Use `LinkedIn: Search Profiles` to find people who match your criteria. 2. Use `Salesforce: Create Lead` or `Google Sheets` to save the list of candidates. Ensure you specify where the list should be saved."
   },
   {
     "useCaseId": "017",
@@ -431,7 +447,8 @@
         "request": "Perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Vendor Spend Analyzer agent helps you understand your vendor expenses. The agent will: 1. Use `Box: Search Content` to find vendor contracts. 2. Use `Salesforce: Search for Records` to find purchase orders. 3. Use `Google Sheets` to create a summary of your top vendors by spend. Ensure the agent has access to the correct Box and Salesforce data."
   },
   {
     "useCaseId": "018",
@@ -457,7 +474,8 @@
         "request": "Yes, it is.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Expense Receipt Chaser agent helps you keep track of expense receipts. The agent will: 1. Use `Google Sheets` to check your expense tracking sheet. 2. Use `Slack: Send Direct Message` to remind employees to submit their receipts. Ensure the agent has access to the correct Google Sheet."
   },
   {
     "useCaseId": "019",
@@ -483,7 +501,8 @@
         "request": "Yes, that's correct.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Cash Flow Forecaster agent helps you predict your future cash flow. The agent will: 1. Use `Salesforce: Search for Records` to pull open opportunities. 2. Use `Google Sheets` to access your accounts payable data. 3. Create a new tab in your Google Sheet with the cash flow forecast. Ensure the agent has access to the correct Salesforce and Google Sheets data."
   },
   {
     "useCaseId": "020",
@@ -511,7 +530,8 @@
         "request": "Yes, it is.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Earnings Call Prep Assistant agent helps you prepare for your quarterly earnings call. The agent will: 1. Use `Google Drive: Search Content` to find financial reports. 2. Use `Gmail: Search Emails` and `Gmail: Summarize Email Thread` to summarize emails from analysts. 3. Use `Google Drive: Create Document/Sheet/Slide` to compile all of the information into a single document. Ensure you provide the correct search criteria for the emails."
   },
   {
     "useCaseId": "021",
@@ -541,7 +561,8 @@
         "request": "That's perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Project Updates Listener agent helps you stay on top of your projects. The agent will: 1. Use `Google Calendar: Get Events`, `Gmail: Search Emails`, `Slack: Search Messages`, and `Google Drive: Search Content` to find all project updates. 2. Use `Confluence: Create Page` to create a consolidated summary of all updates. Ensure you specify the time frame for the updates."
   },
   {
     "useCaseId": "022",
@@ -568,7 +589,8 @@
         "request": "That works for me.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The PO Status Monitor agent helps you track your purchase order requests. The agent will: 1. Use `Jira: Search for Issues` and `Jira: Get Issue Details` to find the status of your PO requests. 2. Use `Slack: Send Direct Message` to give you an update and suggest a next step. Ensure your PO requests are tracked as issues in Jira."
   },
   {
     "useCaseId": "023",
@@ -590,7 +612,8 @@
         "request": "Yes, that's exactly it.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The User Story Generator agent helps you write user stories for your team. The agent will: 1. Take your ideas and rephrase them into a standard user story format. 2. Use `Jira: Create Issue` or `Confluence: Create Page` to save the user story. Ensure you specify where the user story should be saved."
   },
   {
     "useCaseId": "024",
@@ -612,7 +635,8 @@
         "request": "That sounds very useful.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Professional Growth Coach agent helps you improve your communication skills. The agent will: 1. Use `Google Calendar: Get Events` to find your meetings. 2. Use `Google Drive` to access the meeting transcripts. 3. Provide feedback on your communication style. Ensure your meeting transcripts are saved in a Google Drive folder that the agent can access."
   },
   {
     "useCaseId": "025",
@@ -638,7 +662,8 @@
         "request": "Yes, that covers all the setup work.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Training Program Manager agent helps you manage the lifecycle of a new training program. The agent will: 1. Use `Google Calendar: Create Event` and `Google Calendar: Find Available Time` to schedule prep meetings. 2. Use `Google Drive: Create Document/Sheet/Slide` and `Google Drive: Create Folder` to create and organize training materials. 3. Use `Gmail: Create Draft` to send introductory emails. 4. Use `Confluence: Create Page` to create a planning page. Ensure you provide all the necessary details for the training program."
   },
   {
     "useCaseId": "026",
@@ -660,7 +685,8 @@
         "request": "That works.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Scheduled Reporter agent helps you automate your weekly sales report. The agent will: 1. Use `Salesforce: Search for Records` to get the sales data. 2. Use `Gmail: Send Email` to draft an email with the report attached. Note that the agent cannot run on a schedule, so you will need to ask it to run the report."
   },
   {
     "useCaseId": "027",
@@ -682,7 +708,8 @@
         "request": "That's a clever idea. Let's do that.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Design File Notifier (Workaround Accepted) agent helps you manage your design review process. The agent will: 1. Use `Slack: Set Reminder` to remind you to check for updated Figma files. 2. Use `Jira: Create Issue` to create a review ticket for the design. This is a workaround, as the agent cannot directly connect to Figma."
   },
   {
     "useCaseId": "028",
@@ -707,7 +734,8 @@
         "request": "Yes, please do.",
         "response": "Sounds good"
       }
-    ]
+    ],
+    "agentInstructions": "The Design File Notifier (Workaround Rejected) agent is not available at this time. The agent cannot directly connect to Figma, so it cannot automatically detect when files are updated. We will notify you when this feature becomes available."
   },
   {
     "useCaseId": "029",
@@ -730,7 +758,8 @@
         "request": "Yes, exactly.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Secure Data Room Creator agent helps you create a secure data room for M&A projects. The agent will: 1. Use `Box: Create Folder` to create a new secure folder. 2. Use `Dropbox: Search Content` to find the relevant files. 3. Use `Box: Copy File/Folder` to copy the files to the new Box folder. Ensure you provide the correct names for the folder and files."
   },
   {
     "useCaseId": "030",
@@ -753,7 +782,8 @@
         "request": "Perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Budget Exception Reporter agent helps you track over-budget CapEx requests. The agent will: 1. Use `Jira: Search for Issues` and `Jira: Get Issue Details` to find all over-budget requests. 2. Use `Google Sheets` to create a list of the requests for your review. Ensure you provide the correct Jira label for over-budget requests."
   },
   {
     "useCaseId": "031",
@@ -775,7 +805,8 @@
         "request": "Yes, that's the plan.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Sales Reconciliation Assistant agent helps you with your month-end close. The agent will: 1. Use `Salesforce: Search for Records` to find all 'Closed Won' opportunities. 2. Use `Google Sheets` to compare the list against your revenue recognition sheet. 3. Create a new tab in your Google Sheet with any discrepancies. Ensure the agent has access to the correct Salesforce and Google Sheets data."
   },
   {
     "useCaseId": "032",
@@ -797,7 +828,8 @@
         "request": "Yes, sounds good.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Commission Verifier agent helps you verify sales commissions. The agent will: 1. Use `Salesforce: Get Record Details` to get the deal details. 2. Use `Confluence: Get Page Content` to check the commission rules. 3. Tell you if the commission is correct and show you the calculation. Ensure the agent has access to the correct Salesforce deal and Confluence page."
   },
   {
     "useCaseId": "033",
@@ -819,7 +851,8 @@
         "request": "Yes, that's right.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Procurement Assistant agent helps you manage your inventory. The agent will: 1. Use `Google Sheets` to check your current inventory. 2. Use `Jira: Create Issue` to create a procurement ticket if inventory is low. Ensure the agent has access to the correct Google Sheet."
   },
   {
     "useCaseId": "034",
@@ -842,7 +875,8 @@
         "request": "That would be a great help.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Contract Reviewer agent helps you review sales contracts. The agent will: 1. Use `Google Drive: Search Content` to find the draft contract. 2. Use `Confluence: Get Page Content` to compare it against your standard T&Cs. 3. Use `Google Drive: Create Document/Sheet/Slide` to create a new document with any non-standard clauses highlighted. Ensure you provide the correct file name for the draft contract."
   },
   {
     "useCaseId": "035",
@@ -865,7 +899,8 @@
         "request": "Yes, that's perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The MBR Deck Builder agent helps you build your monthly business review deck. The agent will: 1. Use `Google Drive: Create Document/Sheet/Slide` to create a new presentation. 2. Use `Salesforce: Search for Records` to summarize your top deals. 3. Use `Jira: Search for Issues` to list any high-priority finance tickets. Ensure you provide a name for the new presentation."
   },
   {
     "useCaseId": "036",
@@ -888,7 +923,8 @@
         "request": "Sounds great.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The New Hire Onboarding Assistant agent helps you onboard new hires. The agent will: 1. Use `Workday: Find Colleague` to get the new hire's information. 2. Use `Jira: Create Issue` to create IT setup tickets. 3. Use `Google Calendar: Create Event` to schedule orientation meetings and 1-on-1s. Ensure you provide the new hire's name and start date."
   },
   {
     "useCaseId": "037",
@@ -911,7 +947,8 @@
         "request": "Yes, execute immediately.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Incident Response Coordinator agent helps you manage incidents. The agent will: 1. Use `Slack: Send Message to Channel` to acknowledge the incident and create a new channel. 2. Use `Jira: Create Issue` to create a P0 ticket. 3. Use `Google Calendar: Create Event` to schedule a war room meeting. Ensure you provide a name for the new Slack channel."
   },
   {
     "useCaseId": "038",
@@ -934,7 +971,8 @@
         "request": "That's exactly what I need.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Deal Closing Assistant agent helps you with your deal closing process. The agent will: 1. Use `Salesforce: Get Record Details` to get the deal information. 2. Use `Google Drive: Create Document/Sheet/Slide` to generate a closing report. 3. Use `Slack: Send Message to Channel` to notify the sales team. Note that you will need to provide the deal name or ID."
   },
   {
     "useCaseId": "039",
@@ -963,7 +1001,8 @@
         "request": "Perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Lead Enrichment Assistant agent helps you enrich new leads. The agent will: 1. Use `Salesforce: Update Record` to update the lead information. 2. Use `HubSpot: Search for Contacts/Deals` and `Web Search` to find additional information. 3. Use `Google Drive: Create Document/Sheet/Slide` to create a briefing doc. 4. Use `Jira: Create Issue` to assign a review task. Ensure you define what a 'high-value' lead is."
   },
   {
     "useCaseId": "040",
@@ -986,6 +1025,7 @@
         "request": "That's great, thanks.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The QBR Prep Assistant agent helps you prepare for your quarterly business review. The agent will: 1. Use `Salesforce: Search for Records` to get sales data. 2. Use `Zendesk: Search for Tickets` to get support ticket data. 3. Use `Google Drive: Create Document/Sheet/Slide` to create a presentation. Ensure you specify any additional data sources you want to include."
   }
 ]
