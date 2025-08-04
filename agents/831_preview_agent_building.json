@@ -19,7 +19,8 @@
         "request": "Yes, that's perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The IT Incident Reporter agent streamlines your IT support process. When you describe an IT problem, the agent will: 1. Use `ServiceNow: Create Incident` to log a new ticket. 2. After the ticket is created, use `Outlook: Send Email` to send a confirmation to your manager. Ensure all details from your problem description are included in the ServiceNow ticket."
   },
   {
     "useCaseId": "002",
@@ -45,7 +46,8 @@
         "request": "Yes, that's the one.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Vacation Planner agent helps you schedule time off. When you provide your desired vacation dates, the agent will: 1. Use `Workday: Request Time Off` to submit the official request. 2. Use `Google Calendar: Create Calendar Event` to block off those dates on your personal calendar. Ensure the dates in Workday and Google Calendar match exactly."
   },
   {
     "useCaseId": "003",
@@ -67,7 +69,8 @@
         "request": "Yes, that's the logic I want.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Bug Submitter agent helps you report bugs efficiently. When you describe a bug, the agent will: 1. Use `Jira: Search Jira Issues` to check if a similar bug has already been reported. 2. If no duplicates are found, use `Jira: Create Jira Issue` to create a new bug report. Include all relevant details from your description in the Jira ticket."
   },
   {
     "useCaseId": "004",
@@ -90,7 +93,8 @@
         "request": "Yes, that covers it.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Meeting Follow-up Assistant helps you stay organized after meetings. When you provide meeting notes, the agent will: 1. Use `Confluence: Create Page` to create a new page with the meeting minutes. 2. Use `Gmail: Send Email` to send a follow-up email to attendees. 3. Use `Jira: Create Jira Issue` to create tickets for any action items identified in the notes. Ensure the Confluence page, email, and Jira tickets are all consistent with the provided notes."
   },
   {
     "useCaseId": "005",
@@ -108,7 +112,8 @@
         "request": "Yes, that's all it needs to do.",
         "response": "Great. The agent is configured. When you need to use it, just tell it you're taking a sick day and provide the team's email address."
       }
-    ]
+    ],
+    "agentInstructions": "The PTO Notifier agent simplifies taking time off. When you need to take a sick day, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Gmail: Send Email` to notify your team's distribution list. Ensure the dates are correct and the email is sent to the specified address."
   },
   {
     "useCaseId": "006",
@@ -134,7 +139,8 @@
         "request": "Yes, that's the workflow.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Incident Escalator agent helps manage critical IT incidents. When you provide a ServiceNow incident ID, the agent will: 1. Use `ServiceNow: Update Incident` to change the incident's priority to critical. 2. Use `Gmail: Send Email` to email the on-call manager for immediate awareness. Ensure the correct incident ID is updated and the email is sent to the appropriate manager."
   },
   {
     "useCaseId": "007",
@@ -151,7 +157,8 @@
         "request": "Yes, that's it. Nothing more.",
         "response": "The agent has been configured with that single capability. It's ready when you are."
       }
-    ]
+    ],
+    "agentInstructions": "The Jira Task Updater agent provides a simple way to update Jira tickets. When you provide a Jira ticket ID and a comment, the agent will use `Jira: Update Jira Issue` to add the comment to the existing ticket. Ensure the comment is added to the correct ticket ID."
   },
   {
     "useCaseId": "008",
@@ -173,7 +180,8 @@
         "request": "Yes, that is the correct sequence.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Outage Communicator agent handles major service disruptions. When you report an outage, the agent will: 1. Use `ServiceNow: Create Incident` to create a P0 incident. 2. Use `Gmail: Send Email` to send a company-wide notification about the outage. Ensure the incident is created with the highest priority and the email is sent to all employees."
   },
   {
     "useCaseId": "009",
@@ -199,7 +207,8 @@
         "request": "That's right.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Team Event Coordinator agent helps you schedule team meetings. When you provide meeting details, the agent will: 1. Use `Outlook: Create Calendar Event` to create the meeting invitation. 2. Use `Gmail: Send Email` to send a separate email with the agenda. Ensure the meeting details are correct and the agenda is sent to all attendees."
   },
   {
     "useCaseId": "010",
@@ -221,7 +230,8 @@
         "request": "Yes, that's the perfect workflow.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Project Kick-off Assistant helps you start new projects. When you provide project details, the agent will: 1. Use `Confluence: Create Page` to create a project overview page. 2. Use `Jira: Create Jira Issue` to create the main epic for the project. Ensure the Confluence page and Jira epic are consistent with the project details."
   },
   {
     "useCaseId": "011",
@@ -243,7 +253,8 @@
         "request": "Perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Weekly Status Reporter agent automates your project status emails. When you specify a project, the agent will: 1. Use `Jira: Search Jira Issues` to find all issues updated in the last week. 2. Use `Gmail: Send Email` to send a summary of the issues to your stakeholders. Ensure the Jira search is filtered correctly and the email is sent to the right people."
   },
   {
     "useCaseId": "012",
@@ -265,7 +276,8 @@
         "request": "Yes, that's exactly it.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Retrospective Planner agent helps you organize sprint retrospectives. When you provide the sprint details, the agent will: 1. Use `Confluence: Create Page` to create a new retro page. 2. Use `Google Calendar: Create Calendar Event` to schedule the meeting and invite the team. Ensure the Confluence page is created and the calendar event is sent to all team members."
   },
   {
     "useCaseId": "013",
@@ -287,7 +299,8 @@
         "request": "Yes, that's correct.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Cross-Team Bug Notifier agent helps you report bugs and notify other teams. When you describe a bug, the agent will: 1. Use `Jira: Create Jira Issue` to create a new bug report. 2. Use `Outlook: Send Email` to notify another team about the new bug. Ensure the Jira ticket is created correctly and the email is sent to the specified team."
   },
   {
     "useCaseId": "014",
@@ -314,7 +327,8 @@
         "request": "Yes, thank you.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Leave of Absence Coordinator agent handles all aspects of your extended leave. When you provide your leave dates, the agent will: 1. Use `Workday: Request Time Off` to submit the official request. 2. Use `Outlook: Create Calendar Event` to block off the time on your work calendar. 3. Use `Outlook: Send Email` to send an out-of-office notification to your team. Ensure all dates are correct and all actions are completed."
   },
   {
     "useCaseId": "015",
@@ -336,7 +350,8 @@
         "request": "Yes, that's the process.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Service Desk Automator agent helps you manage new IT issues. When a new type of issue is reported, the agent will: 1. Use `ServiceNow: Create Incident` to create a new ticket. 2. Use `Confluence: Create Page` to create a draft for a new knowledge base article. Ensure the incident is created and the Confluence page is ready for documentation."
   },
   {
     "useCaseId": "016",
@@ -358,7 +373,8 @@
         "request": "That's exactly what I need.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Release Notes Drafter agent automates the creation of release notes. When you specify a release version, the agent will: 1. Use `Jira: Search Jira Issues` to find all completed issues in that version. 2. Use `Confluence: Create Page` to create a draft release notes page with the results. Ensure the Jira search is correct and the Confluence page is created with the list of issues."
   },
   {
     "useCaseId": "017",
@@ -380,7 +396,8 @@
         "request": "Yes, that will save me a lot of time.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The PTO Commenter agent helps you notify your team about your time off. When you request PTO, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Jira: Update Jira Issue` to add a comment to all of your open Jira tickets, notifying your team that you will be out of office. Ensure the Workday request is submitted and all your Jira tickets are updated."
   },
   {
     "useCaseId": "018",
@@ -402,7 +419,8 @@
         "request": "Correct.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The On-Call Handoff Assistant helps you with your weekly on-call handoff. When you provide a summary of the week's events, the agent will: 1. Use `Confluence: Create Page` to create a handoff summary page. 2. Use `Gmail: Send Email` to email a link to the page to the next on-call engineer. Ensure the Confluence page is created and the email is sent to the correct person."
   },
   {
     "useCaseId": "019",
@@ -419,7 +437,8 @@
         "request": "Yes, that's it.",
         "response": "Okay, the agent is ready. It's configured with that single capability."
       }
-    ]
+    ],
+    "agentInstructions": "The ServiceNow Commenter agent provides a simple way to update ServiceNow tickets. When you provide an incident number and a comment, the agent will use `ServiceNow: Update Incident` to add the comment to the existing ticket. Ensure the comment is added to the correct incident."
   },
   {
     "useCaseId": "020",
@@ -441,7 +460,8 @@
         "request": "Yes, that's what I need.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Team Brainstorm Organizer agent helps you set up brainstorming sessions. When you provide the session details, the agent will: 1. Use `Confluence: Create Page` to create a new page for the session. 2. Use `Outlook: Create Calendar Event` to schedule the meeting and invite the team. Ensure the Confluence page is created and the calendar event is sent to all team members."
   },
   {
     "useCaseId": "021",
@@ -463,7 +483,8 @@
         "request": "Yes, that's perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Scrum Blocker Reporter agent helps you manage blockers in your daily stand-up. When a team member reports a blocker, the agent will: 1. Use `Jira: Create Jira Issue` to create a high-priority 'Blocker' issue. 2. Use `Google Calendar: Create Calendar Event` to schedule a 15-minute follow-up meeting with the people needed to solve it. Ensure the Jira ticket is created and the meeting is scheduled with the right people."
   },
   {
     "useCaseId": "022",
@@ -489,7 +510,8 @@
         "request": "Yes, that's right.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Customer Complaint Logger agent helps you log customer complaints. When you receive a complaint, the agent will: 1. Use `Jira: Create Jira Issue` to create a new issue. 2. Use `Outlook: Send Email` to send a confirmation email to the customer. Ensure the Jira issue is created and the confirmation email is sent to the customer."
   },
   {
     "useCaseId": "023",
@@ -511,7 +533,8 @@
         "request": "Yes, that's the process.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Interview Scheduler agent helps you schedule interviews with candidates. When you provide the candidate and interviewer details, the agent will: 1. Use `Google Calendar: Create Calendar Event` to create an event with the candidate and interviewers. 2. Use `Gmail: Send Email` to send a confirmation email with the details. Ensure the calendar event is created and the confirmation email is sent to everyone."
   },
   {
     "useCaseId": "024",
@@ -533,7 +556,8 @@
         "request": "Yes, exactly.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Knowledge Base Creator agent helps you build out your knowledge base. When you mark a bug as 'Fixed' in Jira, the agent will: 1. Use `Jira: Update Jira Issue` to confirm the fix. 2. Use `Confluence: Create Page` to create a new knowledge base article explaining the fix. Ensure the Jira issue is updated and the Confluence page is created with the correct information."
   },
   {
     "useCaseId": "025",
@@ -550,7 +574,8 @@
         "request": "Yes, that's all. Nothing fancy.",
         "response": "The agent has been configured with that single capability. It's ready when you are."
       }
-    ]
+    ],
+    "agentInstructions": "The Simple Emailer agent provides a basic way to send emails. When you provide the recipient, subject, and body, the agent will use `Gmail: Send Email` to send the email. Ensure the email is sent to the correct recipient with the correct content."
   },
   {
     "useCaseId": "026",
@@ -572,7 +597,8 @@
         "request": "Yes, that's it.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The IT Request Follow-up agent helps you update IT requests. When you provide an update, the agent will: 1. Use `ServiceNow: Update Incident` to add the update to the ticket. 2. Use `Outlook: Send Email` to notify the person who filed the request. Ensure the ServiceNow ticket is updated and the notification is sent to the correct person."
   },
   {
     "useCaseId": "027",
@@ -594,7 +620,8 @@
         "request": "Perfect.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Jira Triage Assistant helps you with Jira triage. When you provide a ticket and its priority and component, the agent will: 1. Use `Jira: Update Jira Issue` to update the ticket. 2. Use `Gmail: Send Email` to notify the component owner. Ensure the Jira ticket is updated and the notification is sent to the correct owner."
   },
   {
     "useCaseId": "028",
@@ -611,7 +638,8 @@
         "request": "Yes, just a simple scheduler.",
         "response": "The agent is ready. Just tell it who to invite, the title, and the time."
       }
-    ]
+    ],
+    "agentInstructions": "The Meeting Scheduler agent helps you schedule meetings. When you provide the meeting details, the agent will use `Google Calendar: Create Calendar Event` to schedule the meeting. Ensure the meeting is scheduled with the correct people and at the correct time."
   },
   {
     "useCaseId": "029",
@@ -633,7 +661,8 @@
         "request": "Yes, that workflow is correct.",
         "response": null
       }
-    ]
+    ],
+    "agentInstructions": "The Project Update Communicator agent helps you send out project updates. When you provide an update, the agent will: 1. Use `Confluence: Create Page` to create a new page with your update. 2. Use `Gmail: Send Email` to send a link to the page to all project stakeholders. Ensure the Confluence page is created and the email is sent to all stakeholders."
   },
   {
     "useCaseId": "030",
@@ -650,6 +679,7 @@
         "request": "Yes, just a fast way to create tasks.",
         "response": "Okay, the agent is configured. It's ready to create Jira issues for you when you need it."
       }
-    ]
+    ],
+    "agentInstructions": "The Task Creator agent helps you quickly create tasks in Jira. When you provide the task details, the agent will use `Jira: Create Jira Issue` to create a new task. Ensure the task is created with the correct details."
   }
 ]
