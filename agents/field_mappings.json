@@ -880,7 +880,1783 @@
       ]
     }
   },
+  "jira": {
+  "create_issue": {
+    "required": [
+      {
+        "fieldName": "project",
+        "description": "The key or ID of the project."
+      },
+      {
+        "fieldName": "summary",
+        "description": "A brief summary of the issue."
+      },
+      {
+        "fieldName": "issuetype",
+        "description": "The name or ID of the issue type (e.g., 'Task', 'Bug')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "description",
+        "description": "A detailed description of the issue."
+      },
+      {
+        "fieldName": "assignee",
+        "description": "The user to whom the issue is assigned."
+      },
+      {
+        "fieldName": "reporter",
+        "description": "The user who is reporting the issue."
+      },
+      {
+        "fieldName": "labels",
+        "description": "A list of labels to add to the issue."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The priority of the issue."
+      },
+      {
+        "fieldName": "components",
+        "description": "A list of components to associate with the issue."
+      },
+      {
+        "fieldName": "duedate",
+        "description": "The due date for the issue."
+      }
+    ]
+  },
+  "update_issue": {
+    "required": [
+      {
+        "fieldName": "issueIdOrKey",
+        "description": "The ID or key of the issue to update."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "summary",
+        "description": "The new summary of the issue."
+      },
+      {
+        "fieldName": "description",
+        "description": "The new description of the issue."
+      },
+      {
+        "fieldName": "assignee",
+        "description": "The user to whom the issue is assigned."
+      },
+      {
+        "fieldName": "reporter",
+        "description": "The user who is reporting the issue."
+      },
+      {
+        "fieldName": "labels",
+        "description": "A list of labels to add to the issue."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The priority of the issue."
+      },
+      {
+        "fieldName": "components",
+        "description": "A list of components to associate with the issue."
+      },
+      {
+        "fieldName": "duedate",
+        "description": "The due date for the issue."
+      }
+    ]
+  },
+  "add_comment_to_issue": {
+    "required": [
+      {
+        "fieldName": "issueIdOrKey",
+        "description": "The ID or key of the issue."
+      },
+      {
+        "fieldName": "body",
+        "description": "The comment text in Atlassian Document Format."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "visibility",
+        "description": "The group or role to which this comment is visible."
+      }
+    ]
+  },
+  "get_issue_details": {
+    "required": [
+      {
+        "fieldName": "issueIdOrKey",
+        "description": "The ID or key of the issue."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "fields",
+        "description": "A comma-separated list of fields to return."
+      },
+      {
+        "fieldName": "expand",
+        "description": "A comma-separated list of properties to expand."
+      },
+      {
+        "fieldName": "properties",
+        "description": "A comma-separated list of issue properties to include."
+      },
+      {
+        "fieldName": "updateHistory",
+        "description": "A boolean to indicate whether to include update history."
+      }
+    ]
+  },
+  "transition_issue_status": {
+    "required": [
+      {
+        "fieldName": "issueIdOrKey",
+        "description": "The ID or key of the issue."
+      },
+      {
+        "fieldName": "transition",
+        "description": "An object containing the ID of the transition to perform."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "fields",
+        "description": "An object containing any fields required for the transition screen."
+      },
+      {
+        "fieldName": "comment",
+        "description": "A comment to add to the issue upon transition."
+      },
+      {
+        "fieldName": "historyMetadata",
+        "description": "Additional metadata for the transition."
+      }
+    ]
+  },
+  "list_issues": {
+    "required": [
+      {
+        "fieldName": "jql",
+        "description": "The JQL query string."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "startAt",
+        "description": "The index of the first issue to return."
+      },
+      {
+        "fieldName": "maxResults",
+        "description": "The maximum number of issues to return."
+      },
+      {
+        "fieldName": "fields",
+        "description": "A comma-separated list of fields to return."
+      },
+      {
+        "fieldName": "expand",
+        "description": "A comma-separated list of properties to expand."
+      }
+    ]
+  }
+},
+"microsoft_outlook": {
+  "send_email": {
+    "required": [
+      {
+        "fieldName": "toRecipients",
+        "description": "A list of recipient email addresses."
+      },
+      {
+        "fieldName": "subject",
+        "description": "The subject of the email. Can be generated by the agent."
+      },
+      {
+        "fieldName": "body",
+        "description": "The content of the email. Can be generated by the agent."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "ccRecipients",
+        "description": "A list of CC recipient email addresses."
+      },
+      {
+        "fieldName": "bccRecipients",
+        "description": "A list of BCC recipient email addresses."
+      },
+      {
+        "fieldName": "attachments",
+        "description": "A list of file paths to attach."
+      },
+      {
+        "fieldName": "saveToSentItems",
+        "description": "Whether to save the email in the Sent Items folder. Defaults to true."
+      }
+    ]
+  },
+  "create_calendar_event": {
+    "required": [
+      {
+        "fieldName": "subject",
+        "description": "The title of the event."
+      },
+      {
+        "fieldName": "start",
+        "description": "The start date and time for the event (e.g., '2025-08-06T12:00:00')."
+      },
+      {
+        "fieldName": "end",
+        "description": "The end date and time for the event (e.g., '2025-08-06T14:00:00')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "body",
+        "description": "The description or agenda for the event."
+      },
+      {
+        "fieldName": "location",
+        "description": "The location of the event."
+      },
+      {
+        "fieldName": "attendees",
+        "description": "A list of email addresses for people to invite."
+      },
+      {
+        "fieldName": "timeZone",
+        "description": "The time zone for the start and end times. Defaults to the user's primary time zone."
+      },
+      {
+        "fieldName": "isOnlineMeeting",
+        "description": "Set to true to make it a Teams meeting."
+      }
+    ]
+  }
+},
+"servicenow": {
+  "update_incident": {
+    "required": [
+      {
+        "fieldName": "sys_id",
+        "description": "The unique ID of the incident to update."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "short_description",
+        "description": "A brief, updated summary of the incident."
+      },
+      {
+        "fieldName": "description",
+        "description": "A more detailed description of the incident or the update."
+      },
+      {
+        "fieldName": "state",
+        "description": "The new state of the incident (e.g., 'In Progress', 'Resolved')."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The new priority level (e.g., 'High', 'Critical')."
+      },
+      {
+        "fieldName": "comments",
+        "description": "Work notes or comments to add to the incident."
+      },
+      {
+        "fieldName": "assigned_to",
+        "description": "The user or group to whom the incident should be assigned."
+      },
+      {
+        "fieldName": "close_code",
+        "description": "The reason for closing the incident."
+      },
+      {
+        "fieldName": "close_notes",
+        "description": "Detailed notes about the resolution."
+      }
+    ]
+  },
+  "create_incident": {
+    "required": [
+      {
+        "fieldName": "short_description",
+        "description": "A brief summary of the incident (e.g., 'Printer is broken')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "description",
+        "description": "A more detailed description of the issue."
+      },
+      {
+        "fieldName": "caller_id",
+        "description": "The user reporting the incident. Defaults to the current user."
+      },
+      {
+        "fieldName": "urgency",
+        "description": "The urgency of the incident."
+      },
+      {
+        "fieldName": "impact",
+        "description": "The business impact of the incident."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The priority of the incident."
+      },
+      {
+        "fieldName": "assignment_group",
+        "description": "The group to which the incident should be assigned."
+      },
+      {
+        "fieldName": "category",
+        "description": "The category of the incident (e.g., 'Hardware', 'Software')."
+      },
+      {
+        "fieldName": "subcategory",
+        "description": "The subcategory of the incident."
+      }
+    ]
+  },
+  "create_service_request": {
+    "required": [
+      {
+        "fieldName": "sysparm_id",
+        "description": "The sys_id of the service catalog item to order."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "variables",
+        "description": "A JSON object containing the specific variables and their values required for the chosen catalog item (e.g., {\"laptop_model\": \"MacBook Pro\", \"requested_for\": \"John Doe\"})."
+      },
+      {
+        "fieldName": "sysparm_quantity",
+        "description": "The quantity of the item to order. Defaults to 1."
+      }
+    ]
+  },
+  "search_knowledge_base": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The text to search for in the knowledge base."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "language",
+        "description": "The language to search in."
+      },
+      {
+        "fieldName": "knowledge_base",
+        "description": "The sys_id of a specific knowledge base to search within."
+      },
+      {
+        "fieldName": "limit",
+        "description": "The maximum number of articles to return."
+      },
+      {
+        "fieldName": "offset",
+        "description": "The starting record for pagination."
+      }
+    ]
+  }
+},
+"workday": {
+  "request_time_off": {
+    "required": [
+      {
+        "fieldName": "dates",
+        "description": "A list of dates for the time off request."
+      },
+      {
+        "fieldName": "type",
+        "description": "The type of time off (e.g., 'Vacation', 'Sick')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "quantity",
+        "description": "The number of hours or days being requested per date. Defaults to a full day."
+      },
+      {
+        "fieldName": "comment",
+        "description": "A comment or reason for the request."
+      }
+    ]
+  },
+  "check_time_off_balance": {
+    "required": [
+      {
+        "fieldName": "time_off_plan",
+        "description": "The name of the time off plan to check (e.g., 'Vacation', 'Sick Leave')."
+      }
+    ],
+    "optional": []
+  }
+},
+"microsoft_outlook_email": {
+  "create_draft": {
+    "required": [
+      {
+        "fieldName": "subject",
+        "description": "The subject of the email."
+      },
+      {
+        "fieldName": "body",
+        "description": "The content of the email."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "toRecipients",
+        "description": "A list of recipient email addresses."
+      },
+      {
+        "fieldName": "ccRecipients",
+        "description": "A list of CC recipient email addresses."
+      },
+      {
+        "fieldName": "bccRecipients",
+        "description": "A list of BCC recipient email addresses."
+      },
+      {
+        "fieldName": "attachments",
+        "description": "A list of file paths to attach."
+      }
+    ]
+  },
+  "move_email": {
+    "required": [
+      {
+        "fieldName": "message_id",
+        "description": "The ID of the email to move."
+      },
+      {
+        "fieldName": "destinationId",
+        "description": "The ID or well-known name of the destination folder (e.g., 'inbox', 'archive', 'deleteditems')."
+      }
+    ],
+    "optional": []
+  },
+  "search_emails": {
+    "required": [
+      {
+        "fieldName": "queryString",
+        "description": "The search query string. Can be a simple string or a KQL query."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "from",
+        "description": "The starting index for pagination."
+      },
+      {
+        "fieldName": "size",
+        "description": "The number of results to return."
+      }
+    ]
+  }
+},
+"slack": {
+  "search_messages": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The search query. Can include operators like 'in:#channel', 'from:@user', etc."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "sort",
+        "description": "How to sort the results. Can be 'score' (for relevance) or 'timestamp'."
+      },
+      {
+        "fieldName": "count",
+        "description": "The number of messages to return per page."
+      },
+      {
+        "fieldName": "page",
+        "description": "The page number to retrieve."
+      }
+    ]
+  },
+  "send_direct_message": {
+    "required": [
+      {
+        "fieldName": "user_id",
+        "description": "The ID of the user to send the message to."
+      },
+      {
+        "fieldName": "text",
+        "description": "The content of the message."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "as_user",
+        "description": "A boolean to post the message as the authenticated user instead of a bot."
+      }
+    ]
+  },
+  "send_message_to_channel": {
+    "required": [
+      {
+        "fieldName": "channel_id",
+        "description": "The ID of the channel to send the message to."
+      },
+      {
+        "fieldName": "text",
+        "description": "The content of the message."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "blocks",
+        "description": "A JSON-based array of structured blocks for richly formatted messages."
+      },
+      {
+        "fieldName": "as_user",
+        "description": "A boolean to post the message as the authenticated user instead of a bot."
+      }
+    ]
+  },
+  "set_reminder": {
+    "required": [
+      {
+        "fieldName": "text",
+        "description": "The content of the reminder (e.g., 'Submit my expense report')."
+      },
+      {
+        "fieldName": "time",
+        "description": "When the reminder should occur. This can be a Unix timestamp or a natural language description like 'in 15 minutes' or 'every Thursday'."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "user",
+        "description": "The user to receive the reminder. Defaults to the authenticated user."
+      }
+    ]
+  },
+  "set_status": {
+    "required": [
+      {
+        "fieldName": "status_text",
+        "description": "The text for the status."
+      },
+      {
+        "fieldName": "status_emoji",
+        "description": "The emoji for the status (e.g., ':train:')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "status_expiration",
+        "description": "A Unix timestamp for when the status should expire."
+      }
+    ]
+  },
+  "upload_file": {
+    "required": [
+      {
+        "fieldName": "file_path",
+        "description": "The local path to the file to upload."
+      },
+      {
+        "fieldName": "channel_id",
+        "description": "The ID of the channel to upload the file to."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "initial_comment",
+        "description": "A message to post with the file."
+      },
+      {
+        "fieldName": "title",
+        "description": "A title for the file."
+      }
+    ]
+  }
+},
+"ms_office": {
+  "create_document": {
+    "required": [
+      {
+        "fieldName": "filename",
+        "description": "The name of the new document (e.g., 'Project Proposal.docx')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "parent_id",
+        "description": "The ID of the parent folder to create the document in. Defaults to the root folder."
+      },
+      {
+        "fieldName": "content",
+        "description": "The initial binary content of the document. If not provided, an empty document will be created."
+      }
+    ]
+  },
+  "create_spreadsheet": {
+    "required": [
+      {
+        "fieldName": "filename",
+        "description": "The name of the new spreadsheet (e.g., 'Q3 Budget.xlsx')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "parent_id",
+        "description": "The ID of the parent folder to create the spreadsheet in. Defaults to the root folder."
+      },
+      {
+        "fieldName": "content",
+        "description": "The initial binary content of the spreadsheet. If not provided, an empty spreadsheet will be created."
+      }
+    ]
+  }
+},
+"sharepoint": {
+  "create_list_item": {
+    "required": [
+      {
+        "fieldName": "site_url",
+        "description": "The URL of the SharePoint site."
+      },
+      {
+        "fieldName": "list_title",
+        "description": "The title of the list."
+      },
+      {
+        "fieldName": "fields",
+        "description": "A JSON object representing the fields and values of the new list item."
+      }
+    ],
+    "optional": []
+  },
+  "get_list_items": {
+    "required": [
+      {
+        "fieldName": "site_url",
+        "description": "The URL of the SharePoint site."
+      },
+      {
+        "fieldName": "list_title",
+        "description": "The title of the list."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "select",
+        "description": "A comma-separated list of fields to return."
+      },
+      {
+        "fieldName": "filter",
+        "description": "An OData filter query to apply."
+      },
+      {
+        "fieldName": "expand",
+        "description": "A comma-separated list of lookup fields to expand."
+      },
+      {
+        "fieldName": "top",
+        "description": "The maximum number of items to return."
+      }
+    ]
+  },
+  "search_site_content": {
+    "required": [
+      {
+        "fieldName": "site_url",
+        "description": "The URL of the SharePoint site to search."
+      },
+      {
+        "fieldName": "querytext",
+        "description": "The search query."
+      }
+    ],
+    "optional": []
+  },
+  "update_list_item": {
+    "required": [
+      {
+        "fieldName": "site_url",
+        "description": "The URL of the SharePoint site."
+      },
+      {
+        "fieldName": "list_title",
+        "description": "The title of the list."
+      },
+      {
+        "fieldName": "item_id",
+        "description": "The ID of the list item to update."
+      },
+      {
+        "fieldName": "fields",
+        "description": "A JSON object representing the fields and values to update."
+      }
+    ],
+    "optional": []
+  },
+  "upload_document": {
+    "required": [
+      {
+        "fieldName": "site_url",
+        "description": "The URL of the SharePoint site."
+      },
+      {
+        "fieldName": "folder_name",
+        "description": "The name of the document library or folder."
+      },
+      {
+        "fieldName": "file_path",
+        "description": "The local path to the file to upload."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "overwrite",
+        "description": "A boolean to indicate whether to overwrite an existing file with the same name. Defaults to true."
+      }
+    ]
+  }
+},
+"zendesk": {
+  "create_ticket": {
+    "required": [
+      {
+        "fieldName": "subject",
+        "description": "The subject of the ticket."
+      },
+      {
+        "fieldName": "comment",
+        "description": "The initial comment or description of the issue."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "requester",
+        "description": "An object with the user's name and email. If not provided, the agent can use the authenticated user's information."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The priority of the ticket."
+      },
+      {
+        "fieldName": "tags",
+        "description": "A list of tags to add to the ticket."
+      }
+    ]
+  },
+  "update_ticket": {
+    "required": [
+      {
+        "fieldName": "ticket_id",
+        "description": "The ID of the ticket to update."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "status",
+        "description": "The new status of the ticket."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The new priority of the ticket."
+      },
+      {
+        "fieldName": "comment",
+        "description": "A comment to add to the ticket."
+      },
+      {
+        "fieldName": "assignee_id",
+        "description": "The ID of the agent to assign the ticket to."
+      }
+    ]
+  },
+  "add_public_private_comment": {
+    "required": [
+      {
+        "fieldName": "ticket_id",
+        "description": "The ID of the ticket to add the comment to."
+      },
+      {
+        "fieldName": "body",
+        "description": "The content of the comment."
+      },
+      {
+        "fieldName": "public",
+        "description": "A boolean to indicate if the comment is public (true) or private (false)."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "author_id",
+        "description": "The ID of the user adding the comment. Defaults to the authenticated user."
+      }
+    ]
+  },
+  "get_ticket_details": {
+    "required": [
+      {
+        "fieldName": "ticket_id",
+        "description": "The ID of the ticket to retrieve."
+      }
+    ],
+    "optional": []
+  },
+  "search_for_tickets": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The search query. Can include keywords and filters like 'status:open'."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "sort_by",
+        "description": "The field to sort by."
+      },
+      {
+        "fieldName": "sort_order",
+        "description": "The direction to sort (either 'asc' or 'desc')."
+      }
+    ]
+  }
+},
+"google_drive": {
+  "create_document_sheet_slide": {
+    "required": [
+      {
+        "fieldName": "name",
+        "description": "The name of the new file."
+      },
+      {
+        "fieldName": "mimeType",
+        "description": "The MIME type of the file to create. Must be one of 'application/vnd.google-apps.document', 'application/vnd.google-apps.spreadsheet', or 'application/vnd.google-apps.presentation'."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "parents",
+        "description": "A list of parent folder IDs."
+      }
+    ]
+  },
+  "download_file": {
+    "required": [
+      {
+        "fieldName": "fileId",
+        "description": "The ID of the file to download or export."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "mimeType",
+        "description": "For Google Workspace documents, the MIME type to export to (e.g., 'application/pdf', 'text/csv'). If not provided for a Google Doc, the agent will have to decide on a default export format."
+      }
+    ]
+  },
+  "move_file_folder": {
+    "required": [
+      {
+        "fieldName": "fileId",
+        "description": "The ID of the file or folder to move."
+      },
+      {
+        "fieldName": "addParents",
+        "description": "The ID of the new parent folder."
+      },
+      {
+        "fieldName": "removeParents",
+        "description": "The ID of the original parent folder."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "supportsAllDrives",
+        "description": "A boolean to indicate whether the requesting application supports both My Drives and shared drives."
+      }
+    ]
+  },
+  "search_content": {
+    "required": [
+      {
+        "fieldName": "q",
+        "description": "The query string for searching files."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "pageSize",
+        "description": "The maximum number of files to return."
+      },
+      {
+        "fieldName": "pageToken",
+        "description": "The token for continuing a previous list request."
+      },
+      {
+        "fieldName": "fields",
+        "description": "A selector specifying which fields to include in the response."
+      }
+    ]
+  },
+  "share_file_folder": {
+    "required": [
+      {
+        "fieldName": "fileId",
+        "description": "The ID of the file or folder to share."
+      },
+      {
+        "fieldName": "type",
+        "description": "The type of permission (e.g., 'user', 'group', 'domain', 'anyone')."
+      },
+      {
+        "fieldName": "role",
+        "description": "The role to grant (e.g., 'owner', 'writer', 'commenter', 'reader')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "emailAddress",
+        "description": "The email address of the user or group to share with."
+      },
+      {
+        "fieldName": "domain",
+        "description": "The domain to share with."
+      },
+      {
+        "fieldName": "sendNotificationEmail",
+        "description": "A boolean to indicate whether to send a notification email."
+      },
+      {
+        "fieldName": "emailMessage",
+        "description": "A custom message to include in the notification email."
+      }
+    ]
+  },
+  "star_file_folder": {
+    "required": [
+      {
+        "fieldName": "fileId",
+        "description": "The ID of the file or folder to star."
+      },
+      {
+        "fieldName": "starred",
+        "description": "A boolean indicating whether to star (true) or unstar (false) the file."
+      }
+    ],
+    "optional": []
+  },
+  "upload_file": {
+    "required": [
+      {
+        "fieldName": "name",
+        "description": "The name of the file."
+      },
+      {
+        "fieldName": "file_path",
+        "description": "The local path to the file to upload."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "parents",
+        "description": "A list of parent folder IDs."
+      },
+      {
+        "fieldName": "mimeType",
+        "description": "The MIME type of the file."
+      }
+    ]
+  }
+},
+"teams": {
+  "schedule_meeting": {
+    "required": [
+      {
+        "fieldName": "subject",
+        "description": "The title of the meeting."
+      },
+      {
+        "fieldName": "startDateTime",
+        "description": "The start date and time of the meeting."
+      },
+      {
+        "fieldName": "endDateTime",
+        "description": "The end date and time of the meeting."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "attendees",
+        "description": "A list of email addresses for people to invite."
+      },
+      {
+        "fieldName": "body",
+        "description": "The description or agenda for the meeting."
+      }
+    ]
+  },
+  "search_messages": {
+    "required": [
+      {
+        "fieldName": "queryString",
+        "description": "The search query."
+      }
+    ],
+    "optional": []
+  },
+  "send_chat_message": {
+    "required": [
+      {
+        "fieldName": "chat_id",
+        "description": "The ID of the chat to send the message to."
+      },
+      {
+        "fieldName": "content",
+        "description": "The content of the message."
+      }
+    ],
+    "optional": []
+  },
+  "send_message_to_channel": {
+    "required": [
+      {
+        "fieldName": "team-id",
+        "description": "The ID of the team."
+      },
+      {
+        "fieldName": "channel-id",
+        "description": "The ID of the channel."
+      },
+      {
+        "fieldName": "content",
+        "description": "The content of the message."
+      }
+    ],
+    "optional": []
+  },
+  "share_file": {
+    "required": [
+      {
+        "fieldName": "team-id",
+        "description": "The ID of the team."
+      },
+      {
+        "fieldName": "channel-id",
+        "description": "The ID of the channel."
+      },
+      {
+        "fieldName": "driveItemId",
+        "description": "The ID of the file (DriveItem) to share."
+      },
+      {
+        "fieldName": "type",
+        "description": "The type of sharing link to create (e.g., 'view', 'edit')."
+      },
+      {
+        "fieldName": "scope",
+        "description": "The scope of the sharing link (e.g., 'anonymous', 'organization')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "password",
+        "description": "A password to protect the link."
+      },
+      {
+        "fieldName": "expirationDateTime",
+        "description": "The expiration date and time for the link."
+      }
+    ]
+  }
+},
+"onedrive": {
+  "create_folder": {
+    "required": [
+      {
+        "fieldName": "name",
+        "description": "The name of the new folder."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "parent_id",
+        "description": "The ID of the parent folder. Defaults to the root folder."
+      }
+    ]
+  },
+  "download_file": {
+    "required": [
+      {
+        "fieldName": "file_id",
+        "description": "The ID of the file to download."
+      }
+    ],
+    "optional": []
+  },
+  "move_file_folder": {
+    "required": [
+      {
+        "fieldName": "file_id",
+        "description": "The ID of the file or folder to move."
+      },
+      {
+        "fieldName": "parent_id",
+        "description": "The ID of the destination folder."
+      }
+    ],
+    "optional": []
+  },
+  "search_content": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The search query."
+      }
+    ],
+    "optional": []
+  },
+  "share_file_folder": {
+    "required": [
+      {
+        "fieldName": "file_id",
+        "description": "The ID of the file or folder to share."
+      },
+      {
+        "fieldName": "type",
+        "description": "The type of sharing link to create (e.g., 'view', 'edit')."
+      },
+      {
+        "fieldName": "scope",
+        "description": "The scope of the sharing link (e.g., 'anonymous', 'organization')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "password",
+        "description": "A password to protect the link."
+      },
+      {
+        "fieldName": "expirationDateTime",
+        "description": "The expiration date and time for the link."
+      }
+    ]
+  },
+  "upload_file": {
+    "required": [
+      {
+        "fieldName": "file_path",
+        "description": "The local path to the file to upload."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "parent_id",
+        "description": "The ID of the parent folder. Defaults to the root folder."
+      },
+      {
+        "fieldName": "name",
+        "description": "The name of the file in OneDrive. Defaults to the original file name."
+      }
+    ]
+  }
+},
+"salesforce": {
+  "create_contact": {
+    "required": [
+      {
+        "fieldName": "LastName",
+        "description": "The contact's last name."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "FirstName",
+        "description": "The contact's first name."
+      },
+      {
+        "fieldName": "Email",
+        "description": "The contact's email address."
+      },
+      {
+        "fieldName": "Phone",
+        "description": "The contact's phone number."
+      },
+      {
+        "fieldName": "AccountId",
+        "description": "The ID of the account to associate the contact with."
+      }
+    ]
+  },
+  "create_lead": {
+    "required": [
+      {
+        "fieldName": "LastName",
+        "description": "The lead's last name."
+      },
+      {
+        "fieldName": "Company",
+        "description": "The lead's company."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "FirstName",
+        "description": "The lead's first name."
+      },
+      {
+        "fieldName": "Email",
+        "description": "The lead's email address."
+      },
+      {
+        "fieldName": "Phone",
+        "description": "The lead's phone number."
+      },
+      {
+        "fieldName": "Title",
+        "description": "The lead's job title."
+      },
+      {
+        "fieldName": "LeadSource",
+        "description": "The source of the lead (e.g., 'Web', 'Phone Inquiry')."
+      },
+      {
+        "fieldName": "Status",
+        "description": "The status of the lead (e.g., 'New', 'Working')."
+      }
+    ]
+  },
+  "create_task": {
+    "required": [
+      {
+        "fieldName": "Subject",
+        "description": "The subject of the task."
+      },
+      {
+        "fieldName": "Status",
+        "description": "The status of the task (e.g., 'Not Started', 'In Progress')."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "Priority",
+        "description": "The priority of the task (e.g., 'High', 'Normal')."
+      },
+      {
+        "fieldName": "OwnerId",
+        "description": "The ID of the user to whom the task is assigned."
+      },
+      {
+        "fieldName": "Description",
+        "description": "A description of the task."
+      },
+      {
+        "fieldName": "WhoId",
+        "description": "The ID of a related Lead or Contact."
+      },
+      {
+        "fieldName": "WhatId",
+        "description": "The ID of a related Account, Opportunity, etc."
+      }
+    ]
+  },
+  "get_record_details": {
+    "required": [
+      {
+        "fieldName": "sObjectName",
+        "description": "The API name of the object (e.g., 'Account', 'Contact')."
+      },
+      {
+        "fieldName": "id",
+        "description": "The ID of the record to retrieve."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "fields",
+        "description": "A comma-separated list of fields to retrieve."
+      }
+    ]
+  },
+  "log_a_call_email": {
+    "required": [
+      {
+        "fieldName": "Subject",
+        "description": "The subject of the call or email."
+      },
+      {
+        "fieldName": "WhoId",
+        "description": "The ID of the related Lead or Contact."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "WhatId",
+        "description": "The ID of a related Account, Opportunity, etc."
+      },
+      {
+        "fieldName": "ActivityDate",
+        "description": "The date of the call or email."
+      },
+      {
+        "fieldName": "Description",
+        "description": "A description of the call or email."
+      },
+      {
+        "fieldName": "Status",
+        "description": "The status of the task (e.g., 'Completed')."
+      },
+      {
+        "fieldName": "Type",
+        "description": "The type of activity (e.g., 'Call', 'Email')."
+      }
+    ]
+  },
+  "search_for_records": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The SOQL or SOSL query string."
+      }
+    ],
+    "optional": []
+  },
+  "update_record": {
+    "required": [
+      {
+        "fieldName": "sObjectName",
+        "description": "The API name of the object (e.g., 'Account', 'Contact')."
+      },
+      {
+        "fieldName": "id",
+        "description": "The ID of the record to update."
+      },
+      {
+        "fieldName": "fields",
+        "description": "A JSON object representing the fields and their new values."
+      }
+    ],
+    "optional": []
+  }
+},
+"hubspot": {
+  "create_contact": {
+    "required": [
+      {
+        "fieldName": "email",
+        "description": "The contact's email address."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "firstname",
+        "description": "The contact's first name."
+      },
+      {
+        "fieldName": "lastname",
+        "description": "The contact's last name."
+      },
+      {
+        "fieldName": "phone",
+        "description": "The contact's phone number."
+      },
+      {
+        "fieldName": "company",
+        "description": "The contact's company."
+      }
+    ]
+  },
+  "create_deal": {
+    "required": [
+      {
+        "fieldName": "dealname",
+        "description": "The name of the deal."
+      },
+      {
+        "fieldName": "dealstage",
+        "description": "The stage of the deal."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "pipeline",
+        "description": "The ID of the pipeline the deal belongs to."
+      },
+      {
+        "fieldName": "amount",
+        "description": "The monetary value of the deal."
+      },
+      {
+        "fieldName": "closedate",
+        "description": "The expected close date of the deal."
+      },
+      {
+        "fieldName": "hubspot_owner_id",
+        "description": "The ID of the HubSpot user who owns the deal."
+      }
+    ]
+  },
+  "log_activity_on_record": {
+    "required": [
+      {
+        "fieldName": "hs_communication_body",
+        "description": "The body or content of the communication."
+      },
+      {
+        "fieldName": "hs_timestamp",
+        "description": "The timestamp of the activity."
+      },
+      {
+        "fieldName": "hubspot_owner_id",
+        "description": "The ID of the HubSpot user who owns the record."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "hs_communication_channel_type",
+        "description": "The type of communication (e.g., 'EMAIL', 'CALL')."
+      },
+      {
+        "fieldName": "associations",
+        "description": "A list of associations to other records."
+      }
+    ]
+  },
+  "search_for_contacts_deals": {
+    "required": [
+      {
+        "fieldName": "objectType",
+        "description": "The type of object to search for ('contacts' or 'deals')."
+      },
+      {
+        "fieldName": "filterGroups",
+        "description": "A list of filter groups to apply to the search."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "sorts",
+        "description": "A list of properties to sort by."
+      },
+      {
+        "fieldName": "properties",
+        "description": "A list of properties to return in the response."
+      },
+      {
+        "fieldName": "limit",
+        "description": "The maximum number of results to return."
+      },
+      {
+        "fieldName": "after",
+        "description": "The cursor for pagination."
+      }
+    ]
+  },
+  "update_deal_stage": {
+    "required": [
+      {
+        "fieldName": "dealId",
+        "description": "The ID of the deal to update."
+      },
+      {
+        "fieldName": "dealstage",
+        "description": "The ID of the new deal stage."
+      }
+    ],
+    "optional": []
+  }
+},
+"linear": {
+  "comment_on_issue": {
+    "required": [
+      {
+        "fieldName": "issueId",
+        "description": "The ID of the issue to comment on."
+      },
+      {
+        "fieldName": "body",
+        "description": "The content of the comment."
+      }
+    ],
+    "optional": []
+  },
+  "create_issue": {
+    "required": [
+      {
+        "fieldName": "title",
+        "description": "The title of the issue."
+      },
+      {
+        "fieldName": "teamId",
+        "description": "The ID of the team to create the issue in."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "description",
+        "description": "The description of the issue."
+      },
+      {
+        "fieldName": "assigneeId",
+        "description": "The ID of the user to assign the issue to."
+      },
+      {
+        "fieldName": "labelIds",
+        "description": "A list of label IDs to add to the issue."
+      },
+      {
+        "fieldName": "stateId",
+        "description": "The ID of the state to set the issue to."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The priority of the issue."
+      }
+    ]
+  },
+  "get_issue_details": {
+    "required": [
+      {
+        "fieldName": "issueId",
+        "description": "The ID of the issue to retrieve."
+      }
+    ],
+    "optional": []
+  },
+  "search_issues": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The search query."
+      }
+    ],
+    "optional": []
+  },
+  "update_issue": {
+    "required": [
+      {
+        "fieldName": "issueId",
+        "description": "The ID of the issue to update."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "title",
+        "description": "The new title of the issue."
+      },
+      {
+        "fieldName": "description",
+        "description": "The new description of the issue."
+      },
+      {
+        "fieldName": "assigneeId",
+        "description": "The ID of the user to assign the issue to."
+      },
+      {
+        "fieldName": "labelIds",
+        "description": "A list of label IDs to add to the issue."
+      },
+      {
+        "fieldName": "stateId",
+        "description": "The ID of the state to set the issue to."
+      },
+      {
+        "fieldName": "priority",
+        "description": "The priority of the issue."
+      }
+    ]
+  }
+},
+"msft_entraid": {
+  "find_group": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The search query. Can be a display name, a filter, or a search term."
+      }
+    ],
+    "optional": []
+  },
+  "find_person": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The search query. Can be a name, email address, or other identifying information."
+      }
+    ],
+    "optional": []
+  },
+  "get_my_profile": {
+    "required": [],
+    "optional": [
+      {
+        "fieldName": "select",
+        "description": "A comma-separated list of fields to return."
+      }
+    ]
+  }
+},
+"notion": {
+  "add_to_database": {
+    "required": [
+      {
+        "fieldName": "database_id",
+        "description": "The ID of the database to add the page to."
+      },
+      {
+        "fieldName": "properties",
+        "description": "A JSON object representing the properties of the new page."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "children",
+        "description": "A list of block objects to add as content to the page."
+      }
+    ]
+  },
+  "update_page": {
+    "required": [
+      {
+        "fieldName": "page_id",
+        "description": "The ID of the page to update."
+      },
+      {
+        "fieldName": "properties",
+        "description": "A JSON object representing the properties to update."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "archived",
+        "description": "A boolean to archive or unarchive the page."
+      }
+    ]
+  },
+  "create_page": {
+    "required": [
+      {
+        "fieldName": "parent",
+        "description": "An object specifying the parent page or database."
+      },
+      {
+        "fieldName": "properties",
+        "description": "A JSON object representing the properties of the new page."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "children",
+        "description": "A list of block objects to add as content to the page."
+      }
+    ]
+  },
+  "search_workspace": {
+    "required": [
+      {
+        "fieldName": "query",
+        "description": "The text to search for."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "sort",
+        "description": "An object to specify the sorting of results."
+      },
+      {
+        "fieldName": "filter",
+        "description": "An object to filter the results to pages or databases."
+      },
+      {
+        "fieldName": "page_size",
+        "description": "The number of results to return."
+      },
+      {
+        "fieldName": "start_cursor",
+        "description": "The cursor for pagination."
+      }
+    ]
+  }
+},
+"linkedin": {
+  "search_profiles": {
+    "required": [
+      {
+        "fieldName": "keywords",
+        "description": "Keywords to search for in profiles."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "company",
+        "description": "Filter by company."
+      },
+      {
+        "fieldName": "title",
+        "description": "Filter by title."
+      },
+      {
+        "fieldName": "location",
+        "description": "Filter by location."
+      }
+    ]
+  },
+  "search_for_companies": {
+    "required": [
+      {
+        "fieldName": "keywords",
+        "description": "Keywords to search for in company profiles."
+      }
+    ],
+    "optional": [
+      {
+        "fieldName": "industry",
+        "description": "Filter by industry."
+      },
+      {
+        "fieldName": "location",
+        "description": "Filter by location."
+      }
+    ]
+  },
+  "get_a_linkedin_profile": {
+    "required": [
+      {
+        "fieldName": "person_id",
+        "description": "The ID of the person's profile to retrieve."
+      }
+    ],
+    "optional": []
+  },
+  "send_linkedin_message": {
+    "required": [
+      {
+        "fieldName": "recipient_id",
+        "description": "The ID of the recipient."
+      },
+      {
+        "fieldName": "message",
+        "description": "The content of the message."
+      }
+    ],
+    "optional": []
+  }
+},
   "google_calendar": {
+
+
     "cancel_event": {
       "required": [
         {
