@@ -1,0 +1,467 @@
+[
+  {
+    "useCaseId": "001",
+    "agentName": "IT Incident Reporter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "My laptop's battery is draining really fast. Can you open an IT ticket for me and let my manager know?",
+        "agentTrace": [
+          {
+            "thought": "The user wants to report an IT issue. According to my instructions, I must first search for duplicate incidents.",
+            "action": "Call `ServiceNow: Search Incidents` (Query: 'laptop battery draining fast')"
+          },
+          {
+            "observation": "Search returned 0 results."
+          },
+          {
+            "thought": "No duplicates found. Now I will create a new incident in ServiceNow.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'Laptop battery draining fast', Description: 'User reports their laptop battery is draining much faster than usual.')"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012345."
+          },
+          {
+            "thought": "Now I need to email the user's manager with the new incident number.",
+            "action": "Call `Outlook: Send Email` (To: 'manager@example.com', Subject: 'IT Incident Created: INC0012345', Body: 'Just letting you know I've opened an IT incident (INC0012345) for an issue with my laptop battery.')"
+          },
+          {
+            "observation": "Email sent successfully."
+          }
+        ],
+        "finalResponse": "I've created ServiceNow incident INC0012345 for your battery issue and sent a notification to your manager. You should receive a confirmation email from IT shortly."
+      }
+    ]
+  },
+  {
+    "useCaseId": "002",
+    "agentName": "Vacation Planner",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I'd like to book my vacation from September 8th to September 12th.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to book vacation. My instructions require me to check for scheduling conflicts first.",
+            "action": "Call `Google Calendar: Search Events` (StartDate: '2025-09-08', EndDate: '2025-09-12')"
+          },
+          {
+            "observation": "Search returned 0 conflicting events."
+          },
+          {
+            "thought": "No conflicts found. Now I can proceed to request the time off in Workday.",
+            "action": "Call `Workday: Request Time Off` (StartDate: '2025-09-08', EndDate: '2025-09-12', Type: 'Vacation')"
+          },
+          {
+            "observation": "Time off request successfully submitted in Workday."
+          },
+          {
+            "thought": "Finally, I will block the user's calendar.",
+            "action": "Call `Google Calendar: Create Calendar Event` (Title: 'Vacation', StartDate: '2025-09-08', EndDate: '2025-09-12', Availability: 'Out of office')"
+          },
+          {
+            "observation": "Event created on Google Calendar."
+          }
+        ],
+        "finalResponse": "Okay, I've submitted your request for September 8th through 12th in Workday and blocked off that time on your Google Calendar. Enjoy your trip!"
+      }
+    ]
+  },
+  {
+    "useCaseId": "003",
+    "agentName": "Bug Submitter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "File a bug for me. When I click the 'Export' button on the dashboard, the page crashes. This is in the 'Analytics' project. Let the lead dev know.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to file a bug. First, I need to search for duplicates in Jira.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'Analytics', Query: 'export button crash')"
+          },
+          {
+            "observation": "Search returned 0 results."
+          },
+          {
+            "thought": "No duplicates found. Now I will create a new Jira issue.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'Analytics', Title: 'Page crashes when clicking Export button', Body: '...')"
+          },
+          {
+            "observation": "Successfully created Jira issue AN-1138."
+          },
+          {
+            "thought": "Now I will notify the lead developer via Gmail.",
+            "action": "Call `Gmail: Send Email` (To: 'lead-dev@example.com', Subject: 'New Bug Filed: AN-1138', Body: 'A new bug has been filed: Page crashes when clicking Export button. Link: [URL to AN-1138]')"
+          },
+          {
+            "observation": "Email sent successfully."
+          }
+        ],
+        "finalResponse": "I've filed that bug for you as AN-1138 and sent a notification to the lead developer."
+      }
+    ]
+  },
+  {
+    "useCaseId": "004",
+    "agentName": "Meeting Follow-up Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Here are the notes from the 'Q4 Planning' meeting. Please send out the follow-up. Notes: 'We discussed the roadmap. ACTION: Jen to finalize the budget. ACTION: Alex to draft the project proposal.'",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to process meeting notes. First, I'll create the Confluence page.",
+            "action": "Call `Confluence: Create Page` (Title: 'Meeting Notes: Q4 Planning', Body: '...')"
+          },
+          {
+            "observation": "Confluence page created. URL is '.../Q4-Planning'."
+          },
+          {
+            "thought": "My instructions are to parse for 'ACTION:'. I found two. I will confirm these with the user before creating tickets.",
+            "action": null
+          },
+          {
+            "observation": "User confirms both action items."
+          },
+          {
+            "thought": "User approved. Now I will create the Jira tickets.",
+            "action": "Call `Jira: Create Jira Issue` (Title: 'Finalize the Q4 budget', Assignee: 'Jen')"
+          },
+          {
+            "observation": "Created ticket TASK-501."
+          },
+          {
+            "thought": "Second action item for Alex.",
+            "action": "Call `Jira: Create Jira Issue` (Title: 'Draft the project proposal', Assignee: 'Alex')"
+          },
+          {
+            "observation": "Created ticket TASK-502."
+          },
+          {
+            "thought": "Finally, I'll send the summary email with links to everything.",
+            "action": "Call `Gmail: Send Email` (To: 'team@example.com', Subject: 'Follow up: Q4 Planning', Body: 'Notes: [URL to Confluence]. Action Items: TASK-501, TASK-502.')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Done. I've created the Confluence page, assigned Jira tickets TASK-501 to Jen and TASK-502 to Alex, and sent a summary email to the team."
+      }
+    ]
+  },
+  {
+    "useCaseId": "005",
+    "agentName": "PTO Notifier",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I need to take a sick day today. Let my team know.",
+        "agentTrace": [
+          {
+            "thought": "User is taking a sick day. I need to request it in Workday and create a team calendar event.",
+            "action": "Call `Workday: Request Time Off` (StartDate: 'today', EndDate: 'today', Type: 'Sick')"
+          },
+          {
+            "observation": "Successfully submitted sick day request in Workday."
+          },
+          {
+            "thought": "Now I will create an event on the team's shared Outlook calendar.",
+            "action": "Call `Outlook: Create Calendar Event` (Calendar: 'Team Calendar', Title: 'User OOO (Sick)', StartDate: 'today', EndDate: 'today', AllDay: true)"
+          },
+          {
+            "observation": "Event created."
+          }
+        ],
+        "finalResponse": "Okay, I've submitted a sick day request for you in Workday and blocked off today on the team calendar. Hope you feel better soon."
+      }
+    ]
+  },
+  {
+    "useCaseId": "006",
+    "agentName": "Incident Escalator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Escalate incident INC0012345, it's critical.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to escalate an incident. I need to update its priority in ServiceNow.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC0012345', Priority: '1-Critical')"
+          },
+          {
+            "observation": "Incident INC0012345 updated successfully."
+          },
+          {
+            "thought": "Now I need to get the incident details to include in the email.",
+            "action": "Call `ServiceNow: Search Incidents` (Query: 'id=INC0012345')"
+          },
+          {
+            "observation": "Found incident details: 'Description: Login service failing for EU customers...'"
+          },
+          {
+            "thought": "Now I will notify the manager via Gmail with the summary.",
+            "action": "Call `Gmail: Send Email` (To: 'on-call-manager@example.com', Subject: 'Escalation: INC0012345', Body: 'Incident Summary: Login service failing for EU customers...')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've escalated INC0012345 to 'Critical' priority and notified the on-call manager with a summary of the incident."
+      }
+    ]
+  },
+  {
+    "useCaseId": "007",
+    "agentName": "Jira Task Updater",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Add a comment to ticket PROJ-123. Tell them 'The fix has been deployed to staging.' and notify the reporter.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to add a comment to a Jira ticket and notify someone.",
+            "action": "Call `Jira: Update Jira Issue` (ID: 'PROJ-123', Comment: 'The fix has been deployed to staging.')"
+          },
+          {
+            "observation": "Comment successfully added to PROJ-123. Reporter is 'reporter@example.com'."
+          },
+          {
+            "thought": "Now I will send a notification email.",
+            "action": "Call `Gmail: Send Email` (To: 'reporter@example.com', Subject: 'Update on PROJ-123', Body: 'A new comment has been added: The fix has been deployed to staging.')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Okay, I've added your comment to PROJ-123 and notified the reporter."
+      }
+    ]
+  },
+  {
+    "useCaseId": "008",
+    "agentName": "Outage Communicator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Declare a major outage. The API service is down. Create a P0 and send a company-wide email.",
+        "agentTrace": [
+          {
+            "thought": "This is a major outage report. I need to create a P0 incident in ServiceNow and then send a notification email via Gmail.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'Major Outage: API Service Down', Priority: '0-Critical')"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012400."
+          },
+          {
+            "thought": "Now I will send the company-wide notification.",
+            "action": "Call `Gmail: Send Email` (To: 'all-employees@example.com', Subject: 'Service Alert: Major Outage for API Service', ...)"
+          },
+          {
+            "observation": "Email sent successfully."
+          }
+        ],
+        "finalResponse": "I have declared a major outage. ServiceNow incident INC0012400 has been created and a notification has been sent to all employees."
+      }
+    ]
+  },
+  {
+    "useCaseId": "009",
+    "agentName": "Team Event Coordinator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Schedule our team sync for this Friday at 10 AM. The agenda is to 'Review Q3 goals'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to schedule a meeting. I need to create an Outlook event and put the agenda in the description.",
+            "action": "Call `Outlook: Create Calendar Event` (Title: 'Team Sync', Time: 'Friday 10 AM', Attendees: 'team@example.com', Description: 'Agenda: Review Q3 goals.')"
+          },
+          {
+            "observation": "Outlook event created successfully."
+          }
+        ],
+        "finalResponse": "Okay, I've scheduled the 'Team Sync' on the team's Outlook calendar for Friday at 10 AM with the agenda included in the invitation."
+      }
+    ]
+  },
+  {
+    "useCaseId": "010",
+    "agentName": "Project Kick-off Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Let's kick off the 'Odyssey' project. The goal is to redesign the homepage. Notify the 'web-team@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to kick off a project. I need to create a Confluence page and a Jira epic, then notify the team.",
+            "action": "Call `Confluence: Create Page` (Space: 'PROD', Title: 'Project Odyssey: Homepage Redesign', ...)"
+          },
+          {
+            "observation": "Confluence page created. URL: '.../Odyssey'."
+          },
+          {
+            "thought": "Now to create the corresponding epic in Jira.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'WEB', Type: 'Epic', Title: 'Project Odyssey: Homepage Redesign')"
+          },
+          {
+            "observation": "Successfully created epic WEB-250. URL: '.../WEB-250'."
+          },
+          {
+            "thought": "Finally, I'll send the kick-off email.",
+            "action": "Call `Gmail: Send Email` (To: 'web-team@example.com', Subject: 'Project Kick-off: Odyssey', Body: 'Project resources are ready. Confluence: [URL], Jira Epic: [URL]')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Project 'Odyssey' is kicked off. I've created the project page in Confluence, the main epic in Jira (WEB-250), and sent a notification to the web team."
+      }
+    ]
+  },
+  {
+    "useCaseId": "011",
+    "agentName": "Weekly Status Reporter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Prepare the weekly status report for the 'Mobile' project.",
+        "agentTrace": [
+          {
+            "thought": "User wants a status report. I'll search Jira for recently updated issues in the 'Mobile' project.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'Mobile', UpdatedSince: '-7d')"
+          },
+          {
+            "observation": "Found 5 issues: MOB-123 (Done), MOB-125 (In Progress), MOB-126 (In Review)..."
+          },
+          {
+            "thought": "Now I will draft the email and present it to the user for approval before sending.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I've found 5 updates for the 'Mobile' project this week. Here is the draft email for stakeholders:\n\n**Subject: Weekly Status: Mobile Project**\n\n*Summary of updates:*\n- MOB-123: Done\n- MOB-125: In Progress\n- ...\n\nDo you approve sending this?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "012",
+    "agentName": "Retrospective Planner",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Set up the retrospective for the 'Delta Sprint'. Schedule it for this Thursday at 3 PM.",
+        "agentTrace": [
+          {
+            "thought": "User wants to set up a retrospective. I'll create the Confluence page using the standard template.",
+            "action": "Call `Confluence: Create Page` (Space: 'TEAM', Title: 'Retrospective: Delta Sprint', Body: '<h1>Retrospective</h1><h2>What went well?</h2>...<h2>Action Items</h2>...')"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now I will schedule the event on Google Calendar.",
+            "action": "Call `Google Calendar: Create Calendar Event` (Title: 'Retrospective: Delta Sprint', Time: 'Thursday 3 PM', ...)"
+          },
+          {
+            "observation": "Event created on Google Calendar."
+          }
+        ],
+        "finalResponse": "All set. I've created the 'Retrospective: Delta Sprint' page in Confluence from the template and scheduled the meeting on your team's Google Calendar for Thursday at 3 PM."
+      }
+    ]
+  },
+  {
+    "useCaseId": "013",
+    "agentName": "Cross-Team Bug Notifier",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Log a bug that our login is failing with their new authentication service. Notify the 'security-team@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to file a bug and notify another team. I will create the Jira issue first.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'APP', Title: 'Login failing with new auth service')"
+          },
+          {
+            "observation": "Successfully created Jira issue APP-2049. URL: '.../APP-2049'."
+          },
+          {
+            "thought": "Now I will send the notification email using Outlook, including the link.",
+            "action": "Call `Outlook: Send Email` (To: 'security-team@example.com', Subject: 'Heads up: New bug related to auth service (APP-2049)', Body: 'Link to ticket: [URL]')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Okay, I've logged the bug as APP-2049 and sent a notification with a link to the security team."
+      }
+    ]
+  },
+  {
+    "useCaseId": "014",
+    "agentName": "Leave of Absence Coordinator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I need to start my 4-week parental leave on September 1st. For my OOO message, please direct urgent inquiries to 'colleague@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "The user is requesting a 4-week leave with a custom OOO message.",
+            "action": "Call `Workday: Request Time Off` (StartDate: '2025-09-01', EndDate: '2025-09-29', Type: 'Leave')"
+          },
+          {
+            "observation": "Leave successfully submitted in Workday."
+          },
+          {
+            "thought": "Next, block the Outlook calendar.",
+            "action": "Call `Outlook: Create Calendar Event` (Title: 'Parental Leave', StartDate: '2025-09-01', EndDate: '2025-09-29', Availability: 'Out of office')"
+          },
+          {
+            "observation": "Calendar event created."
+          },
+          {
+            "thought": "Finally, send the notification email with the custom message.",
+            "action": "Call `Outlook: Send Email` (To: 'team@example.com', Subject: 'Parental Leave Notification', Body: '...For urgent matters, please contact colleague@example.com...')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Okay, your parental leave has been submitted in Workday. I've also blocked your Outlook calendar and sent a notification email to your team with your custom message."
+      }
+    ]
+  },
+  {
+    "useCaseId": "015",
+    "agentName": "Service Desk Automator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "A user is reporting they can't log in with their SSO credentials to the new 'Analytics Dashboard'. This seems to be a new issue.",
+        "agentTrace": [
+          {
+            "thought": "User is reporting a new issue. I need to create a ServiceNow incident and a Confluence KB draft, then link them.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'SSO Login Failure: Analytics Dashboard', ...)"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012500."
+          },
+          {
+            "thought": "Now I will create the draft KB article in Confluence.",
+            "action": "Call `Confluence: Create Page` (Space: 'KB', Title: 'Troubleshooting: SSO Login Failure for Analytics Dashboard', ...)"
+          },
+          {
+            "observation": "Confluence page created. URL: '.../SSO-Login-Failure'."
+          },
+          {
+            "thought": "Finally, I will update the ServiceNow incident with the link to the KB article.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC0012500', Comment: 'Created KB draft: [URL]')"
+          },
+          {
+            "observation": "Incident updated."
+          }
+        ],
+        "finalResponse": "I've created incident INC0012500 and a draft knowledge base article. I've also added a link to the article in the incident ticket."
+      }
+    ]
+  }
+]

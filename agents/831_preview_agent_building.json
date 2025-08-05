@@ -681,5 +681,1439 @@
       }
     ],
     "agentInstructions": "The Task Creator agent helps you quickly create tasks in Jira. When you provide the task details, the agent will use `Jira: Create Jira Issue` to create a new task. Ensure the task is created with the correct details."
+  },
+  {
+    "useCaseId": "031",
+    "agentName": "IT Helpdesk Assistant",
+    "toolSelection": [
+      "ServiceNow: Create Incident",
+      "Jira: Search Jira Issues"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that creates a ServiceNow ticket and then checks Jira for related engineering tickets.",
+        "response": "I can do that. The agent will first use 'Create Incident' in ServiceNow. Then, what kind of search should it perform in Jira?"
+      },
+      {
+        "request": "It should search for any open Jira issues that contain the incident number.",
+        "response": "Okay. So, the agent will create a ServiceNow incident, then search Jira for that incident number to find related bugs. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The IT Helpdesk Assistant agent helps you manage IT incidents and their related engineering tickets. When you report an issue, the agent will: 1. Use `ServiceNow: Create Incident` to log the issue. 2. Use `Jira: Search Jira Issues` to find any related engineering tickets by searching for the new incident number. Ensure the incident is created and the Jira search is performed correctly."
+  },
+  {
+    "useCaseId": "032",
+    "agentName": "Holiday Booker",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "Build an agent to book my holidays in Workday and notify my manager.",
+        "response": "I can do that. It will use 'Request Time Off' in Workday. For the notification, should it use Outlook or Gmail?"
+      },
+      {
+        "request": "Use Outlook.",
+        "response": "Got it. The agent will request the time off in Workday and then send a notification email via Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Holiday Booker agent helps you book your holidays. When you provide your desired dates, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Outlook: Send Email` to notify your manager. Ensure the dates are correct and the notification is sent."
+  },
+  {
+    "useCaseId": "033",
+    "agentName": "Feature Idea Logger",
+    "toolSelection": [
+      "Jira: Create Jira Issue",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to log new feature ideas. It should create a Jira issue and a Confluence page for the design.",
+        "response": "I can build that. The agent will use 'Create Jira Issue' and 'Create Page' in Confluence. Is there a specific order they should be created in?"
+      },
+      {
+        "request": "Create the Jira issue first, then the Confluence page.",
+        "response": "Okay. The agent will first create the Jira issue for the feature idea, and then create a corresponding design page in Confluence. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the flow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Feature Idea Logger agent helps you log new feature ideas. When you describe a feature, the agent will: 1. Use `Jira: Create Jira Issue` to create a new feature request. 2. Use `Confluence: Create Page` to create a design page for the new feature. Ensure the Jira issue and Confluence page are created with the correct details."
+  },
+  {
+    "useCaseId": "034",
+    "agentName": "All-Hands Meeting Organizer",
+    "toolSelection": [
+      "Google Calendar: Create Calendar Event",
+      "Gmail: Send Email",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize our monthly all-hands meeting.",
+        "response": "I can do that. It can create the event in Google Calendar, send an announcement email via Gmail, and create a Confluence page for the agenda. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's the perfect combination.",
+        "response": "Okay, the agent is configured. Just provide the meeting details when you're ready."
+      }
+    ],
+    "agentInstructions": "The All-Hands Meeting Organizer agent helps you organize your monthly all-hands meetings. When you provide the meeting details, the agent will: 1. Use `Google Calendar: Create Calendar Event` to schedule the meeting. 2. Use `Gmail: Send Email` to send an announcement to the company. 3. Use `Confluence: Create Page` to create an agenda page. Ensure all details are correct and all actions are completed."
+  },
+  {
+    "useCaseId": "035",
+    "agentName": "Sick Leave Notifier",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Outlook: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that requests a sick day in Workday and blocks my Outlook calendar.",
+        "response": "I can build that. It will use 'Request Time Off' in Workday and 'Create Calendar Event' in Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's all it needs to do.",
+        "response": "The agent is ready. Just tell it the dates when you need to use it."
+      }
+    ],
+    "agentInstructions": "The Sick Leave Notifier agent helps you manage sick leave. When you need to take a sick day, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Outlook: Create Calendar Event` to block off the time on your calendar. Ensure the dates are correct in both systems."
+  },
+  {
+    "useCaseId": "036",
+    "agentName": "Critical Incident Reporter",
+    "toolSelection": [
+      "ServiceNow: Create Incident",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to report a critical incident in both ServiceNow and Jira.",
+        "response": "I can do that. It will use 'Create Incident' in ServiceNow and 'Create Jira Issue' in Jira. Should they have the same title and description?"
+      },
+      {
+        "request": "Yes, they should be identical.",
+        "response": "Okay. The agent will create a new incident in ServiceNow and a new issue in Jira with the same details. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Critical Incident Reporter agent helps you report critical incidents across systems. When you report an incident, the agent will: 1. Use `ServiceNow: Create Incident` to create a new incident. 2. Use `Jira: Create Jira Issue` to create a corresponding issue. Ensure the details are identical in both systems."
+  },
+  {
+    "useCaseId": "037",
+    "agentName": "Jira Issue Assigner",
+    "toolSelection": [
+      "Jira: Update Jira Issue",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can assign a Jira ticket to someone and notify them.",
+        "response": "I can build that. It will use 'Update Jira Issue' to set the assignee. For the notification, should it use Gmail or Outlook?"
+      },
+      {
+        "request": "Use Gmail.",
+        "response": "Got it. The agent will update the Jira issue with the new assignee and then send a notification email via Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Issue Assigner agent helps you assign Jira tickets. When you provide a ticket ID and an assignee, the agent will: 1. Use `Jira: Update Jira Issue` to assign the ticket. 2. Use `Gmail: Send Email` to notify the new assignee. Ensure the ticket is assigned correctly and the notification is sent."
+  },
+  {
+    "useCaseId": "038",
+    "agentName": "System Maintenance Announcer",
+    "toolSelection": [
+      "Outlook: Send Email",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to announce system maintenance. It should send an email and create a Confluence page with the details.",
+        "response": "I can do that. It will use 'Send Email' from Outlook and 'Create Page' in Confluence. Is there a specific order?"
+      },
+      {
+        "request": "Create the Confluence page first, then send the email with a link to the page.",
+        "response": "Okay. The agent will first create the Confluence page, and then send an announcement email via Outlook with the link. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The System Maintenance Announcer agent helps you announce system maintenance. When you provide the maintenance details, the agent will: 1. Use `Confluence: Create Page` to create a page with the details. 2. Use `Outlook: Send Email` to announce the maintenance and provide a link to the Confluence page. Ensure the page is created and the email is sent to the correct audience."
+  },
+  {
+    "useCaseId": "039",
+    "agentName": "Client Meeting Scheduler",
+    "toolSelection": [
+      "Outlook: Create Calendar Event",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to schedule a client meeting and log it in Jira.",
+        "response": "I can build that. It will use 'Create Calendar Event' in Outlook. How should it log the meeting in Jira?"
+      },
+      {
+        "request": "It should add a comment to the client's main Jira ticket with the meeting details.",
+        "response": "Got it. The agent will create the Outlook calendar event and then add a comment to the specified Jira ticket. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Client Meeting Scheduler agent helps you schedule and log client meetings. When you provide the meeting details, the agent will: 1. Use `Outlook: Create Calendar Event` to schedule the meeting. 2. Use `Jira: Update Jira Issue` to add a comment with the meeting details to the client's Jira ticket. Ensure the meeting is scheduled and the Jira ticket is updated."
+  },
+  {
+    "useCaseId": "040",
+    "agentName": "Design Review Organizer",
+    "toolSelection": [
+      "Confluence: Create Page",
+      "Google Calendar: Create Calendar Event",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize a design review. It should create a Confluence page, schedule a meeting, and send a reminder.",
+        "response": "I can do that. It will use 'Create Page' in Confluence, 'Create Calendar Event' in Google Calendar, and 'Send Email' from Gmail for the reminder. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the complete workflow.",
+        "response": "The agent is configured. Just provide the design details when you're ready."
+      }
+    ],
+    "agentInstructions": "The Design Review Organizer agent helps you organize design reviews. When you provide the design details, the agent will: 1. Use `Confluence: Create Page` to create a page with the design. 2. Use `Google Calendar: Create Calendar Event` to schedule the review meeting. 3. Use `Gmail: Send Email` to send a reminder to the attendees. Ensure all details are correct and all actions are completed."
+  },
+  {
+    "useCaseId": "041",
+    "agentName": "Weekly Digest Creator",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to create a weekly digest of all completed Jira tickets and post it to Confluence.",
+        "response": "I can build that. It will use 'Search Jira Issues' to find all tickets completed in the last 7 days, and then 'Create Page' in Confluence to post the digest. Is that correct?"
+      },
+      {
+        "request": "Yes, that's exactly what I need.",
+        "response": "The agent is ready. You can trigger it weekly to create the digest."
+      }
+    ],
+    "agentInstructions": "The Weekly Digest Creator agent helps you create a weekly digest of completed work. The agent will: 1. Use `Jira: Search Jira Issues` to find all tickets completed in the last week. 2. Use `Confluence: Create Page` to create a digest page with the list of completed tickets. Ensure the Jira search is configured correctly for your project."
+  },
+  {
+    "useCaseId": "042",
+    "agentName": "Sprint Planning Assistant",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent for sprint planning. It should find all unassigned stories and schedule a planning meeting.",
+        "response": "I can do that. It will use 'Search Jira Issues' to find unassigned stories. For the meeting, should it use Google Calendar or Outlook?"
+      },
+      {
+        "request": "Use Google Calendar.",
+        "response": "Okay. The agent will find all unassigned Jira stories and then create a sprint planning meeting in Google Calendar. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Sprint Planning Assistant agent helps you with sprint planning. The agent will: 1. Use `Jira: Search Jira Issues` to find all unassigned stories. 2. Use `Google Calendar: Create Calendar Event` to schedule a planning meeting to discuss the stories. Ensure the Jira search is configured correctly for your backlog."
+  },
+  {
+    "useCaseId": "043",
+    "agentName": "Security Incident Responder",
+    "toolSelection": [
+      "ServiceNow: Create Incident",
+      "Outlook: Send Email",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to handle security incidents. It should create a ServiceNow ticket, a Jira ticket, and email the security team.",
+        "response": "I can build that. It will use 'Create Incident' in ServiceNow, 'Create Jira Issue', and 'Send Email' from Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the full process.",
+        "response": "The agent is configured. Just provide the incident details when needed."
+      }
+    ],
+    "agentInstructions": "The Security Incident Responder agent helps you handle security incidents. When you report a security incident, the agent will: 1. Use `ServiceNow: Create Incident` to log the incident. 2. Use `Jira: Create Jira Issue` to create a task for the engineering team. 3. Use `Outlook: Send Email` to notify the security team. Ensure all details are consistent across all systems."
+  },
+  {
+    "useCaseId": "044",
+    "agentName": "Time Off Logger",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to request time off in Workday and log the time against a Jira ticket.",
+        "response": "I can do that. It will use 'Request Time Off' in Workday. How should it log the time in Jira?"
+      },
+      {
+        "request": "It should add a comment to a specific 'Time Off' Jira ticket with the dates.",
+        "response": "Got it. The agent will request the time off in Workday and then add a comment to your 'Time Off' Jira ticket. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Time Off Logger agent helps you log your time off. When you request time off, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Jira: Update Jira Issue` to add a comment to your 'Time Off' ticket with the dates. Ensure the Workday request is submitted and the Jira ticket is updated."
+  },
+  {
+    "useCaseId": "045",
+    "agentName": "Service Restoration Notifier",
+    "toolSelection": [
+      "ServiceNow: Update Incident",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to announce that a service has been restored. It should update the ServiceNow ticket and send an email.",
+        "response": "I can build that. It will use 'Update Incident' in ServiceNow to close the ticket. For the email, should it use Gmail or Outlook?"
+      },
+      {
+        "request": "Use Gmail.",
+        "response": "Okay. The agent will update the ServiceNow incident to 'Resolved' and then send a service restoration email via Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Service Restoration Notifier agent helps you announce service restorations. When a service is restored, the agent will: 1. Use `ServiceNow: Update Incident` to resolve the corresponding incident ticket. 2. Use `Gmail: Send Email` to announce that the service is back online. Ensure the correct incident is resolved and the announcement is sent to the right audience."
+  },
+  {
+    "useCaseId": "046",
+    "agentName": "Confluence Page Updater",
+    "toolSelection": [
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent that can just create or update a Confluence page for me.",
+        "response": "I can build that. The agent will use the 'Create Page' action in Confluence. If the page already exists, it will update it. Is that what you're looking for?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the page title and content."
+      }
+    ],
+    "agentInstructions": "The Confluence Page Updater agent provides a simple way to create or update Confluence pages. When you provide a page title and content, the agent will use `Confluence: Create Page` to create or update the page. If the page exists, it will be updated; otherwise, it will be created."
+  },
+  {
+    "useCaseId": "047",
+    "agentName": "Team Lunch Organizer",
+    "toolSelection": [
+      "Outlook: Create Calendar Event",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize a team lunch. It should schedule it in Outlook and send an email with a poll for food choices.",
+        "response": "I can do that. It will use 'Create Calendar Event' in Outlook for the schedule. For the email with the poll, should it also use Outlook?"
+      },
+      {
+        "request": "Yes, use Outlook for both.",
+        "response": "Got it. The agent will create the calendar event and send a separate email with the poll, both from Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Team Lunch Organizer agent helps you organize team lunches. When you provide the details, the agent will: 1. Use `Outlook: Create Calendar Event` to schedule the lunch. 2. Use `Outlook: Send Email` to send an email with a poll for food choices. Ensure the event is scheduled and the poll is sent to the team."
+  },
+  {
+    "useCaseId": "048",
+    "agentName": "Bug Verification Assistant",
+    "toolSelection": [
+      "Jira: Update Jira Issue",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help with bug verification. It should update the Jira ticket to 'Ready for QA' and notify the QA team.",
+        "response": "I can build that. It will use 'Update Jira Issue' to change the status. For the notification, should it use Gmail or Outlook?"
+      },
+      {
+        "request": "Use Gmail.",
+        "response": "Okay. The agent will update the Jira ticket's status and then send a notification email to the QA team via Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Bug Verification Assistant agent helps you with bug verification. When a bug is ready for QA, the agent will: 1. Use `Jira: Update Jira Issue` to change the ticket's status to 'Ready for QA'. 2. Use `Gmail: Send Email` to notify the QA team. Ensure the correct ticket is updated and the notification is sent to the QA distribution list."
+  },
+  {
+    "useCaseId": "049",
+    "agentName": "Simple Calendar Booker",
+    "toolSelection": [
+      "Outlook: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need a very simple agent that just books an event on my Outlook calendar.",
+        "response": "I can build that. It will use the 'Create Calendar Event' action in Outlook. Is that all you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the event details when you want to use it."
+      }
+    ],
+    "agentInstructions": "The Simple Calendar Booker agent provides a simple way to book events on your Outlook calendar. When you provide the event details, the agent will use `Outlook: Create Calendar Event` to create the event. Ensure the details are correct."
+  },
+  {
+    "useCaseId": "050",
+    "agentName": "Project Documentation Creator",
+    "toolSelection": [
+      "Confluence: Create Page",
+      "Jira: Search Jira Issues"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to create project documentation. It should create a Confluence page and link to all the epics in the project.",
+        "response": "I can do that. It will use 'Create Page' in Confluence. For the epics, it will use 'Search Jira Issues' to find all epics for a given project. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": "The agent is configured. Just provide the project name and it will create the documentation page."
+      }
+    ],
+    "agentInstructions": "The Project Documentation Creator agent helps you create project documentation. When you provide a project name, the agent will: 1. Use `Jira: Search Jira Issues` to find all epics for that project. 2. Use `Confluence: Create Page` to create a documentation page that lists and links to all the project epics. Ensure the project name is correct."
+  },
+  {
+    "useCaseId": "051",
+    "agentName": "IT Ticket Assigner",
+    "toolSelection": [
+      "ServiceNow: Update Incident",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to assign a ServiceNow ticket and notify the assignee.",
+        "response": "I can build that. It will use 'Update Incident' in ServiceNow to set the assignee. For the notification, should it use Outlook or Gmail?"
+      },
+      {
+        "request": "Use Outlook.",
+        "response": "Got it. The agent will update the ServiceNow ticket with the new assignee and then send a notification email via Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The IT Ticket Assigner agent helps you assign ServiceNow tickets. When you provide a ticket ID and an assignee, the agent will: 1. Use `ServiceNow: Update Incident` to assign the ticket. 2. Use `Outlook: Send Email` to notify the new assignee. Ensure the ticket is assigned correctly and the notification is sent."
+  },
+  {
+    "useCaseId": "052",
+    "agentName": "Personal Time Off Booker",
+    "toolSelection": [
+      "Workday: Request Time Off"
+    ],
+    "conversation": [
+      {
+        "request": "I need a very simple agent to book my personal time off in Workday.",
+        "response": "I can build that. It will use the 'Request Time Off' action in Workday. Is that all you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the dates when you want to use it."
+      }
+    ],
+    "agentInstructions": "The Personal Time Off Booker agent provides a simple way to book your personal time off. When you provide the dates, the agent will use `Workday: Request Time Off` to submit the request. Ensure the dates are correct."
+  },
+  {
+    "useCaseId": "053",
+    "agentName": "Epic Progress Reporter",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to report the progress of a Jira epic. It should find all the stories in the epic and email a summary.",
+        "response": "I can do that. It will use 'Search Jira Issues' to find all stories linked to the epic. For the summary email, should it use Gmail or Outlook?"
+      },
+      {
+        "request": "Use Gmail.",
+        "response": "Okay. The agent will find all the stories in the epic and then send a progress summary email via Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Epic Progress Reporter agent helps you report the progress of a Jira epic. When you provide an epic ID, the agent will: 1. Use `Jira: Search Jira Issues` to find all stories linked to the epic. 2. Use `Gmail: Send Email` to send a progress summary to stakeholders. Ensure the epic ID is correct."
+  },
+  {
+    "useCaseId": "054",
+    "agentName": "Workshop Facilitator",
+    "toolSelection": [
+      "Google Calendar: Create Calendar Event",
+      "Confluence: Create Page",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to facilitate a workshop. It should schedule the workshop, create a Confluence page for exercises, and send a prep email.",
+        "response": "I can build that. It will use 'Create Calendar Event' in Google Calendar, 'Create Page' in Confluence, and 'Send Email' from Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the complete process.",
+        "response": "The agent is configured. Just provide the workshop details when you're ready."
+      }
+    ],
+    "agentInstructions": "The Workshop Facilitator agent helps you facilitate workshops. When you provide the workshop details, the agent will: 1. Use `Google Calendar: Create Calendar Event` to schedule the workshop. 2. Use `Confluence: Create Page` to create a page for workshop exercises. 3. Use `Gmail: Send Email` to send a preparation email to attendees. Ensure all details are correct and all actions are completed."
+  },
+  {
+    "useCaseId": "055",
+    "agentName": "Parental Leave Planner",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Outlook: Send Email",
+      "Outlook: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to plan my parental leave. It should request the leave in Workday, notify my team, and block my calendar.",
+        "response": "I can do that. It will use 'Request Time Off' in Workday. For the notification and calendar, should it use Outlook or Google?"
+      },
+      {
+        "request": "Use Outlook for both.",
+        "response": "Got it. The agent will request the leave in Workday, send a notification email via Outlook, and create a calendar event in Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the full plan.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Parental Leave Planner agent helps you plan your parental leave. When you provide your leave dates, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Outlook: Send Email` to notify your team. 3. Use `Outlook: Create Calendar Event` to block off your calendar. Ensure the dates are correct and all actions are completed."
+  },
+  {
+    "useCaseId": "056",
+    "agentName": "System Outage Reporter",
+    "toolSelection": [
+      "ServiceNow: Create Incident",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to report a system outage. It should create a ServiceNow ticket and a Confluence page for live updates.",
+        "response": "I can build that. It will use 'Create Incident' in ServiceNow and 'Create Page' in Confluence. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": "The agent is ready. Just provide the outage details when it happens."
+      }
+    ],
+    "agentInstructions": "The System Outage Reporter agent helps you report system outages. When you report an outage, the agent will: 1. Use `ServiceNow: Create Incident` to log the outage. 2. Use `Confluence: Create Page` to create a page for live updates. Ensure the incident is created and the Confluence page is ready for updates."
+  },
+  {
+    "useCaseId": "057",
+    "agentName": "Jira Sub-task Creator",
+    "toolSelection": [
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to create a sub-task for a Jira story.",
+        "response": "I can build that. It will use the 'Create Jira Issue' action and set the parent issue. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the parent story ID and the sub-task details."
+      }
+    ],
+    "agentInstructions": "The Jira Sub-task Creator agent provides a simple way to create Jira sub-tasks. When you provide a parent story ID and sub-task details, the agent will use `Jira: Create Jira Issue` to create the sub-task and link it to the parent. Ensure the parent ID is correct."
+  },
+  {
+    "useCaseId": "058",
+    "agentName": "Product Launch Announcer",
+    "toolSelection": [
+      "Gmail: Send Email",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to announce a product launch. It should send a company-wide email and create a Confluence page with the launch details.",
+        "response": "I can do that. It will use 'Send Email' from Gmail and 'Create Page' in Confluence. Which should happen first?"
+      },
+      {
+        "request": "Create the Confluence page first, then send the email with a link to it.",
+        "response": "Okay. The agent will create the Confluence page and then send the announcement email via Gmail with the link. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Product Launch Announcer agent helps you announce product launches. When you provide the launch details, the agent will: 1. Use `Confluence: Create Page` to create a page with the launch details. 2. Use `Gmail: Send Email` to announce the launch to the company with a link to the page. Ensure the page is created and the email is sent to the correct audience."
+  },
+  {
+    "useCaseId": "059",
+    "agentName": "Sales Demo Scheduler",
+    "toolSelection": [
+      "Google Calendar: Create Calendar Event",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to schedule a sales demo and log it in the client's Jira ticket.",
+        "response": "I can build that. It will use 'Create Calendar Event' in Google Calendar. How should it log the demo in Jira?"
+      },
+      {
+        "request": "It should add a comment to the client's opportunity ticket with the demo details.",
+        "response": "Got it. The agent will create the Google Calendar event and then add a comment to the specified Jira ticket. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Sales Demo Scheduler agent helps you schedule and log sales demos. When you provide the demo details, the agent will: 1. Use `Google Calendar: Create Calendar Event` to schedule the demo. 2. Use `Jira: Update Jira Issue` to add a comment with the demo details to the client's opportunity ticket. Ensure the demo is scheduled and the Jira ticket is updated."
+  },
+  {
+    "useCaseId": "060",
+    "agentName": "Training Session Organizer",
+    "toolSelection": [
+      "Outlook: Create Calendar Event",
+      "Confluence: Create Page",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize a training session. It should schedule the session, create a Confluence page for materials, and send a confirmation email.",
+        "response": "I can do that. It will use 'Create Calendar Event' in Outlook, 'Create Page' in Confluence, and 'Send Email' from Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the full process.",
+        "response": "The agent is configured. Just provide the training details when you're ready."
+      }
+    ],
+    "agentInstructions": "The Training Session Organizer agent helps you organize training sessions. When you provide the training details, the agent will: 1. Use `Outlook: Create Calendar Event` to schedule the session. 2. Use `Confluence: Create Page` to create a page for training materials. 3. Use `Outlook: Send Email` to send a confirmation email to attendees. Ensure all details are correct and all actions are completed."
+  },
+  {
+    "useCaseId": "061",
+    "agentName": "Release Blocker Reporter",
+    "toolSelection": [
+      "Jira: Create Jira Issue",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to report a release blocker. It should create a critical Jira issue and email the release manager.",
+        "response": "I can build that. It will use 'Create Jira Issue' to create a blocker ticket. For the email, should it use Gmail or Outlook?"
+      },
+      {
+        "request": "Use Gmail.",
+        "response": "Okay. The agent will create the Jira blocker and then send a notification email to the release manager via Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Release Blocker Reporter agent helps you report release blockers. When you report a blocker, the agent will: 1. Use `Jira: Create Jira Issue` to create a critical blocker issue. 2. Use `Gmail: Send Email` to notify the release manager. Ensure the Jira issue is created with the highest priority and the email is sent immediately."
+  },
+  {
+    "useCaseId": "062",
+    "agentName": "Team Offsite Planner",
+    "toolSelection": [
+      "Google Calendar: Create Calendar Event",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to plan our team offsite. It should block the dates on our Google Calendar and create a Confluence page for ideas.",
+        "response": "I can do that. It will use 'Create Calendar Event' on Google Calendar and 'Create Page' in Confluence. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": "The agent is ready. Just provide the dates and some initial ideas."
+      }
+    ],
+    "agentInstructions": "The Team Offsite Planner agent helps you plan your team offsite. When you provide the dates and details, the agent will: 1. Use `Google Calendar: Create Calendar Event` to block the dates on the team calendar. 2. Use `Confluence: Create Page` to create a page for offsite ideas and planning. Ensure the dates are correct and the Confluence page is created."
+  },
+  {
+    "useCaseId": "063",
+    "agentName": "Customer Feedback Logger",
+    "toolSelection": [
+      "Jira: Create Jira Issue",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to log customer feedback. It should create a Jira issue and a Confluence page to track the feedback.",
+        "response": "I can build that. It will use 'Create Jira Issue' and 'Create Page' in Confluence. Should the Confluence page link to the Jira issue?"
+      },
+      {
+        "request": "Yes, please include a link.",
+        "response": "Okay. The agent will create a Jira issue for the feedback and a Confluence page that links to the issue. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Customer Feedback Logger agent helps you log customer feedback. When you receive feedback, the agent will: 1. Use `Jira: Create Jira Issue` to create a new issue. 2. Use `Confluence: Create Page` to create a page to track the feedback, including a link to the Jira issue. Ensure the issue and page are created with the correct details."
+  },
+  {
+    "useCaseId": "064",
+    "agentName": "Simple Outlook Emailer",
+    "toolSelection": [
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need a basic agent that can send an email for me using Outlook.",
+        "response": "I can build that. It will use the 'Send Email' action from Outlook. You would just provide the recipient, subject, and body. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's all.",
+        "response": "The agent is configured. It's ready when you are."
+      }
+    ],
+    "agentInstructions": "The Simple Outlook Emailer agent provides a basic way to send emails using Outlook. When you provide the recipient, subject, and body, the agent will use `Outlook: Send Email` to send the email. Ensure the email is sent to the correct recipient with the correct content."
+  },
+  {
+    "useCaseId": "065",
+    "agentName": "IT Service Request Creator",
+    "toolSelection": [
+      "ServiceNow: Create Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to create an IT service request in ServiceNow.",
+        "response": "I can build that. It will use the 'Create Incident' action in ServiceNow, but we can label it as a service request. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": "The agent is ready. Just provide the details of your service request."
+      }
+    ],
+    "agentInstructions": "The IT Service Request Creator agent provides a simple way to create IT service requests. When you provide the details of your request, the agent will use `ServiceNow: Create Incident` to create a new service request ticket. Ensure all details are included in the ticket."
+  },
+  {
+    "useCaseId": "066",
+    "agentName": "PTO Balance Checker",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can check my PTO balance in Workday and email it to me.",
+        "response": "I can build that. It will use a Workday action to get your balance and then 'Send Email' from Gmail to send it to you. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": "The agent is configured. You can ask it for your PTO balance anytime."
+      }
+    ],
+    "agentInstructions": "The PTO Balance Checker agent helps you check your PTO balance. The agent will: 1. Use a `Workday` action to get your current PTO balance. 2. Use `Gmail: Send Email` to email the balance to you. Note: This is a conceptual example, assuming a 'Get Balance' action exists in Workday."
+  },
+  {
+    "useCaseId": "067",
+    "agentName": "Jira Epic Creator",
+    "toolSelection": [
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to create a new epic in Jira.",
+        "response": "I can build that. It will use the 'Create Jira Issue' action and set the issue type to 'Epic'. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the epic name and summary."
+      }
+    ],
+    "agentInstructions": "The Jira Epic Creator agent provides a simple way to create Jira epics. When you provide the epic details, the agent will use `Jira: Create Jira Issue` to create a new epic. Ensure the issue type is set to 'Epic'."
+  },
+  {
+    "useCaseId": "068",
+    "agentName": "Meeting Minutes Distributor",
+    "toolSelection": [
+      "Confluence: Create Page",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to distribute meeting minutes. It should create a Confluence page and email a link to the attendees.",
+        "response": "I can do that. It will use 'Create Page' in Confluence and 'Send Email' from Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": "The agent is ready. Just provide the minutes and the list of attendees."
+      }
+    ],
+    "agentInstructions": "The Meeting Minutes Distributor agent helps you distribute meeting minutes. When you provide the minutes, the agent will: 1. Use `Confluence: Create Page` to create a page with the minutes. 2. Use `Outlook: Send Email` to send a link to the page to all attendees. Ensure the page is created and the email is sent to the correct people."
+  },
+  {
+    "useCaseId": "069",
+    "agentName": "Support Ticket Escalator",
+    "toolSelection": [
+      "ServiceNow: Update Incident",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to escalate a support ticket from ServiceNow to Jira.",
+        "response": "I can build that. It will take a ServiceNow incident ID, create a new Jira issue, and then update the ServiceNow ticket with the Jira issue ID. Is that the workflow?"
+      },
+      {
+        "request": "Yes, that's exactly it.",
+        "response": "The agent is configured. Just provide the ServiceNow incident ID to escalate it."
+      }
+    ],
+    "agentInstructions": "The Support Ticket Escalator agent helps you escalate support tickets from ServiceNow to Jira. When you provide a ServiceNow incident ID, the agent will: 1. Use `Jira: Create Jira Issue` to create a new issue for the engineering team. 2. Use `ServiceNow: Update Incident` to add the new Jira issue ID to the ServiceNow ticket for tracking. Ensure the correct incident is updated."
+  },
+  {
+    "useCaseId": "070",
+    "agentName": "Candidate Rejection Notifier",
+    "toolSelection": [
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to send rejection emails to candidates.",
+        "response": "I can build that. It will use the 'Send Email' action from Gmail. You would provide the candidate's email and name to personalize the template. Is that what you need?"
+      },
+      {
+        "request": "Yes, that will be very helpful.",
+        "response": "The agent is configured. Just provide the candidate's details to send the email."
+      }
+    ],
+    "agentInstructions": "The Candidate Rejection Notifier agent helps you send rejection emails to candidates. When you provide the candidate's details, the agent will use `Gmail: Send Email` to send a polite rejection email. Ensure the correct template and details are used."
+  },
+  {
+    "useCaseId": "071",
+    "agentName": "Daily Standup Reminder",
+    "toolSelection": [
+      "Google Calendar: Create Calendar Event",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to remind the team about our daily standup. It should check if the event is on the calendar and send a reminder email.",
+        "response": "I can do that. It will use Google Calendar to find the standup event and then 'Send Email' from Gmail to send the reminder. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": "The agent is configured. You can trigger it daily before the standup."
+      }
+    ],
+    "agentInstructions": "The Daily Standup Reminder agent helps you remind your team about the daily standup. The agent will: 1. Use `Google Calendar` to find today's standup event. 2. Use `Gmail: Send Email` to send a reminder to the team. Note: This is a conceptual example, assuming a 'Find Event' action exists in Google Calendar."
+  },
+  {
+    "useCaseId": "072",
+    "agentName": "Jira Bug Reporter",
+    "toolSelection": [
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to report a bug in Jira.",
+        "response": "I can build that. It will use the 'Create Jira Issue' action and set the issue type to 'Bug'. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the bug details."
+      }
+    ],
+    "agentInstructions": "The Jira Bug Reporter agent provides a simple way to report bugs in Jira. When you provide the bug details, the agent will use `Jira: Create Jira Issue` to create a new bug report. Ensure the issue type is set to 'Bug'."
+  },
+  {
+    "useCaseId": "073",
+    "agentName": "New Hire Onboarding Assistant",
+    "toolSelection": [
+      "Confluence: Create Page",
+      "Jira: Create Jira Issue",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help with new hire onboarding. It should create a Confluence page with resources, a Jira ticket for their setup, and a welcome email.",
+        "response": "I can build that. It will use 'Create Page' in Confluence, 'Create Jira Issue', and 'Send Email' from Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the complete onboarding process.",
+        "response": "The agent is configured. Just provide the new hire's details to start the process."
+      }
+    ],
+    "agentInstructions": "The New Hire Onboarding Assistant agent helps you with new hire onboarding. When a new hire joins, the agent will: 1. Use `Confluence: Create Page` to create a page with onboarding resources. 2. Use `Jira: Create Jira Issue` to create a ticket for their IT setup. 3. Use `Outlook: Send Email` to send a welcome email. Ensure all details are correct for the new hire."
+  },
+  {
+    "useCaseId": "074",
+    "agentName": "ServiceNow Status Checker",
+    "toolSelection": [
+      "ServiceNow: Update Incident",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can check the status of a ServiceNow ticket and email it to me.",
+        "response": "I can build that. It will use a ServiceNow action to get the ticket status and then 'Send Email' from Gmail to send it to you. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": "The agent is configured. You can ask it for the status of any ServiceNow ticket."
+      }
+    ],
+    "agentInstructions": "The ServiceNow Status Checker agent helps you check the status of ServiceNow tickets. The agent will: 1. Use a `ServiceNow` action to get the status of a given incident ID. 2. Use `Gmail: Send Email` to email the status to you. Note: This is a conceptual example, assuming a 'Get Incident Status' action exists in ServiceNow."
+  },
+  {
+    "useCaseId": "075",
+    "agentName": "Bereavement Leave Booker",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to book bereavement leave in Workday and notify HR.",
+        "response": "I can build that. It will use 'Request Time Off' in Workday. For the notification to HR, should it use Outlook or Gmail?"
+      },
+      {
+        "request": "Use Outlook.",
+        "response": "Got it. The agent will request the leave in Workday and then send a notification email to HR via Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Bereavement Leave Booker agent helps you book bereavement leave. When you provide the dates, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Outlook: Send Email` to notify HR. Ensure the dates are correct and the notification is sent to the HR department."
+  },
+  {
+    "useCaseId": "076",
+    "agentName": "Jira Story Promoter",
+    "toolSelection": [
+      "Jira: Update Jira Issue",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to promote a Jira story to an epic. It should update the issue type and create a new Confluence page for the epic.",
+        "response": "I can do that. It will use 'Update Jira Issue' to change the issue type to 'Epic'. Then it will use 'Create Page' in Confluence. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": "The agent is ready. Just provide the Jira story ID to promote it."
+      }
+    ],
+    "agentInstructions": "The Jira Story Promoter agent helps you promote a Jira story to an epic. When you provide a story ID, the agent will: 1. Use `Jira: Update Jira Issue` to change the issue type to 'Epic'. 2. Use `Confluence: Create Page` to create a new page for the epic's details. Ensure the correct story is promoted."
+  },
+  {
+    "useCaseId": "077",
+    "agentName": "Team Holiday Calendar Creator",
+    "toolSelection": [
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to create a shared team holiday calendar in Google Calendar.",
+        "response": "I can build that. It will use the 'Create Calendar Event' action to add holidays to a shared Google Calendar. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the holiday dates and the shared calendar ID."
+      }
+    ],
+    "agentInstructions": "The Team Holiday Calendar Creator agent helps you create a shared team holiday calendar. When you provide the holiday dates, the agent will use `Google Calendar: Create Calendar Event` to add them to your shared team calendar. Ensure you provide the correct calendar ID."
+  },
+  {
+    "useCaseId": "078",
+    "agentName": "Quarterly Business Review Organizer",
+    "toolSelection": [
+      "Confluence: Create Page",
+      "Outlook: Create Calendar Event",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize our quarterly business review. It should create a Confluence page for the presentation, schedule the meeting in Outlook, and send an announcement via Gmail.",
+        "response": "I can build that. It will use 'Create Page' in Confluence, 'Create Calendar Event' in Outlook, and 'Send Email' from Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the complete process.",
+        "response": "The agent is configured. Just provide the QBR details when you're ready."
+      }
+    ],
+    "agentInstructions": "The Quarterly Business Review Organizer agent helps you organize your QBR. When you provide the details, the agent will: 1. Use `Confluence: Create Page` to create a page for the presentation. 2. Use `Outlook: Create Calendar Event` to schedule the meeting. 3. Use `Gmail: Send Email` to send an announcement to stakeholders. Ensure all details are correct and all actions are completed."
+  },
+  {
+    "useCaseId": "079",
+    "agentName": "ServiceNow Incident Closer",
+    "toolSelection": [
+      "ServiceNow: Update Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to close a ServiceNow incident.",
+        "response": "I can build that. It will use the 'Update Incident' action in ServiceNow to set the status to 'Closed'. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the incident ID to close it."
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident Closer agent provides a simple way to close ServiceNow incidents. When you provide an incident ID, the agent will use `ServiceNow: Update Incident` to set the status to 'Closed'. Ensure the correct incident is closed."
+  },
+  {
+    "useCaseId": "080",
+    "agentName": "Jury Duty Notifier",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to handle my jury duty notification. It should request the time off in Workday and email my team.",
+        "response": "I can build that. It will use 'Request Time Off' in Workday. For the email, should it use Gmail or Outlook?"
+      },
+      {
+        "request": "Use Gmail.",
+        "response": "Got it. The agent will request the time off in Workday and then send a notification email to your team via Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jury Duty Notifier agent helps you handle jury duty notifications. When you have jury duty, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Gmail: Send Email` to notify your team. Ensure the dates are correct and the notification is sent."
+  },
+  {
+    "useCaseId": "081",
+    "agentName": "Tech Talk Organizer",
+    "toolSelection": [
+      "Google Calendar: Create Calendar Event",
+      "Confluence: Create Page",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize a tech talk. It should schedule it, create a Confluence page for the abstract, and send an invitation.",
+        "response": "I can build that. It will use 'Create Calendar Event' in Google Calendar, 'Create Page' in Confluence, and 'Send Email' from Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the full workflow.",
+        "response": "The agent is configured. Just provide the tech talk details."
+      }
+    ],
+    "agentInstructions": "The Tech Talk Organizer agent helps you organize tech talks. When you provide the details, the agent will: 1. Use `Google Calendar: Create Calendar Event` to schedule the talk. 2. Use `Confluence: Create Page` to create a page for the abstract and slides. 3. Use `Gmail: Send Email` to send an invitation to the engineering team. Ensure all details are correct."
+  },
+  {
+    "useCaseId": "082",
+    "agentName": "Jira Ticket Cloner",
+    "toolSelection": [
+      "Jira: Create Jira Issue",
+      "Jira: Search Jira Issues"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to clone a Jira ticket.",
+        "response": "I can build that. It will use 'Search Jira Issues' to get the details of the ticket to clone, and then 'Create Jira Issue' to create a new one with the same details. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the Jira ticket ID to clone it."
+      }
+    ],
+    "agentInstructions": "The Jira Ticket Cloner agent helps you clone Jira tickets. When you provide a ticket ID, the agent will: 1. Use `Jira: Search Jira Issues` to get the details of the ticket. 2. Use `Jira: Create Jira Issue` to create a new ticket with the same details. Ensure the correct ticket is cloned."
+  },
+  {
+    "useCaseId": "083",
+    "agentName": "Company Holiday Announcer",
+    "toolSelection": [
+      "Outlook: Send Email",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to announce a company holiday. It should send an email and add it to the company's Google Calendar.",
+        "response": "I can do that. It will use 'Send Email' from Outlook and 'Create Calendar Event' in Google Calendar. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": "The agent is configured. Just provide the holiday details."
+      }
+    ],
+    "agentInstructions": "The Company Holiday Announcer agent helps you announce company holidays. When you provide the holiday details, the agent will: 1. Use `Outlook: Send Email` to announce the holiday to the company. 2. Use `Google Calendar: Create Calendar Event` to add the holiday to the company calendar. Ensure the details are correct and the announcement is sent."
+  },
+  {
+    "useCaseId": "084",
+    "agentName": "ServiceNow Problem Creator",
+    "toolSelection": [
+      "ServiceNow: Create Incident",
+      "Jira: Search Jira Issues"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to create a ServiceNow problem record from multiple incidents and link them in Jira.",
+        "response": "I can build that. It will use 'Create Incident' in ServiceNow to create the problem record. How should it link them in Jira?"
+      },
+      {
+        "request": "It should search for the incident numbers in Jira and link them to a new parent 'Problem' ticket.",
+        "response": "Okay. The agent will create a ServiceNow problem, then search for the related incidents in Jira and link them to a new problem ticket. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Problem Creator agent helps you create and manage problem records. The agent will: 1. Use `ServiceNow: Create Incident` to create a new problem record. 2. Use `Jira: Search Jira Issues` to find the related incident tickets. 3. Use `Jira: Create Jira Issue` to create a new parent 'Problem' ticket and link the incidents. Ensure the correct incidents are linked."
+  },
+  {
+    "useCaseId": "085",
+    "agentName": "Unpaid Time Off Booker",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to book unpaid time off in Workday and notify my manager and HR.",
+        "response": "I can build that. It will use 'Request Time Off' in Workday. For the notification, should it use Outlook or Gmail?"
+      },
+      {
+        "request": "Use Outlook.",
+        "response": "Got it. The agent will request the unpaid time off in Workday and then send a notification email to your manager and HR via Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Unpaid Time Off Booker agent helps you book unpaid time off. When you provide the dates, the agent will: 1. Use `Workday: Request Time Off` to submit the request for unpaid leave. 2. Use `Outlook: Send Email` to notify your manager and HR. Ensure the dates are correct and the notification is sent."
+  },
+  {
+    "useCaseId": "086",
+    "agentName": "Jira Sprint Closer",
+    "toolSelection": [
+      "Jira: Update Jira Issue",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to close a Jira sprint. It should move unfinished stories to the next sprint and create a sprint report in Confluence.",
+        "response": "I can do that. It will use 'Update Jira Issue' to move the stories. Then it will use 'Create Page' in Confluence for the report. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": "The agent is ready. Just provide the sprint ID to close it."
+      }
+    ],
+    "agentInstructions": "The Jira Sprint Closer agent helps you close Jira sprints. When you provide a sprint ID, the agent will: 1. Use `Jira: Update Jira Issue` to move any unfinished stories to the next sprint. 2. Use `Confluence: Create Page` to create a sprint report with the completed and moved stories. Ensure the correct sprint is closed."
+  },
+  {
+    "useCaseId": "087",
+    "agentName": "Board Meeting Organizer",
+    "toolSelection": [
+      "Outlook: Create Calendar Event",
+      "Confluence: Create Page",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize a board meeting. It should schedule it in Outlook, create a private Confluence page for the agenda, and send a confidential email with the link.",
+        "response": "I can build that. It will use 'Create Calendar Event' in Outlook, 'Create Page' in Confluence with restricted permissions, and 'Send Email' from Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the complete process. Security is key.",
+        "response": "The agent is configured. Just provide the meeting details."
+      }
+    ],
+    "agentInstructions": "The Board Meeting Organizer agent helps you organize board meetings. When you provide the details, the agent will: 1. Use `Outlook: Create Calendar Event` to schedule the meeting. 2. Use `Confluence: Create Page` to create a private page for the agenda with restricted permissions. 3. Use `Gmail: Send Email` to send a confidential email with the link to the board members. Ensure all details are correct and permissions are set correctly."
+  },
+  {
+    "useCaseId": "088",
+    "agentName": "Simple Gmailer",
+    "toolSelection": [
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need a very basic agent that can just send an email for me using Gmail.",
+        "response": "I can build that. It will use the 'Send Email' action from Gmail. You would just provide the recipient, subject, and body. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's all.",
+        "response": "The agent is configured. It's ready when you are."
+      }
+    ],
+    "agentInstructions": "The Simple Gmailer agent provides a basic way to send emails using Gmail. When you provide the recipient, subject, and body, the agent will use `Gmail: Send Email` to send the email. Ensure the email is sent to the correct recipient with the correct content."
+  },
+  {
+    "useCaseId": "089",
+    "agentName": "ServiceNow Change Request Creator",
+    "toolSelection": [
+      "ServiceNow: Create Incident",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to create a ServiceNow change request and notify the change advisory board.",
+        "response": "I can build that. It will use 'Create Incident' in ServiceNow to create the change request. For the notification, should it use Outlook or Gmail?"
+      },
+      {
+        "request": "Use Outlook.",
+        "response": "Got it. The agent will create the change request in ServiceNow and then send a notification email to the change advisory board via Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Change Request Creator agent helps you create ServiceNow change requests. When you provide the change details, the agent will: 1. Use `ServiceNow: Create Incident` to create a new change request. 2. Use `Outlook: Send Email` to notify the change advisory board. Ensure the change details are correct and the notification is sent."
+  },
+  {
+    "useCaseId": "090",
+    "agentName": "Sabbatical Leave Planner",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Gmail: Send Email",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to plan my sabbatical. It should request the leave in Workday, notify my department, and block my Google Calendar.",
+        "response": "I can do that. It will use 'Request Time Off' in Workday. For the notification and calendar, should it use Gmail and Google Calendar?"
+      },
+      {
+        "request": "Yes, use Gmail and Google Calendar.",
+        "response": "Got it. The agent will request the leave in Workday, send a notification email via Gmail, and create a calendar event in Google Calendar. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the full plan.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Sabbatical Leave Planner agent helps you plan your sabbatical. When you provide your leave dates, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Gmail: Send Email` to notify your department. 3. Use `Google Calendar: Create Calendar Event` to block off your calendar. Ensure the dates are correct and all actions are completed."
+  },
+  {
+    "useCaseId": "091",
+    "agentName": "Jira Issue Linker",
+    "toolSelection": [
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to link two Jira issues together.",
+        "response": "I can build that. It will use the 'Update Jira Issue' action to add a link between two issues. You would provide the two issue IDs and the link type. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the two issue IDs to link them."
+      }
+    ],
+    "agentInstructions": "The Jira Issue Linker agent provides a simple way to link two Jira issues. When you provide two issue IDs and a link type (e.g., 'is blocked by'), the agent will use `Jira: Update Jira Issue` to link them. Ensure the correct issue IDs and link type are provided."
+  },
+  {
+    "useCaseId": "092",
+    "agentName": "Deprecation Announcer",
+    "toolSelection": [
+      "Confluence: Create Page",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to announce the deprecation of a feature. It should create a Confluence page with the details and send an email to customers.",
+        "response": "I can do that. It will use 'Create Page' in Confluence and 'Send Email' from Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": "The agent is configured. Just provide the deprecation details."
+      }
+    ],
+    "agentInstructions": "The Deprecation Announcer agent helps you announce feature deprecations. When you provide the details, the agent will: 1. Use `Confluence: Create Page` to create a page with the deprecation plan and timeline. 2. Use `Gmail: Send Email` to announce the deprecation to customers. Ensure the details are correct and the announcement is sent to the right audience."
+  },
+  {
+    "useCaseId": "093",
+    "agentName": "ServiceNow Incident Commenter",
+    "toolSelection": [
+      "ServiceNow: Update Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to add a comment to a ServiceNow incident.",
+        "response": "I can build that. It will use the 'Update Incident' action in ServiceNow. You would just provide the incident ID and the comment. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the incident ID and your comment."
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident Commenter agent provides a simple way to add comments to ServiceNow incidents. When you provide an incident ID and a comment, the agent will use `ServiceNow: Update Incident` to add the comment. Ensure the correct incident is updated."
+  },
+  {
+    "useCaseId": "094",
+    "agentName": "Charity Day Organizer",
+    "toolSelection": [
+      "Outlook: Create Calendar Event",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize a charity day. It should schedule it in Outlook and send an email with details about the charity.",
+        "response": "I can do that. It will use 'Create Calendar Event' in Outlook for the schedule. For the email, should it also use Outlook?"
+      },
+      {
+        "request": "Yes, use Outlook for both.",
+        "response": "Got it. The agent will create the calendar event and send a separate email with the charity details, both from Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Charity Day Organizer agent helps you organize charity days. When you provide the details, the agent will: 1. Use `Outlook: Create Calendar Event` to schedule the event. 2. Use `Outlook: Send Email` to send an email with details about the charity. Ensure the event is scheduled and the email is sent to the company."
+  },
+  {
+    "useCaseId": "095",
+    "agentName": "Jira Issue Mover",
+    "toolSelection": [
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to move a Jira issue to another project.",
+        "response": "I can build that. It will use the 'Update Jira Issue' action to change the project for an issue. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the issue ID and the new project key."
+      }
+    ],
+    "agentInstructions": "The Jira Issue Mover agent provides a simple way to move a Jira issue to another project. When you provide an issue ID and the new project key, the agent will use `Jira: Update Jira Issue` to move the issue. Ensure the correct issue and project are provided."
+  },
+  {
+    "useCaseId": "096",
+    "agentName": "Office Move Notifier",
+    "toolSelection": [
+      "Gmail: Send Email",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to notify the company about an office move. It should send an email and create a calendar event for the move date.",
+        "response": "I can do that. It will use 'Send Email' from Gmail and 'Create Calendar Event' in Google Calendar. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": "The agent is configured. Just provide the office move details."
+      }
+    ],
+    "agentInstructions": "The Office Move Notifier agent helps you notify the company about an office move. When you provide the details, the agent will: 1. Use `Gmail: Send Email` to announce the move. 2. Use `Google Calendar: Create Calendar Event` to block the move date on the company calendar. Ensure the details are correct and the announcement is sent."
+  },
+  {
+    "useCaseId": "097",
+    "agentName": "ServiceNow Knowledge Base Linker",
+    "toolSelection": [
+      "ServiceNow: Update Incident",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to link a ServiceNow incident to a new Confluence knowledge base article.",
+        "response": "I can build that. It will use 'Create Page' in Confluence to create the article, and then 'Update Incident' in ServiceNow to add a link to the new article. Is that the workflow?"
+      },
+      {
+        "request": "Yes, that's exactly it.",
+        "response": "The agent is configured. Just provide the ServiceNow incident ID and the article content."
+      }
+    ],
+    "agentInstructions": "The ServiceNow Knowledge Base Linker agent helps you link ServiceNow incidents to knowledge base articles. When you provide an incident ID and article content, the agent will: 1. Use `Confluence: Create Page` to create the new knowledge base article. 2. Use `ServiceNow: Update Incident` to add a link to the new article in the incident. Ensure the correct incident is updated."
+  },
+  {
+    "useCaseId": "098",
+    "agentName": "Military Leave Booker",
+    "toolSelection": [
+      "Workday: Request Time Off",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to book military leave in Workday and notify my chain of command.",
+        "response": "I can build that. It will use 'Request Time Off' in Workday. For the notification, should it use Outlook or Gmail?"
+      },
+      {
+        "request": "Use Outlook.",
+        "response": "Got it. The agent will request the military leave in Workday and then send a notification email to your chain of command via Outlook. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Military Leave Booker agent helps you book military leave. When you provide the dates, the agent will: 1. Use `Workday: Request Time Off` to submit the request. 2. Use `Outlook: Send Email` to notify your chain of command. Ensure the dates are correct and the notification is sent."
+  },
+  {
+    "useCaseId": "099",
+    "agentName": "Jira Version Creator",
+    "toolSelection": [
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need a simple agent to create a new version in a Jira project.",
+        "response": "I can build that. It will use a Jira action to create a new version in a project. Is that what you need?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": "The agent is ready. Just provide the project key and the version name."
+      }
+    ],
+    "agentInstructions": "The Jira Version Creator agent provides a simple way to create new versions in Jira projects. When you provide a project key and version name, the agent will use a `Jira` action to create the new version. Note: This is a conceptual example, assuming a 'Create Version' action exists in Jira."
+  },
+  {
+    "useCaseId": "100",
+    "agentName": "Hackathon Organizer",
+    "toolSelection": [
+      "Confluence: Create Page",
+      "Google Calendar: Create Calendar Event",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to organize a hackathon. It should create a Confluence page for project ideas, schedule the event in Google Calendar, and send an announcement via Gmail.",
+        "response": "I can build that. It will use 'Create Page' in Confluence, 'Create Calendar Event' in Google Calendar, and 'Send Email' from Gmail. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the complete process.",
+        "response": "The agent is configured. Just provide the hackathon details when you're ready."
+      }
+    ],
+    "agentInstructions": "The Hackathon Organizer agent helps you organize a hackathon. When you provide the details, the agent will: 1. Use `Confluence: Create Page` to create a page for project ideas. 2. Use `Google Calendar: Create Calendar Event` to schedule the event. 3. Use `Gmail: Send Email` to send an announcement to the company. Ensure all details are correct and all actions are completed."
   }
 ]
