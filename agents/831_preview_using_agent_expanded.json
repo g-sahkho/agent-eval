@@ -1,0 +1,1735 @@
+[
+  {
+    "useCaseId": "001",
+    "agentName": "IT Incident Reporter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "My laptop's battery is draining really fast. Can you open an IT ticket for me and let my manager know?",
+        "agentTrace": [
+          {
+            "thought": "The user wants to report an IT issue. I need to create a ServiceNow incident and then send an Outlook email to their manager.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'Laptop battery draining fast', Description: 'User reports their laptop battery is draining much faster than usual.')"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012345."
+          },
+          {
+            "thought": "Now I need to email the user's manager. I will use Outlook as configured.",
+            "action": "Call `Outlook: Send Email` (To: 'manager@example.com', Subject: 'IT Incident Created: INC0012345', Body: 'Just letting you know I've opened an IT incident (INC0012345) for an issue with my laptop battery.')"
+          },
+          {
+            "observation": "Email sent successfully."
+          }
+        ],
+        "finalResponse": "I've created the ServiceNow incident INC0012345 for your battery issue and sent a notification to your manager. You should receive a confirmation email from IT shortly."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "My computer is broken. File a ticket.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is very vague. 'Broken' could mean many things. I need more specific information to create a useful ServiceNow ticket.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can definitely create a ticket for you, but could you please describe the problem in a bit more detail? For example, is the computer not turning on, is an application crashing, or are you seeing an error message?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "My VPN client won't connect. Please open a ticket.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to create a ServiceNow incident for a VPN issue.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'VPN Connection Failure', Description: 'User reports that their VPN client is failing to connect.')"
+          },
+          {
+            "observation": "Received an error from the ServiceNow API: `API_UNAVAILABLE (Code: 503)`."
+          },
+          {
+            "thought": "I can't create the ticket because the ServiceNow service seems to be down. I need to inform the user about the failure and suggest an alternative."
+          }
+        ],
+        "finalResponse": "I tried to create a ServiceNow ticket, but it seems the service is currently unavailable. I was unable to file the ticket. Please try again in a little while, or contact the IT help desk directly if it's urgent."
+      }
+    ]
+  },
+  {
+    "useCaseId": "002",
+    "agentName": "Vacation Planner",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I'd like to book my vacation from September 8th to September 12th.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to book vacation. I need to call Workday to request the time off and then Google Calendar to block the time.",
+            "action": "Call `Workday: Request Time Off` (StartDate: '2025-09-08', EndDate: '2025-09-12', Type: 'Vacation')"
+          },
+          {
+            "observation": "Time off request successfully submitted in Workday."
+          },
+          {
+            "thought": "Now that the request is in Workday, I will block the user's calendar.",
+            "action": "Call `Google Calendar: Create Calendar Event` (Title: 'Vacation', StartDate: '2025-09-08', EndDate: '2025-09-12', Availability: 'Out of office')"
+          },
+          {
+            "observation": "Event created on Google Calendar."
+          }
+        ],
+        "finalResponse": "Okay, I've submitted your request for September 8th through 12th in Workday and blocked off that time on your Google Calendar. Enjoy your trip!"
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Book my vacation for the last week of December.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to book vacation in the last week of December. I should check if this period falls within a company-wide 'holiday freeze' period before submitting.",
+            "action": "Call internal policy tool to check for holiday freezes."
+          },
+          {
+            "observation": "The period from December 22nd to January 2nd is a company-wide change freeze period where PTO is discouraged for on-call staff."
+          },
+          {
+            "thought": "I should warn the user about the change freeze before proceeding with the Workday request."
+          }
+        ],
+        "finalResponse": "Just a heads-up, the last week of December is a company-wide 'change freeze' period. I can still submit the request for you, but it might require extra approval. Do you want me to proceed?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "I want to take the next two weeks off, starting tomorrow.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to request two weeks of vacation. I'll call the Workday tool.",
+            "action": "Call `Workday: Request Time Off` (StartDate: '2025-08-04', EndDate: '2025-08-15', Type: 'Vacation')"
+          },
+          {
+            "observation": "Received an error from Workday API: `INSUFFICIENT_BALANCE`. User has 5 vacation days available, but the request is for 10."
+          },
+          {
+            "thought": "The user doesn't have enough PTO accrued for this request. I must inform them about the error."
+          }
+        ],
+        "finalResponse": "It looks like you don't have enough vacation time accrued for that request. Workday shows you have 5 days available, but the request is for 10. Would you like to request a shorter duration?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "003",
+    "agentName": "Bug Submitter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "File a bug for me. When I click the 'Export' button on the dashboard, the page crashes. This is in the 'Analytics' project.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to file a bug. First, I need to search for duplicates in Jira.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'Analytics', Query: 'export button crash')"
+          },
+          {
+            "observation": "Search returned 0 results."
+          },
+          {
+            "thought": "No duplicates found. Now I will create a new Jira issue.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'Analytics', Title: 'Page crashes when clicking Export button', Body: 'Steps to reproduce: 1. Navigate to dashboard. 2. Click Export button. Expected: file downloads. Actual: page crashes.')"
+          },
+          {
+            "observation": "Successfully created Jira issue AN-1138."
+          }
+        ],
+        "finalResponse": "I've filed that bug for you. The ticket number is AN-1138."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "There's a bug where the login button is misaligned on the homepage.",
+        "agentTrace": [
+          {
+            "thought": "The user is reporting a bug. I must search for duplicates first.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'WebApp', Query: 'login button alignment')"
+          },
+          {
+            "observation": "Search returned 1 result: WA-901 'Login button is off-center on Safari'."
+          },
+          {
+            "thought": "I found a very similar bug. Creating a duplicate isn't ideal. I should ask the user if they want to add their report to the existing ticket."
+          }
+        ],
+        "finalResponse": "Before I create a new bug, I found a similar existing ticket: WA-901 'Login button is off-center on Safari'. Does that sound like the same issue? I can add your report as a comment to that ticket if you'd like."
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Please create a bug in the 'Secret-Project' project. The user avatar is not loading.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to create a Jira issue. I'll search for duplicates first.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'Secret-Project', Query: 'avatar not loading')"
+          },
+          {
+            "observation": "Search returned 0 results."
+          },
+          {
+            "thought": "Okay, no duplicates. Now I will try to create the issue.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'Secret-Project', Title: 'User avatar not loading')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `PERMISSION_DENIED`. User is not a member of project 'Secret-Project'."
+          }
+        ],
+        "finalResponse": "I couldn't create that bug. It looks like you don't have permission to create issues in the 'Secret-Project' project. Would you like me to file it in a different project?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "004",
+    "agentName": "Meeting Follow-up Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Here are the notes from the 'Q4 Planning' meeting. Please send out the follow-up. Action items are: 'Jen to finalize the budget', and 'Alex to draft the project proposal'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants me to process meeting notes. I need to create a Confluence page, create two Jira issues, and send a Gmail summary.",
+            "action": "Call `Confluence: Create Page` (Title: 'Meeting Notes: Q4 Planning', Body: '...notes... Action items: Jen to finalize the budget, Alex to draft the project proposal')"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now for the Jira tickets. First action item for Jen.",
+            "action": "Call `Jira: Create Jira Issue` (Title: 'Finalize the Q4 budget', Assignee: 'Jen')"
+          },
+          {
+            "observation": "Created ticket TASK-501."
+          },
+          {
+            "thought": "Second action item for Alex.",
+            "action": "Call `Jira: Create Jira Issue` (Title: 'Draft the project proposal', Assignee: 'Alex')"
+          },
+          {
+            "observation": "Created ticket TASK-502."
+          },
+          {
+            "thought": "Finally, I'll send the summary email.",
+            "action": "Call `Gmail: Send Email` (To: 'team@example.com', Subject: 'Follow up: Q4 Planning', Body: '...')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Done. I've created the Confluence page, assigned Jira tickets TASK-501 to Jen and TASK-502 to Alex, and sent a summary email to the team."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Here are my meeting notes, please process them: 'We discussed Q4 planning and agreed that the budget and proposal are important.'",
+        "agentTrace": [
+          {
+            "thought": "The user provided notes, but I can't identify any clear, assignable action items. I need to ask for clarification before creating Jira tickets.",
+            "action": "Call `Confluence: Create Page` (Title: 'Meeting Notes: Q4 Planning', Body: 'We discussed Q4 planning and agreed that the budget and proposal are important.')"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now I need to ask about the action items."
+          }
+        ],
+        "finalResponse": "I've saved the notes to Confluence. I see 'budget' and 'proposal' were mentioned, but I couldn't identify clear action items to create in Jira. Could you tell me who is assigned to each of those tasks?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Here are my meeting notes, put them under the 'Q4-Planning-Brief' parent page in Confluence and send the follow-up.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to process meeting notes. The first step is to create the Confluence page.",
+            "action": "Call `Confluence: Create Page` (Title: 'Meeting Follow-up', ParentPage: 'Q4-Planning-Brief', ...)"
+          },
+          {
+            "observation": "Received an error from the Confluence API: `PARENT_PAGE_NOT_FOUND`."
+          },
+          {
+            "thought": "The parent page the user specified doesn't exist. I can't proceed with the rest of the workflow. I need to inform the user."
+          }
+        ],
+        "finalResponse": "I wasn't able to create the Confluence page because the parent page you specified, 'Q4-Planning-Brief', doesn't seem to exist. Could you please check the name or provide a different parent page?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "005",
+    "agentName": "PTO Notifier",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I need to take a sick day today. Let my team know at 'dev-team@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "User is taking a sick day. I need to request it in Workday and email the team.",
+            "action": "Call `Workday: Request Time Off` (StartDate: 'today', EndDate: 'today', Type: 'Sick')"
+          },
+          {
+            "observation": "Successfully submitted sick day request in Workday."
+          },
+          {
+            "thought": "Now I will email the team.",
+            "action": "Call `Gmail: Send Email` (To: 'dev-team@example.com', Subject: 'Out of Office Today', Body: 'Hi team, I am taking a sick day today and will be out of office. I will respond to messages upon my return.')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Okay, I've submitted a sick day request for you in Workday and notified 'dev-team@example.com'. Hope you feel better soon."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "I forgot to log my sick day from yesterday. Can you do it for me and notify my team?",
+        "agentTrace": [
+          {
+            "thought": "The user is requesting a sick day for a past date. The Workday API might allow this, but I should confirm with the user that the date is correct before proceeding.",
+            "action": null
+          }
+        ],
+        "finalResponse": "Just to confirm, you want me to log a sick day for yesterday's date? Is that correct?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "I need to take a sick day. Email the team at 'dev team'.",
+        "agentTrace": [
+          {
+            "thought": "User is taking a sick day. I'll submit to Workday first.",
+            "action": "Call `Workday: Request Time Off` (StartDate: 'today', EndDate: 'today', Type: 'Sick')"
+          },
+          {
+            "observation": "Successfully submitted sick day request in Workday."
+          },
+          {
+            "thought": "Now I'll try to email the team. The address 'dev team' looks invalid.",
+            "action": "Call `Gmail: Send Email` (To: 'dev team', ...)"
+          },
+          {
+            "observation": "Received an error from the Gmail API: `INVALID_RECIPIENT_ADDRESS`."
+          }
+        ],
+        "finalResponse": "I've submitted your sick day request in Workday, but I couldn't send the email because 'dev team' doesn't look like a valid email address. Could you please provide the correct team email?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "006",
+    "agentName": "Incident Escalator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Escalate incident INC0012345, it's critical.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to escalate an incident. I need to update it in ServiceNow and then email the on-call manager.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC0012345', Priority: '1-Critical')"
+          },
+          {
+            "observation": "Incident INC0012345 updated successfully."
+          },
+          {
+            "thought": "Now I will notify the manager via Gmail.",
+            "action": "Call `Gmail: Send Email` (To: 'on-call-manager@example.com', Subject: 'Escalation: INC0012345', ...)"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've escalated INC0012345 to 'Critical' priority and notified the on-call manager."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "I need to escalate INC0012345 again.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to escalate an incident. I should check its current priority first.",
+            "action": "Call `ServiceNow: Search Jira Issues` (Query: 'id=INC0012345')"
+          },
+          {
+            "observation": "Found incident INC0012345. Current priority is '1-Critical'."
+          },
+          {
+            "thought": "The incident is already at the highest priority. I should inform the user."
+          }
+        ],
+        "finalResponse": "That incident, INC0012345, is already set to '1-Critical', the highest priority. Do you still want me to send another notification email to the on-call manager?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Escalate ticket INC9999999.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to escalate an incident. I will try to update it in ServiceNow.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC9999999', Priority: '1-Critical')"
+          },
+          {
+            "observation": "Received an error from the ServiceNow API: `INCIDENT_NOT_FOUND`."
+          },
+          {
+            "thought": "The ticket doesn't exist. I need to inform the user."
+          }
+        ],
+        "finalResponse": "I couldn't find an incident with the ID 'INC9999999'. Please double-check the ticket number."
+      }
+    ]
+  },
+  {
+    "useCaseId": "007",
+    "agentName": "Jira Task Updater",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Add a comment to ticket PROJ-123. Tell them 'The fix has been deployed to staging.'",
+        "agentTrace": [
+          {
+            "thought": "The user wants to add a comment to a Jira ticket. This is a straightforward call to the Update Jira Issue tool.",
+            "action": "Call `Jira: Update Jira Issue` (ID: 'PROJ-123', Comment: 'The fix has been deployed to staging.')"
+          },
+          {
+            "observation": "Comment successfully added to PROJ-123."
+          }
+        ],
+        "finalResponse": "Okay, I've added your comment to PROJ-123."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Can you add a comment to PROJ-456? The client is reporting the issue again.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to add a comment. I should check the ticket status first to provide more context.",
+            "action": "Call `Jira: Search Jira Issues` (Query: 'id=PROJ-456')"
+          },
+          {
+            "observation": "Found ticket PROJ-456. Status is 'Closed', Resolution is 'Done'."
+          },
+          {
+            "thought": "The ticket is already closed. Adding a comment might not be the right action. The user might want to reopen it or create a new one. I should advise them.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can add that comment, but just so you know, ticket PROJ-456 is marked as 'Closed'. A comment might not be seen. Would you prefer to reopen this ticket, or create a new one instead?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Add a comment to ticket PROJ-123.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to add a comment but hasn't provided the text for the comment. I cannot proceed without the content.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. What comment would you like me to add?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "008",
+    "agentName": "Outage Communicator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Declare a major outage. The API service is down. Create a P0 and send a company-wide email.",
+        "agentTrace": [
+          {
+            "thought": "This is a major outage report. I need to create a P0 incident in ServiceNow and then send a notification email via Gmail.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'Major Outage: API Service Down', Priority: '0-Critical')"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012400."
+          },
+          {
+            "thought": "Now I will send the company-wide notification.",
+            "action": "Call `Gmail: Send Email` (To: 'all-employees@example.com', Subject: 'Service Alert: Major Outage for API Service', ...)"
+          },
+          {
+            "observation": "Email sent successfully."
+          }
+        ],
+        "finalResponse": "I have declared a major outage. ServiceNow incident INC0012400 has been created and a notification has been sent to all employees. The engineering team is on it."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "We have an outage, send the alert!",
+        "agentTrace": [
+          {
+            "thought": "The user has reported an outage but not specified which system or service is affected. This is crucial information for the incident and the email.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can send the alert, but I need a little more information. Which service or application is experiencing the outage?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "The database is down. Create a P0 and email everyone.",
+        "agentTrace": [
+          {
+            "thought": "User is reporting a database outage. I'll create the ServiceNow ticket first.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'Major Outage: Database Down', Priority: '0-Critical')"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012401."
+          },
+          {
+            "thought": "Now I will attempt to send the company-wide email.",
+            "action": "Call `Gmail: Send Email` (To: 'all-employees@example.com', ...)"
+          },
+          {
+            "observation": "Received an error from the Gmail API: `SEND_PERMISSION_DENIED`. The agent's service account is not authorized to send to this distribution list."
+          }
+        ],
+        "finalResponse": "I have successfully created the ServiceNow incident INC0012401, but I was unable to send the company-wide email because I don't have permission to send to that address. The ticket is open and the on-call team should be alerted."
+      }
+    ]
+  },
+  {
+    "useCaseId": "009",
+    "agentName": "Team Event Coordinator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Schedule our team sync for this Friday at 10 AM. Send an agenda with the topic 'Review Q3 goals'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to schedule a meeting. I need to create an Outlook event and send an agenda email via Gmail.",
+            "action": "Call `Outlook: Create Calendar Event` (Title: 'Team Sync', Time: 'Friday 10 AM', Attendees: 'team@example.com')"
+          },
+          {
+            "observation": "Outlook event created successfully."
+          },
+          {
+            "thought": "Now I will send the agenda email.",
+            "action": "Call `Gmail: Send Email` (To: 'team@example.com', Subject: 'Agenda for Friday Team Sync', Body: 'Hi team, the main topic for our sync on Friday will be to review Q3 goals.')"
+          },
+          {
+            "observation": "Email sent successfully."
+          }
+        ],
+        "finalResponse": "Okay, I've scheduled the 'Team Sync' on your Outlook calendar for Friday at 10 AM and sent an email with the agenda."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Schedule a team lunch for tomorrow at noon.",
+        "agentTrace": [
+          {
+            "thought": "User wants to schedule a lunch. I should check attendees' calendars for conflicts before creating the event.",
+            "action": "Call `Outlook: Get Calendar Availability` (Time: 'Tomorrow 12 PM', Attendees: 'team@example.com')"
+          },
+          {
+            "observation": "Found conflicts. 'Alex' has '1-on-1 w/ Manager' and 'Sarah' has 'Client Call'."
+          },
+          {
+            "thought": "There are conflicts. I should inform the user and ask how to proceed."
+          }
+        ],
+        "finalResponse": "I checked everyone's calendars, and it looks like Alex and Sarah have conflicts at noon tomorrow. Should I go ahead and schedule it anyway, or would you like to try a different time?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Schedule a project kick-off for next Monday at 9 AM.",
+        "agentTrace": [
+          {
+            "thought": "User wants to schedule a meeting. I'll call the Outlook tool.",
+            "action": "Call `Outlook: Create Calendar Event` (Title: 'Project Kick-off', ...)"
+          },
+          {
+            "observation": "Received an error from the Outlook API: `AUTH_TOKEN_EXPIRED`."
+          },
+          {
+            "thought": "I can't access the user's calendar. I need to ask them to re-authenticate."
+          }
+        ],
+        "finalResponse": "I couldn't schedule that meeting because my connection to your Outlook account has expired. Could you please re-authorize it?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "010",
+    "agentName": "Project Kick-off Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Let's kick off the 'Odyssey' project. The goal is to redesign the homepage.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to kick off a project. I need to create a Confluence page and a Jira epic.",
+            "action": "Call `Confluence: Create Page` (Space: 'PROD', Title: 'Project Odyssey: Homepage Redesign', Body: 'Project goal is to redesign the homepage.')"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now to create the corresponding epic in Jira.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'WEB', Type: 'Epic', Title: 'Project Odyssey: Homepage Redesign')"
+          },
+          {
+            "observation": "Successfully created epic WEB-250."
+          }
+        ],
+        "finalResponse": "Project 'Odyssey' is kicked off. I've created the project page in Confluence and the main epic in Jira (WEB-250)."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Let's kick off the 'Phoenix' project.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to start a project. I'll try to create the Confluence page first.",
+            "action": "Call `Confluence: Create Page` (Space: 'PROD', Title: 'Project Phoenix')"
+          },
+          {
+            "observation": "A page with the title 'Project Phoenix' already exists in this space."
+          },
+          {
+            "thought": "There's a naming collision. I should ask the user how they want to handle it."
+          }
+        ],
+        "finalResponse": "A Confluence page named 'Project Phoenix' already exists. Should I create a new page with a different name (e.g., 'Project Phoenix v2'), or would you like me to update the existing one?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Kick off project 'Helios' in the 'SUN' Jira project.",
+        "agentTrace": [
+          {
+            "thought": "User wants to kick off a project. I'll start with the Confluence page.",
+            "action": "Call `Confluence: Create Page` (Space: 'PROD', Title: 'Project Helios')"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now I will create the Jira epic in the 'SUN' project.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'SUN', Type: 'Epic', Title: 'Project Helios')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `PROJECT_NOT_FOUND`."
+          }
+        ],
+        "finalResponse": "I created the Confluence page for 'Project Helios', but I couldn't create the Jira epic because a project with the key 'SUN' doesn't seem to exist. Can you please provide a valid Jira project key?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "011",
+    "agentName": "Weekly Status Reporter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Send the weekly status report for the 'Mobile' project to 'stakeholders@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "User wants a status report. I'll search Jira for recently updated issues in the 'Mobile' project.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'Mobile', UpdatedSince: '-7d')"
+          },
+          {
+            "observation": "Found 5 issues: MOB-123 (Done), MOB-125 (In Progress), MOB-126 (In Review)..."
+          },
+          {
+            "thought": "Now I will format these results and email them using Gmail.",
+            "action": "Call `Gmail: Send Email` (To: 'stakeholders@example.com', Subject: 'Weekly Status: Mobile Project', Body: '...formatted list of 5 issues...')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "The weekly status report for the 'Mobile' project, containing 5 updates, has been sent to 'stakeholders@example.com'."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Send the weekly status report for the 'Mobile' project.",
+        "agentTrace": [
+          {
+            "thought": "User wants a status report. I'll search Jira.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'Mobile', UpdatedSince: '-7d')"
+          },
+          {
+            "observation": "Search returned 0 results."
+          },
+          {
+            "thought": "There have been no updates in the last week. I should inform the user before sending a blank email."
+          }
+        ],
+        "finalResponse": "I searched the 'Mobile' project but found no ticket updates in the last 7 days. Do you still want me to send a report stating there are no updates?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Send the weekly status report for the 'Mobile' project.",
+        "agentTrace": [
+          {
+            "thought": "User wants a status report. I'll search Jira.",
+            "action": "Call `Jira: Search Jira Issues` (Project: 'Mobile', UpdatedSince: '-7d')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `JQL_SYNTAX_ERROR`. The query was malformed on my end."
+          },
+          {
+            "thought": "The tool failed because of an internal error in how I constructed the query. I need to report this failure to the user."
+          }
+        ],
+        "finalResponse": "I'm sorry, I encountered an error while trying to search for issues in Jira and couldn't generate the report. Please try again in a moment."
+      }
+    ]
+  },
+  {
+    "useCaseId": "012",
+    "agentName": "Retrospective Planner",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Set up the retrospective for the 'Delta Sprint'. Schedule it for this Thursday at 3 PM.",
+        "agentTrace": [
+          {
+            "thought": "User wants to set up a retrospective. I'll create the Confluence page first.",
+            "action": "Call `Confluence: Create Page` (Space: 'TEAM', Title: 'Retrospective: Delta Sprint', Template: 'Retrospective Template')"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now I will schedule the event on Google Calendar.",
+            "action": "Call `Google Calendar: Create Calendar Event` (Title: 'Retrospective: Delta Sprint', Time: 'Thursday 3 PM', ...)"
+          },
+          {
+            "observation": "Event created on Google Calendar."
+          }
+        ],
+        "finalResponse": "All set. I've created the 'Retrospective: Delta Sprint' page in Confluence from the template and scheduled the meeting on your team's Google Calendar for Thursday at 3 PM."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Set up our next retrospective.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is ambiguous. I don't know the sprint name or the desired time for the meeting.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. What is the name of the sprint we're holding the retrospective for, and when would you like to schedule the meeting?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Set up the retrospective for 'Omega Sprint'.",
+        "agentTrace": [
+          {
+            "thought": "User wants to set up a retrospective. I'll create the Confluence page first.",
+            "action": "Call `Confluence: Create Page` (Space: 'TEAM', Title: 'Retrospective: Omega Sprint', Template: 'Retrospective Template')"
+          },
+          {
+            "observation": "Received an error from the Confluence API: `TEMPLATE_NOT_FOUND`."
+          },
+          {
+            "thought": "I can't create the page because the standard 'Retrospective Template' is missing. I should inform the user."
+          }
+        ],
+        "finalResponse": "I couldn't create the retrospective page because the 'Retrospective Template' seems to be missing in Confluence. I can create a blank page instead, would that work for you?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "013",
+    "agentName": "Cross-Team Bug Notifier",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Log a bug that our login is failing with their new authentication service. Notify the 'security-team@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to file a bug and notify another team. I will create the Jira issue first.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'APP', Title: 'Login failing with new auth service')"
+          },
+          {
+            "observation": "Successfully created Jira issue APP-2049."
+          },
+          {
+            "thought": "Now I will send the notification email using Outlook.",
+            "action": "Call `Outlook: Send Email` (To: 'security-team@example.com', Subject: 'Heads up: New bug related to auth service (APP-2049)', ...)"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Okay, I've logged the bug as APP-2049 and sent a notification to the security team."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "File a bug about the performance issue and let the performance team know.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is missing a key piece of information: the email address for the performance team. I need to ask for it.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. After I create the bug, what is the email address for the performance team that I should notify?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Log a bug about the API timeout and notify 'infra@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to file a bug and notify a team. I'll try to create the Jira issue first.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'API', Title: 'API Timeout')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `SERVICE_UNAVAILABLE`."
+          },
+          {
+            "thought": "Jira is down, so I cannot create the issue. I must inform the user that both steps failed."
+          }
+        ],
+        "finalResponse": "I couldn't file the bug because Jira seems to be down right now. Because the ticket wasn't created, I did not send a notification email. Please try again in a few minutes."
+      }
+    ]
+  },
+  {
+    "useCaseId": "014",
+    "agentName": "Leave of Absence Coordinator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I need to start my 4-week parental leave on September 1st. Please process it.",
+        "agentTrace": [
+          {
+            "thought": "The user is requesting a 4-week leave. I need to use three tools: Workday, Outlook Calendar, and Outlook Email.",
+            "action": "Call `Workday: Request Time Off` (StartDate: '2025-09-01', EndDate: '2025-09-29', Type: 'Leave')"
+          },
+          {
+            "observation": "Leave successfully submitted in Workday."
+          },
+          {
+            "thought": "Next, block the Outlook calendar.",
+            "action": "Call `Outlook: Create Calendar Event` (Title: 'Parental Leave', StartDate: '2025-09-01', EndDate: '2025-09-29', Availability: 'Out of office')"
+          },
+          {
+            "observation": "Calendar event created."
+          },
+          {
+            "thought": "Finally, send the notification email.",
+            "action": "Call `Outlook: Send Email` (To: 'team@example.com', Subject: 'Parental Leave Notification', ...)"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "Okay, your parental leave from Sep 1st to Sep 29th has been submitted in Workday. I've also blocked your Outlook calendar and sent a notification email to your team."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "I need to take a leave of absence.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is missing the start and end dates, which are required for all three tool calls.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can help with that. What are the start and end dates for your leave of absence?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "I need to take a 2-week leave starting Monday.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to request leave. I will start with the Workday tool.",
+            "action": "Call `Workday: Request Time Off` (StartDate: '...', EndDate: '...')"
+          },
+          {
+            "observation": "Received an error from the Workday API: `POLICY_VIOLATION: Leave requires manager pre-approval.`"
+          },
+          {
+            "thought": "The request failed due to a policy that I cannot bypass. I need to inform the user about the required manual step."
+          }
+        ],
+        "finalResponse": "I was unable to submit your leave request. Workday requires manager pre-approval for this type of leave. Please talk to your manager first, and then I can complete the rest of the steps for you."
+      }
+    ]
+  },
+  {
+    "useCaseId": "015",
+    "agentName": "Service Desk Automator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "A user is reporting they can't log in with their SSO credentials to the new 'Analytics Dashboard'. This seems to be a new issue.",
+        "agentTrace": [
+          {
+            "thought": "User is reporting a new issue. I need to create a ServiceNow incident and a Confluence knowledge base draft.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'SSO Login Failure: Analytics Dashboard', ...)"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012500."
+          },
+          {
+            "thought": "Now I will create the draft KB article in Confluence.",
+            "action": "Call `Confluence: Create Page` (Space: 'KB', Title: 'Troubleshooting: SSO Login Failure for Analytics Dashboard', Body: '...placeholder text...')"
+          },
+          {
+            "observation": "Confluence page created."
+          }
+        ],
+        "finalResponse": "I've created incident INC0012500 for this issue and also created a draft knowledge base article in Confluence for the support team to document the fix."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "The wifi is slow again.",
+        "agentTrace": [
+          {
+            "thought": "The user is reporting a recurring, common issue. Creating a new KB article for this might be redundant. I should search first.",
+            "action": "Call `Confluence: Search Pages` (Query: 'troubleshooting slow wifi')"
+          },
+          {
+            "observation": "Found existing page: 'KB-23: Troubleshooting slow office wifi'."
+          },
+          {
+            "thought": "An article already exists. I should create the ticket but skip creating a duplicate Confluence page and link to the existing one instead."
+          }
+        ],
+        "finalResponse": "I'm creating a ticket for the slow wifi. I also found an existing knowledge base article, 'KB-23', that covers this issue, so I won't create a new one. Is that okay?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "A user's mouse isn't working.",
+        "agentTrace": [
+          {
+            "thought": "User is reporting an issue. I'll create the ServiceNow ticket first.",
+            "action": "Call `ServiceNow: Create Incident` (Title: 'User mouse not working')"
+          },
+          {
+            "observation": "Successfully created ServiceNow incident INC0012501."
+          },
+          {
+            "thought": "Now I'll try to create the Confluence page.",
+            "action": "Call `Confluence: Create Page` (Space: 'KB', Title: 'Troubleshooting: Mouse not working')"
+          },
+          {
+            "observation": "Received an error from the Confluence API: `PERMISSION_DENIED`. The agent does not have permission to create pages in the 'KB' space."
+          }
+        ],
+        "finalResponse": "I've created the ServiceNow incident INC0012501, but I was unable to create the draft knowledge base article because of a permissions issue in Confluence. The IT ticket has been filed."
+      }
+    ]
+  },
+  {
+    "useCaseId": "016",
+    "agentName": "Release Notes Drafter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Draft the release notes for version 2.5 of our 'iOS-App' project.",
+        "agentTrace": [
+          {
+            "thought": "User wants release notes. I need to search Jira for all issues in a specific release version.",
+            "action": "Call `Jira: Search Jira Issues` (Query: 'project = iOS-App AND fixVersion = 2.5')"
+          },
+          {
+            "observation": "Found 15 issues: IOS-301 (New Feature: Dark Mode), IOS-305 (Bugfix: Crash on launch), ..."
+          },
+          {
+            "thought": "Now I will create a Confluence page with this list.",
+            "action": "Call `Confluence: Create Page` (Space: 'RELEASES', Title: 'Release Notes v2.5', Body: '...formatted list of 15 issues...')"
+          },
+          {
+            "observation": "Confluence page created."
+          }
+        ],
+        "finalResponse": "Okay, I've drafted the release notes for v2.5. The Confluence page has been created in the 'RELEASES' space with a list of the 15 completed tickets."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Draft the release notes for our next release.",
+        "agentTrace": [
+          {
+            "thought": "The user has not specified the version number or project, which is required for the Jira search.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. For which project and version number should I draft the release notes?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Draft the release notes for version 3.0 of the 'Android' project.",
+        "agentTrace": [
+          {
+            "thought": "User wants release notes. I'll search Jira.",
+            "action": "Call `Jira: Search Jira Issues` (Query: 'project = Android AND fixVersion = 3.0')"
+          },
+          {
+            "observation": "Search returned 0 results."
+          },
+          {
+            "thought": "No issues are tagged with that version. Maybe the version name is wrong, or no tickets have been assigned to it yet. I should inform the user."
+          }
+        ],
+        "finalResponse": "I searched Jira but couldn't find any completed issues for version '3.0' of the 'Android' project. Could you please check if the version name is correct and that tickets have been assigned to it?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "017",
+    "agentName": "PTO Commenter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I'm taking next Friday off. Please submit it and add OOO comments to my Jira tickets.",
+        "agentTrace": [
+          {
+            "thought": "User wants to request PTO and comment on Jira tickets. First, Workday.",
+            "action": "Call `Workday: Request Time Off` (StartDate: '...', EndDate: '...')"
+          },
+          {
+            "observation": "Time off request successful."
+          },
+          {
+            "thought": "Now, find all open Jira issues assigned to the user.",
+            "action": "Call `Jira: Search Jira Issues` (Query: 'assignee = currentUser() AND status not in (Closed, Done)')"
+          },
+          {
+            "observation": "Found 3 issues: PROJ-101, PROJ-105, PROJ-110."
+          },
+          {
+            "thought": "Now I will add a comment to each of the 3 tickets.",
+            "action": "Call `Jira: Update Jira Issue` (ID: 'PROJ-101', Comment: 'I will be OOO next Friday...')"
+          },
+          {
+            "observation": "Comment added."
+          }
+        ],
+        "finalResponse": "I've submitted your PTO request for next Friday. I also found 3 open Jira tickets assigned to you and added a comment to each one letting them know you'll be out."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "I'm taking tomorrow off. Put OOO comments on my tickets.",
+        "agentTrace": [
+          {
+            "thought": "User wants to request PTO. I'll submit to Workday first.",
+            "action": "Call `Workday: Request Time Off` (...)"
+          },
+          {
+            "observation": "Request successful."
+          },
+          {
+            "thought": "Now, I'll search for their open Jira tickets.",
+            "action": "Call `Jira: Search Jira Issues` (Query: 'assignee = currentUser() AND status not in (Closed, Done)')"
+          },
+          {
+            "observation": "Search returned 0 results."
+          },
+          {
+            "thought": "The user has no open tickets assigned to them. I should let them know."
+          }
+        ],
+        "finalResponse": "I've submitted your PTO request for tomorrow in Workday. I didn't find any open Jira tickets assigned to you, so no comments were needed."
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "I'm taking Monday off. Let my Jira tickets know.",
+        "agentTrace": [
+          {
+            "thought": "User wants to request PTO and comment. I'll start with Workday.",
+            "action": "Call `Workday: Request Time Off` (...)"
+          },
+          {
+            "observation": "Received an error from the Workday API: `INSUFFICIENT_BALANCE`."
+          },
+          {
+            "thought": "The first step failed. I should not proceed to the Jira step. I must inform the user of the failure."
+          }
+        ],
+        "finalResponse": "I couldn't submit your PTO request because your vacation balance in Workday is insufficient. Because the request failed, I did not add any comments to your Jira tickets."
+      }
+    ]
+  },
+  {
+    "useCaseId": "018",
+    "agentName": "On-Call Handoff Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Create the on-call handoff page for this week. The main event was incident INC0012550. Email the summary to 'next-oncall@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "User wants to create a handoff document. First, create the Confluence page.",
+            "action": "Call `Confluence: Create Page` (Space: 'ONCALL', Title: 'On-Call Handoff: w/c Aug 4', Body: 'Summary of week: Main event was incident INC0012550...')"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now I will email the link to the next on-call person.",
+            "action": "Call `Gmail: Send Email` (To: 'next-oncall@example.com', Subject: 'On-Call Handoff', Body: 'Hi, here is the handoff document for the week: [link]')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've created the on-call handoff page in Confluence and sent a link to 'next-oncall@example.com'."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Create the handoff page and email the next person.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is missing the content for the summary page and the email address of the next on-call person.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. What summary should I include on the Confluence page, and what is the email address of the next on-call engineer?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Create the on-call handoff page and email 'next-oncall@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "User wants to create a handoff doc. I'll create the Confluence page.",
+            "action": "Call `Confluence: Create Page` (...)"
+          },
+          {
+            "observation": "Received an error from the Confluence API: `SERVICE_UNAVAILABLE`."
+          },
+          {
+            "thought": "Confluence is down. I cannot create the page, so I should not send an email with a broken link."
+          }
+        ],
+        "finalResponse": "I couldn't create the handoff page because Confluence appears to be down. Since the page wasn't created, I didn't send the email. Please try again in a bit."
+      }
+    ]
+  },
+  {
+    "useCaseId": "019",
+    "agentName": "ServiceNow Commenter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Add an update to INC0012345: 'The user has confirmed the issue is resolved on their end.'",
+        "agentTrace": [
+          {
+            "thought": "The user wants to add a comment to a ServiceNow incident. This is a single call to the update tool.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC0012345', Comment: 'The user has confirmed the issue is resolved on their end.')"
+          },
+          {
+            "observation": "Comment added to INC0012345."
+          }
+        ],
+        "finalResponse": "Okay, I've added that update to incident INC0012345."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Add a comment to INC0012300 saying we need more info.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to add a comment. I should check the ticket's status first to see if it's still open.",
+            "action": "Call `ServiceNow: Search Incidents` (Query: 'id=INC0012300')"
+          },
+          {
+            "observation": "Found incident INC0012300. Status is 'Resolved'."
+          },
+          {
+            "thought": "The incident is already resolved. Adding a comment might not be seen. I should ask the user if they want to reopen it instead."
+          }
+        ],
+        "finalResponse": "Just so you know, incident INC0012300 is already marked as 'Resolved'. Do you want to reopen it, or should I just add your comment?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Add a comment to incident INC9998887.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to update an incident.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC9998887', ...)"
+          },
+          {
+            "observation": "Received an error from the ServiceNow API: `INCIDENT_NOT_FOUND`."
+          },
+          {
+            "thought": "The incident ID is invalid. I need to report this to the user."
+          }
+        ],
+        "finalResponse": "I couldn't find an incident with the ID 'INC9998887'. Could you please double-check the number?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "020",
+    "agentName": "Team Brainstorm Organizer",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Set up a brainstorm for 'New Marketing Ideas'. Schedule it for Wednesday at 2 PM.",
+        "agentTrace": [
+          {
+            "thought": "User wants to organize a brainstorm. I'll create the Confluence page first.",
+            "action": "Call `Confluence: Create Page` (Space: 'MKTG', Title: 'Brainstorm: New Marketing Ideas')"
+          },
+          {
+            "observation": "Confluence page created."
+          },
+          {
+            "thought": "Now I will schedule the meeting in Outlook.",
+            "action": "Call `Outlook: Create Calendar Event` (Title: 'Brainstorm: New Marketing Ideas', Time: 'Wednesday 2 PM', ...)"
+          },
+          {
+            "observation": "Outlook event created."
+          }
+        ],
+        "finalResponse": "I've created a Confluence page for 'New Marketing Ideas' and sent an Outlook invitation to the team for Wednesday at 2 PM."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Set up a brainstorm session.",
+        "agentTrace": [
+          {
+            "thought": "This request is too vague. I need a topic for the session and a time to schedule it.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can help set that up. What is the topic of the brainstorm, and when should I schedule the meeting?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Set up a brainstorm for 'Q1 Strategy' for next Tuesday.",
+        "agentTrace": [
+          {
+            "thought": "User wants to organize a brainstorm. I'll start with the Confluence page.",
+            "action": "Call `Confluence: Create Page` (Space: 'STRATEGY', Title: 'Brainstorm: Q1 Strategy')"
+          },
+          {
+            "observation": "Received an error from the Confluence API: `SPACE_ARCHIVED`. The space 'STRATEGY' is archived and read-only."
+          },
+          {
+            "thought": "I can't create a page in an archived space. I should inform the user."
+          }
+        ],
+        "finalResponse": "I couldn't create the Confluence page because the 'STRATEGY' space is archived. Please provide a different Confluence space, and I can try again."
+      }
+    ]
+  },
+  {
+    "useCaseId": "021",
+    "agentName": "Scrum Blocker Reporter",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "I'm blocked. I can't proceed until the security team grants me access to the database. Schedule a follow-up with 'sec-lead@example.com'.",
+        "agentTrace": [
+          {
+            "thought": "User is blocked. I need to create a Blocker issue in Jira and then schedule a follow-up meeting in Google Calendar.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'TEAM', Title: 'BLOCKER: Waiting on DB access from security', Priority: 'Highest')"
+          },
+          {
+            "observation": "Successfully created Jira issue TEAM-404."
+          },
+          {
+            "thought": "Now I will schedule the meeting.",
+            "action": "Call `Google Calendar: Create Calendar Event` (Title: 'Follow-up on Blocker TEAM-404', Attendees: 'user@example.com, sec-lead@example.com', Duration: '15 minutes')"
+          },
+          {
+            "observation": "Meeting scheduled."
+          }
+        ],
+        "finalResponse": "I've created a 'Highest' priority blocker ticket, TEAM-404, in Jira. I've also scheduled a 15-minute follow-up meeting with you and the security lead."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "I'm blocked by Mark.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is not specific enough. 'Blocked by Mark' isn't enough information for a useful Jira ticket, and I need Mark's email to schedule a meeting.",
+            "action": null
+          }
+        ],
+        "finalResponse": "Could you please provide a little more detail on the blocker? What is the specific task you're blocked on? Also, what is Mark's full email address for the meeting invitation?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "I'm blocked on ticket TEAM-399. Schedule a follow-up.",
+        "agentTrace": [
+          {
+            "thought": "User is blocked. I'll create the Jira issue first.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'TEAM', Title: 'BLOCKER: Follow-up on TEAM-399', ...)"
+          },
+          {
+            "observation": "Jira issue TEAM-405 created."
+          },
+          {
+            "thought": "Now I'll schedule the meeting. But the user didn't say who to meet with.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I've created the blocker ticket TEAM-405 for you. Who should I invite to the follow-up meeting?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "022",
+    "agentName": "Customer Complaint Logger",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Log a complaint from customer 'Acme Corp'. Their latest invoice was incorrect. Send them a confirmation at 'billing@acme.com'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to log a customer complaint. I'll create the Jira issue first.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'SUPPORT', Title: 'Customer Complaint: Acme Corp - Incorrect Invoice', Type: 'Complaint')"
+          },
+          {
+            "observation": "Jira issue SUPPORT-801 created."
+          },
+          {
+            "thought": "Now I will send the confirmation email via Outlook.",
+            "action": "Call `Outlook: Send Email` (To: 'billing@acme.com', Subject: 'Regarding your recent inquiry', Body: 'This is to confirm we have received your complaint regarding an incorrect invoice and have opened a ticket (SUPPORT-801) to investigate.')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've logged the complaint as SUPPORT-801 in Jira and sent a confirmation email to 'billing@acme.com'."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "A customer just called and complained. Log it.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is missing all the necessary details: who the customer is, what the complaint is about, and their email for confirmation.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can log the complaint. Could you please tell me the customer's name, the nature of their complaint, and their email address if you'd like me to send a confirmation?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Log a complaint from 'Globex Inc' about slow performance and email them at 'support@globex.com'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to log a complaint. I'll create the Jira issue first.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'SUPPORT', Title: 'Customer Complaint: Globex Inc - Slow Performance')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `REQUIRED_FIELD_MISSING`. The 'Customer Name' custom field is required for issues of type 'Complaint'."
+          },
+          {
+            "thought": "The Jira project has a required field that wasn't provided in the request. I need to ask the user for this specific information."
+          }
+        ],
+        "finalResponse": "I couldn't create the Jira ticket because the 'Customer Name' field is required. Should I put 'Globex Inc' in that field? Because it failed, I did not send a confirmation email."
+      }
+    ]
+  },
+  {
+    "useCaseId": "023",
+    "agentName": "Interview Scheduler",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Schedule an interview with 'candidate@email.com' for Tuesday at 1 PM. Send them a confirmation.",
+        "agentTrace": [
+          {
+            "thought": "User wants to schedule an interview. First, create the Google Calendar event.",
+            "action": "Call `Google Calendar: Create Calendar Event` (Title: 'Interview', Attendees: 'user@example.com, candidate@email.com', Time: 'Tuesday 1 PM')"
+          },
+          {
+            "observation": "Calendar event created."
+          },
+          {
+            "thought": "Now, send the confirmation email via Gmail.",
+            "action": "Call `Gmail: Send Email` (To: 'candidate@email.com', Subject: 'Interview Confirmation', Body: '...confirming your interview on Tuesday at 1 PM...')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've scheduled the interview on your Google Calendar and sent a confirmation email to the candidate."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Schedule an interview for Tuesday at 1 PM.",
+        "agentTrace": [
+          {
+            "thought": "The user did not provide the candidate's email address, which is required for both the calendar invitation and the confirmation email.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can schedule that. What is the candidate's email address?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Schedule an interview with 'candidate@email.com' for Tuesday at 1 PM.",
+        "agentTrace": [
+          {
+            "thought": "User wants to schedule an interview. I'll check my own calendar for conflicts first.",
+            "action": "Call `Google Calendar: Get Calendar Availability` (Time: 'Tuesday 1 PM')"
+          },
+          {
+            "observation": "Found a conflict: 'Dentist Appointment'."
+          },
+          {
+            "thought": "I have a conflict at the requested time. I should inform the user."
+          }
+        ],
+        "finalResponse": "I can't schedule that interview because it looks like you already have a 'Dentist Appointment' on your calendar at that time. Would you like to pick a different time?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "024",
+    "agentName": "Knowledge Base Creator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Mark bug APP-789 as fixed and create a KB article from it.",
+        "agentTrace": [
+          {
+            "thought": "User wants to update a bug and create a KB article. First, I'll update the Jira issue.",
+            "action": "Call `Jira: Update Jira Issue` (ID: 'APP-789', Status: 'Done', Resolution: 'Fixed')"
+          },
+          {
+            "observation": "Jira issue APP-789 updated."
+          },
+          {
+            "thought": "Now, I will create the Confluence page, using the bug's title and description as a base.",
+            "action": "Call `Confluence: Create Page` (Space: 'KB', Title: 'How to fix login error code 500', Body: 'This article explains the fix for the issue described in APP-789...')"
+          },
+          {
+            "observation": "Confluence page created."
+          }
+        ],
+        "finalResponse": "I've marked APP-789 as fixed and created a new draft knowledge base article in Confluence based on the ticket's information."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Mark APP-790 as fixed and create a KB article.",
+        "agentTrace": [
+          {
+            "thought": "User wants to create a KB article from a bug. I should first check if one already exists for this issue.",
+            "action": "Call `Confluence: Search Pages` (Query: 'APP-790')"
+          },
+          {
+            "observation": "Found one page: 'Internal Notes on APP-790'."
+          },
+          {
+            "thought": "A page related to this ticket already exists. I should ask the user if they want to update that one instead of creating a new one."
+          }
+        ],
+        "finalResponse": "I found an existing Confluence page that mentions 'APP-790'. Would you like me to add the resolution information to that page instead of creating a brand new one?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Mark bug APP-800 as fixed and create a KB article.",
+        "agentTrace": [
+          {
+            "thought": "User wants to update a bug and create an article. I'll update Jira first.",
+            "action": "Call `Jira: Update Jira Issue` (ID: 'APP-800', Status: 'Done')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `WORKFLOW_VALIDATION_ERROR`. The 'Resolution' field must be set when moving to 'Done'."
+          },
+          {
+            "thought": "The Jira action failed because of a workflow rule. I should not proceed to the Confluence step. I need to ask the user for the missing info."
+          }
+        ],
+        "finalResponse": "I couldn't mark that ticket as 'Done'. Jira's workflow requires a 'Resolution' (e.g., 'Fixed', 'Won't Fix'). What resolution should I set? I have not created the KB article yet."
+      }
+    ]
+  },
+  {
+    "useCaseId": "025",
+    "agentName": "Simple Emailer",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Send an email to 'jane@example.com' with the subject 'Quick Question' and the body 'Are you free for a quick chat today?'",
+        "agentTrace": [
+          {
+            "thought": "The user wants to send a simple email. All required information is present.",
+            "action": "Call `Gmail: Send Email` (To: 'jane@example.com', Subject: 'Quick Question', Body: 'Are you free for a quick chat today?')"
+          },
+          {
+            "observation": "Email sent successfully."
+          }
+        ],
+        "finalResponse": "Your email to Jane has been sent."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Send an email to my manager.",
+        "agentTrace": [
+          {
+            "thought": "The user used a relative term 'my manager'. I know from their user profile that their manager is 'manager@example.com', but I should confirm before sending.",
+            "action": null
+          }
+        ],
+        "finalResponse": "Sure. Just to confirm, you want me to send this to 'manager@example.com'? And what should the subject and body be?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Send an email to bob@example.com",
+        "agentTrace": [
+          {
+            "thought": "The user has provided a recipient but no subject or body for the email.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can send an email to Bob. What should the subject and body of the email be?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "026",
+    "agentName": "IT Request Follow-up",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Add an update to ServiceNow ticket INC0012600. Let them know 'I've tried restarting and the problem persists'. Then email the person who opened the ticket.",
+        "agentTrace": [
+          {
+            "thought": "User wants to update a ticket and send a notification. First, update ServiceNow.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC0012600', Comment: 'I've tried restarting and the problem persists.')"
+          },
+          {
+            "observation": "Incident updated. The original reporter is 'reporter@example.com'."
+          },
+          {
+            "thought": "Now I will email the reporter via Outlook.",
+            "action": "Call `Outlook: Send Email` (To: 'reporter@example.com', Subject: 'Update on your ticket INC0012600', Body: 'A new comment has been added to your ticket...')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've added your update to INC0012600 and sent a notification to the person who originally reported it."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Update my ticket and let them know it's fixed.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is ambiguous. I don't know which ticket they are referring to.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. Can you please provide the ServiceNow incident number for the ticket you're referring to?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Update INC0012601 and notify the user.",
+        "agentTrace": [
+          {
+            "thought": "User wants to update a ticket. I'll update ServiceNow first.",
+            "action": "Call `ServiceNow: Update Incident` (ID: 'INC0012601', Comment: '...')"
+          },
+          {
+            "observation": "Received an error from the ServiceNow API: `TICKET_LOCKED`. The ticket is currently being edited by another user."
+          },
+          {
+            "thought": "The ticket is locked, so I can't update it. I should not send the email. I must inform the user."
+          }
+        ],
+        "finalResponse": "I couldn't update that ticket because it's currently locked for editing by someone else. Because the update failed, I didn't send a notification. Please try again in a moment."
+      }
+    ]
+  },
+  {
+    "useCaseId": "027",
+    "agentName": "Jira Triage Assistant",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Triage ticket WEB-777. Set priority to 'High' and component to 'UI'. Then notify the component lead.",
+        "agentTrace": [
+          {
+            "thought": "User wants to triage a ticket. First, I'll update the Jira issue.",
+            "action": "Call `Jira: Update Jira Issue` (ID: 'WEB-777', Priority: 'High', Component: 'UI')"
+          },
+          {
+            "observation": "Ticket updated. The lead for the 'UI' component is 'ui-lead@example.com'."
+          },
+          {
+            "thought": "Now I will email the component lead via Gmail.",
+            "action": "Call `Gmail: Send Email` (To: 'ui-lead@example.com', Subject: 'New High Priority Ticket: WEB-777', ...)"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've updated WEB-777 with 'High' priority and the 'UI' component. I've also sent a notification to the component lead."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Triage ticket WEB-778. Set component to 'Backend'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to triage a ticket but hasn't specified a priority. This might be a required step in the triage process.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can set the component to 'Backend'. What priority level should I set for this ticket?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Triage ticket WEB-779. Set component to 'Database'.",
+        "agentTrace": [
+          {
+            "thought": "User wants to triage a ticket. I'll update the Jira issue.",
+            "action": "Call `Jira: Update Jira Issue` (ID: 'WEB-779', Component: 'Database')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `INVALID_VALUE`. 'Database' is not a valid component for the 'WEB' project."
+          },
+          {
+            "thought": "The component name is invalid for this project. I need to inform the user."
+          }
+        ],
+        "finalResponse": "I couldn't update that ticket because 'Database' is not a valid component in the 'WEB' project. The available components are 'UI', 'Backend', and 'API'. Which one should I use?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "028",
+    "agentName": "Meeting Scheduler",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Schedule a '1-on-1' with my manager for Wednesday at 11 AM.",
+        "agentTrace": [
+          {
+            "thought": "User wants to schedule a meeting. I need to get their manager's email and create a Google Calendar event.",
+            "action": "Call `Google Calendar: Create Calendar Event` (Title: '1-on-1', Attendees: 'user@example.com, manager@example.com', Time: 'Wednesday 11 AM')"
+          },
+          {
+            "observation": "Event created successfully."
+          }
+        ],
+        "finalResponse": "Okay, I've scheduled your 1-on-1 on your Google Calendar for Wednesday at 11 AM."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Schedule a meeting with the design team.",
+        "agentTrace": [
+          {
+            "thought": "The user has specified a team, but not a specific time or a title for the meeting.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can schedule that. What should the title of the meeting be, and for what day and time?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Schedule a 'Code Review' for 4 PM today.",
+        "agentTrace": [
+          {
+            "thought": "User wants to schedule a meeting. I'll check my calendar for availability.",
+            "action": "Call `Google Calendar: Get Calendar Availability` (Time: 'Today 4 PM')"
+          },
+          {
+            "observation": "Found conflict: 'Focus Time'."
+          },
+          {
+            "thought": "The user has a conflict. I should inform them."
+          }
+        ],
+        "finalResponse": "I can't schedule that because you already have 'Focus Time' blocked on your calendar at 4 PM today. Would you like to schedule it for a different time?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "029",
+    "agentName": "Project Update Communicator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Post an update on the 'Zeta' project. We have completed milestone 2. Email the stakeholders.",
+        "agentTrace": [
+          {
+            "thought": "User wants to send a project update. First, I'll create the Confluence page.",
+            "action": "Call `Confluence: Create Page` (Space: 'PROJECTS', Title: 'Project Zeta Update: Aug 4', Body: 'Update: We have successfully completed milestone 2.')"
+          },
+          {
+            "observation": "Confluence page created."
+          },
+          {
+            "thought": "Now I will email the link to the project stakeholders via Gmail.",
+            "action": "Call `Gmail: Send Email` (To: 'zeta-stakeholders@example.com', Subject: 'Project Zeta Update', Body: '...Here is a link to the latest update: [link]...')"
+          },
+          {
+            "observation": "Email sent."
+          }
+        ],
+        "finalResponse": "I've posted the update on the 'Zeta' project to Confluence and sent a notification email to the stakeholders."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Send a project update.",
+        "agentTrace": [
+          {
+            "thought": "This request is too vague. I need to know which project this update is for and what the content of the update is.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. Which project is this for, and what is the update you'd like me to post?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Post a project update saying we're on track and email the stakeholders.",
+        "agentTrace": [
+          {
+            "thought": "User wants to send an update. I'll create the Confluence page.",
+            "action": "Call `Confluence: Create Page` (...)"
+          },
+          {
+            "observation": "Confluence page created successfully."
+          },
+          {
+            "thought": "Now I will send the email. The user did not specify the stakeholders' email address.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I have created the Confluence page with your update. What is the email address for the project stakeholders that I should send it to?"
+      }
+    ]
+  },
+  {
+    "useCaseId": "030",
+    "agentName": "Task Creator",
+    "scenarios": [
+      {
+        "scenarioType": "Happy Path",
+        "userRequest": "Create a task to 'Review the Q3 performance metrics'.",
+        "agentTrace": [
+          {
+            "thought": "The user wants to_create a Jira task. This is a single, direct call to the Jira tool.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'TEAM', Type: 'Task', Title: 'Review the Q3 performance metrics')"
+          },
+          {
+            "observation": "Successfully created task TEAM-990."
+          }
+        ],
+        "finalResponse": "I've created the task 'Review the Q3 performance metrics' for you. The ticket is TEAM-990."
+      },
+      {
+        "scenarioType": "Edge Case",
+        "userRequest": "Create a task for me and assign it to Dave.",
+        "agentTrace": [
+          {
+            "thought": "The user's request is missing the content of the task. I also need more information to assign it to 'Dave'.",
+            "action": null
+          }
+        ],
+        "finalResponse": "I can do that. What should the task be about? Also, could you provide Dave's full name or email address so I can assign it correctly?"
+      },
+      {
+        "scenarioType": "Error Case",
+        "userRequest": "Create a task to 'Organize the offsite'.",
+        "agentTrace": [
+          {
+            "thought": "User wants to create a task. I'll call the Jira tool.",
+            "action": "Call `Jira: Create Jira Issue` (Project: 'TEAM', Type: 'Task', Title: 'Organize the offsite')"
+          },
+          {
+            "observation": "Received an error from the Jira API: `PROJECT_ARCHIVED`. The 'TEAM' project has been archived."
+          },
+          {
+            "thought": "I cannot create an issue in an archived project. I need to inform the user."
+          }
+        ],
+        "finalResponse": "I couldn't create that task because the default project 'TEAM' has been archived. Please specify a different project for the task."
+      }
+    ]
+  }
+]
