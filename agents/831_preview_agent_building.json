@@ -2115,5 +2115,1395 @@
       }
     ],
     "agentInstructions": "The Hackathon Organizer agent helps you organize a hackathon. When you provide the details, the agent will: 1. Use `Confluence: Create Page` to create a page for project ideas. 2. Use `Google Calendar: Create Calendar Event` to schedule the event. 3. Use `Gmail: Send Email` to send an announcement to the company. Ensure all details are correct and all actions are completed."
+  },
+  [
+  {
+    "useCaseId": "101",
+    "agentName": "Jira Sprint Auditor",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Jira: Update Jira Issue",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me audit our active Jira sprints.",
+        "response": "I can do that. What should the agent look for? For example, it could find high-priority tickets that are still unassigned."
+      },
+      {
+        "request": "Exactly. It should find all unassigned P0 and P1 tickets in the active sprint, assign them to the project lead, and then send a summary email to me.",
+        "response": "Got it. The agent will be configured to: 1. Search Jira for unassigned P0/P1 tickets in the current sprint. 2. For each ticket found, assign it to the project lead. 3. Send you a single summary email with a list of the tickets that were assigned. Is this correct?"
+      },
+      {
+        "request": "Yes, that's the perfect workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Sprint Auditor helps you maintain sprint hygiene. When you ask it to run, it will: 1. Use `Jira: Search Jira Issues` to find all P0 and P1 tickets in the active sprint that have no assignee. 2. For each ticket, it will use `Jira: Update Jira Issue` to assign it to the designated project lead. 3. It will then use `Gmail: Send Email` to send a summary report to you, listing all the tickets that were automatically assigned."
+  },
+  {
+    "useCaseId": "102",
+    "agentName": "Confluence Documentation Refresher",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want to build an agent that finds old documentation in our Confluence space.",
+        "response": "A great idea for keeping content fresh. How should the agent define 'old'? For example, not updated in the last 365 days?"
+      },
+      {
+        "request": "Yes, let's say 365 days. For every page it finds, it should create a Jira task for the page's original author to review it.",
+        "response": "Okay. The agent will: 1. Search the 'DOCS' Confluence space for pages not updated in 365 days. 2. For each page, it will identify the original author. 3. It will then create a Jira task assigned to that author, asking them to review or archive the page. Does that sound right?"
+      },
+      {
+        "request": "Yes, that's exactly what I need.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Confluence Documentation Refresher helps you find and manage stale content. When invoked, it will: 1. Use a `Confluence: Search Pages` capability to find all pages in a specified space that have not been modified in the last 365 days. 2. For each page found, it will identify the original author and use `Jira: Create Jira Issue` to create a new task, assigning it to the author with a request to review or archive the page."
+  },
+  {
+    "useCaseId": "103",
+    "agentName": "Gmail Action Item Extractor",
+    "toolSelection": [
+      "Gmail: Search Emails",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can find action items in my emails and turn them into Jira tickets.",
+        "response": "I can configure that. Should it search for specific keywords in the email body, like 'ACTION ITEM:' or 'TODO:'?"
+      },
+      {
+        "request": "Yes. It should search my inbox for emails from the last 24 hours containing 'ACTION ITEM:', and for each one, create a 'Task' in my personal Jira project.",
+        "response": "Understood. The agent will be set up to: 1. Search your Gmail for emails in the last 24 hours with the phrase 'ACTION ITEM:'. 2. For each email found, it will create a new task in your 'PERS' Jira project, using the email's subject as the title and its body as the description. Is that correct?"
+      },
+      {
+        "request": "Perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Gmail Action Item Extractor helps you convert emails into tasks. When you ask it to run, it will: 1. Use a `Gmail: Search Emails` capability to find emails in your inbox from the last 24 hours containing the specific phrase 'ACTION ITEM:'. 2. For each matching email, it will use `Jira: Create Jira Issue` to create a new task in your designated project, populating it with the email's subject and body."
+  },
+  {
+    "useCaseId": "104",
+    "agentName": "ServiceNow Stale Ticket Nudger",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "ServiceNow: Update Incident",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "Let's build an agent to follow up on stale IT tickets.",
+        "response": "Good idea. What's the criteria for a 'stale' ticket? For example, any ticket that hasn't been updated in the last 7 days?"
+      },
+      {
+        "request": "Yes, 7 days with no update. The agent should add a comment asking for an update and email the assignee.",
+        "response": "Okay, the workflow will be: 1. Search ServiceNow for incidents with no update in 7 days. 2. For each incident, add a standard comment asking for a status update. 3. Then, send an email to the incident's assignee to notify them. Correct?"
+      },
+      {
+        "request": "Yes, that's the one.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Stale Ticket Nudger helps ensure tickets aren't forgotten. When run, it will: 1. Use a `ServiceNow: Search Incidents` capability to find all incidents that haven't been updated in the last 7 days. 2. For each incident, it will use `ServiceNow: Update Incident` to add a polite comment asking for a status update. 3. It will then use `Outlook: Send Email` to notify the assignee that their ticket requires attention."
+  },
+  {
+    "useCaseId": "105",
+    "agentName": "Calendar Meeting Auditor",
+    "toolSelection": [
+      "Google Calendar: Search Events",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can help me clean up my calendar.",
+        "response": "I can help with that. What should it look for? For example, it could find meetings with no agenda."
+      },
+      {
+        "request": "Exactly. Find all meetings on my calendar for next week that have more than 5 attendees and have no agenda in the description. Then, email the organizer of each and ask them to add one.",
+        "response": "Okay, I can configure that. The agent will: 1. Search your Google Calendar for events next week with >5 attendees and an empty description. 2. For each event, it will identify the organizer. 3. It will then send an email to the organizer politely requesting an agenda. Is that the plan?"
+      },
+      {
+        "request": "Yes, that will save me a lot of time.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Calendar Meeting Auditor helps improve meeting efficiency. When you ask it to run, it will: 1. Use a `Google Calendar: Search Events` capability to find all events on your calendar for the upcoming week that have more than 5 attendees and an empty description. 2. For each such meeting, it will use `Gmail: Send Email` to send a polite request to the meeting organizer, asking them to add an agenda."
+  },
+  {
+    "useCaseId": "106",
+    "agentName": "Workday Leave Coordinator",
+    "toolSelection": [
+      "Workday: Search Leave Requests",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me get an overview of my team's upcoming leave.",
+        "response": "I can do that. The agent can search Workday for approved leave for your team. What should it do with that information?"
+      },
+      {
+        "request": "It should find all approved time off for my direct reports for the next month and create a single Confluence page with a table showing who is out on which days.",
+        "response": "Excellent. The agent will be configured to: 1. Search Workday for approved leave requests for your direct reports in the next 30 days. 2. Consolidate this information into a schedule. 3. Create a new Confluence page with a formatted table of the leave schedule. Is that correct?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Workday Leave Coordinator helps you visualize team availability. When you run it, the agent will: 1. Use a `Workday: Search Leave Requests` capability to find all approved time off for your direct reports in the next 30 days. 2. Use `Confluence: Create Page` to generate a single page with a clear schedule of your team's upcoming leave."
+  },
+  {
+    "useCaseId": "107",
+    "agentName": "Jira Epic Story Summarizer",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can create a summary page for a Jira epic.",
+        "response": "I can do that. When you provide an epic ID, the agent can find all the child stories and their statuses. Where should it put this summary?"
+      },
+      {
+        "request": "It should create a new page in our 'Projects' Confluence space. The page title should be the epic's name, and the content should be a list of all the stories and their current statuses.",
+        "response": "Got it. The agent will: 1. Take a Jira Epic ID from you. 2. Use `Jira: Search Jira Issues` to find all child stories and get the epic's name. 3. Use `Confluence: Create Page` to create a new summary page in the 'Projects' space with the retrieved information. Correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Epic Story Summarizer helps you create quick reports. When you provide a Jira Epic ID, the agent will: 1. Use `Jira: Search Jira Issues` to find the epic's name and all of its child stories with their statuses. 2. Use `Confluence: Create Page` to generate a new page that neatly summarizes this information for easy sharing and review."
+  },
+  {
+    "useCaseId": "108",
+    "agentName": "Outlook Meeting Decliner",
+    "toolSelection": [
+      "Outlook: Search Events",
+      "Outlook: Decline Event",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me decline meetings when I'm on vacation.",
+        "response": "That's a useful automation. The agent can search for meeting invitations that fall within your vacation dates. Should it automatically decline them?"
+      },
+      {
+        "request": "Yes. It should find all invitations on my calendar during my PTO, decline them, and send a note to the organizer saying I am out of office.",
+        "response": "Okay. So for the dates you specify, the agent will: 1. Search your Outlook calendar for tentative meeting invitations. 2. For each one, it will decline the event. 3. It will then send an email to the organizer explaining that you are on PTO. Is that the correct process?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Outlook Meeting Decliner helps you manage your calendar while you're away. When you provide your vacation dates, it will: 1. Use an `Outlook: Search Events` capability to find all tentative meeting invitations within those dates. 2. Use an `Outlook: Decline Event` capability to decline each one. 3. Use `Outlook: Send Email` to send a polite message to each organizer informing them that you are out of office."
+  },
+  {
+    "useCaseId": "109",
+    "agentName": "Jira Release Candidate Auditor",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to check our upcoming release for any open bugs.",
+        "response": "I can do that. When you provide a 'fixVersion', the agent can search for any issues with that version that are not yet in 'Done' or 'Closed' status. What should it do if it finds any?"
+      },
+      {
+        "request": "It should email the release manager with a list of all the open tickets that are blocking the release.",
+        "response": "Understood. The agent will: 1. Search Jira for any issues in the specified 'fixVersion' that are not 'Done'. 2. Compile a list of these issues. 3. Email the list to the release manager. Is that correct?"
+      },
+      {
+        "request": "Yes, that's exactly right.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Release Candidate Auditor helps you ensure releases are ready. When you provide a 'fixVersion', the agent will: 1. Use `Jira: Search Jira Issues` to find all tickets associated with that version that are not in a 'Done' or 'Closed' state. 2. Use `Gmail: Send Email` to send a report to the release manager, listing all the open tickets that require attention before the release can proceed."
+  },
+  {
+    "useCaseId": "110",
+    "agentName": "Onboarding Ticket Creator",
+    "toolSelection": [
+      "Workday: Search New Hires",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can create IT onboarding tickets for new hires.",
+        "response": "I can do that. The agent can be configured to search Workday for any employees who have a start date of next week. Should it then create IT setup tickets for them in Jira?"
+      },
+      {
+        "request": "Yes. It should find all new hires starting next week and create a 'New Hire IT Setup' ticket in Jira for each one.",
+        "response": "Okay. The agent will: 1. Search Workday for new hires with a start date in the next 7 days. 2. For each new hire found, it will create a standardized IT setup ticket in Jira. Is that the workflow you'd like?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Onboarding Ticket Creator automates IT setup for new employees. When run, it will: 1. Use a `Workday: Search New Hires` capability to find all employees with a start date in the upcoming week. 2. For each new hire, it will use `Jira: Create Jira Issue` to create a standardized 'New Hire IT Setup' ticket, ensuring the IT team is prepared."
+  },
+  {
+    "useCaseId": "111",
+    "agentName": "Gmail Project Summarizer",
+    "toolSelection": [
+      "Gmail: Search Emails",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to find all emails related to a specific project and create a summary page.",
+        "response": "I can do that. When you provide a project name, the agent can search your Gmail for all emails with that project name in the subject line. Where should it save the summary?"
+      },
+      {
+        "request": "It should create a new page in my personal Confluence space, listing the subject lines and senders of all the emails it found.",
+        "response": "Got it. The agent will: 1. Search your Gmail for emails matching the project name in the subject. 2. Extract the subject and sender from each email. 3. Create a new Confluence page with this compiled list. Is that correct?"
+      },
+      {
+        "request": "Yes, that's what I need.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Gmail Project Summarizer helps you organize project communications. When you provide a project name, it will: 1. Use a `Gmail: Search Emails` capability to find all emails with the project name in the subject. 2. Use `Confluence: Create Page` to create a new page that lists the subject lines and senders of all matching emails, giving you a quick overview of project communications."
+  },
+  {
+    "useCaseId": "112",
+    "agentName": "ServiceNow Incident Reporter",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can generate a weekly report of all new critical incidents.",
+        "response": "I can configure that. The agent can search ServiceNow for all P0 and P1 incidents created in the last 7 days. Who should receive this report?"
+      },
+      {
+        "request": "It should send the report to the 'it-leadership@example.com' distribution list.",
+        "response": "Okay. The agent will be set up to: 1. Search ServiceNow for all P0/P1 incidents from the past week. 2. Format the results into a summary. 3. Email this summary to the IT leadership team. Is this correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident Reporter helps keep leadership informed. When run, it will: 1. Use a `ServiceNow: Search Incidents` capability to find all P0 and P1 incidents created in the last 7 days. 2. Use `Gmail: Send Email` to send a formatted summary of these critical incidents to a designated leadership email address."
+  },
+  {
+    "useCaseId": "113",
+    "agentName": "Jira Bug Triage Assistant",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me with our bug triage process.",
+        "response": "I can help with that. What's the first step? For example, I can find all new, untriaged bugs."
+      },
+      {
+        "request": "Yes. Find all bugs in the 'Mobile' project with no priority set. For each one, add the 'Needs-Triage' label.",
+        "response": "Okay, a simple and effective workflow. The agent will: 1. Search Jira for bugs in the 'Mobile' project where the priority is empty. 2. For each bug found, it will add the 'Needs-Triage' label. Is that correct?"
+      },
+      {
+        "request": "Yes, that's all it needs to do.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Bug Triage Assistant helps you identify and label untriaged bugs. When you run it, the agent will: 1. Use `Jira: Search Jira Issues` to find all bugs in a specified project that do not have a priority set. 2. For each bug it finds, it will use `Jira: Update Jira Issue` to add a 'Needs-Triage' label, making them easy to find and process."
+  },
+  {
+    "useCaseId": "114",
+    "agentName": "Calendar Free Slot Finder",
+    "toolSelection": [
+      "Google Calendar: Search Events",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can find a time for my team to meet next week.",
+        "response": "I can do that. I can search your team's calendars to find a 30-minute slot where everyone is free. Who should I send the proposed times to?"
+      },
+      {
+        "request": "Find a 30-minute slot for the 'Core-Dev' team next week and email the top 3 suggestions to me.",
+        "response": "Understood. The agent will: 1. Get the member list for the 'Core-Dev' team. 2. Search their Google Calendars for three common 30-minute free slots next week. 3. Email those suggestions to you. Is that the plan?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Calendar Free Slot Finder helps you schedule team meetings without the back-and-forth. When you provide a team name and meeting duration, it will: 1. Use a `Google Calendar: Search Events` capability to check the availability of all team members. 2. Identify the top 3 time slots where everyone is free. 3. Use `Gmail: Send Email` to send the suggested times to you so you can make the final decision."
+  },
+  {
+    "useCaseId": "115",
+    "agentName": "Confluence Action Item Tracker",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Jira: Search Jira Issues",
+      "Confluence: Update Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can update our meeting notes with the status of any action items.",
+        "response": "That's a great way to keep documents live. The agent can search a Confluence page for Jira ticket numbers. For each one it finds, it can get the latest status from Jira and update the page. Is that what you're looking for?"
+      },
+      {
+        "request": "Yes. I want to point it at a Confluence page, and it should find all the Jira tickets mentioned and write the current status next to each one.",
+        "response": "Okay. The agent will: 1. Scan a Confluence page URL you provide for Jira issue keys. 2. For each key, it will use `Jira: Search Jira Issues` to get the status. 3. It will then update the Confluence page to reflect the current status of each ticket. Correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Confluence Action Item Tracker keeps your meeting notes up-to-date. When you provide a Confluence page URL, it will: 1. Use a `Confluence: Search Pages` capability to find all Jira issue keys mentioned on the page. 2. For each key, it will use `Jira: Search Jira Issues` to retrieve the current status. 3. It will then use a `Confluence: Update Page` capability to insert the latest status next to each issue key on the page."
+  },
+  {
+    "useCaseId": "116",
+    "agentName": "Jira Overdue Task Notifier",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want to build an agent that finds and sends reminders for overdue tasks.",
+        "response": "I can do that. The agent can search Jira for tasks whose due date has passed but are not yet 'Done'. Should it notify the assignee of the task?"
+      },
+      {
+        "request": "Yes. It should find all overdue tasks in the 'Marketing' project and send a polite reminder email to each assignee.",
+        "response": "Understood. The agent will: 1. Search Jira for incomplete tasks in the 'Marketing' project with a due date in the past. 2. For each task, it will identify the assignee. 3. It will then send a reminder email to that assignee with a link to the overdue task. Is that correct?"
+      },
+      {
+        "request": "Yes, that's exactly it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Overdue Task Notifier helps keep projects on track. When run, it will: 1. Use `Jira: Search Jira Issues` to find all tasks in a specified project that are past their due date but not yet completed. 2. For each overdue task, it will use `Gmail: Send Email` to send a polite reminder to the assignee, including a direct link to the Jira ticket."
+  },
+  {
+    "useCaseId": "117",
+    "agentName": "Meeting Prep Assistant",
+    "toolSelection": [
+      "Google Calendar: Search Events",
+      "Confluence: Search Pages",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me prepare for my meetings tomorrow.",
+        "response": "I can do that. The agent can look at your calendar for tomorrow, and for each meeting, find a relevant Confluence page to help you prepare. Would you like that?"
+      },
+      {
+        "request": "Yes. It should find all my meetings for tomorrow, search Confluence for a page with the same title as the meeting, and email me a list of the meetings with links to the pages it found.",
+        "response": "Okay. The agent will: 1. Look at your Google Calendar for tomorrow's events. 2. For each event, search Confluence for a matching page title. 3. Send you a single email summarizing tomorrow's meetings and including links to any relevant documents it found. Is that correct?"
+      },
+      {
+        "request": "Yes, that's a great prep tool.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Meeting Prep Assistant helps you prepare for your day. When you ask, it will: 1. Use a `Google Calendar: Search Events` capability to find all your meetings for the next day. 2. For each meeting, it will use a `Confluence: Search Pages` capability to find a page with a matching title. 3. It will then use `Gmail: Send Email` to send you a summary of your day's meetings, with direct links to the relevant Confluence pages for prep."
+  },
+  {
+    "useCaseId": "118",
+    "agentName": "ServiceNow to Jira Escalator",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "Jira: Create Jira Issue",
+      "ServiceNow: Update Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need to build an agent that can escalate a ServiceNow ticket to Jira.",
+        "response": "I can configure that. When you provide a ServiceNow incident ID, the agent can copy the details and create a new bug in Jira. Should it then link the new Jira ticket back to the original ServiceNow incident?"
+      },
+      {
+        "request": "Yes, that's crucial. It needs to create the Jira bug and then add a comment to the ServiceNow ticket with the new Jira issue ID.",
+        "response": "Got it. The agent will: 1. Get the details of a ServiceNow incident. 2. Create a new Jira bug with those details. 3. Add a comment to the ServiceNow incident with the new Jira ID for tracking. Is that the workflow?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow to Jira Escalator streamlines your support workflow. When you provide a ServiceNow Incident ID, it will: 1. Use a `ServiceNow: Search Incidents` capability to retrieve the incident's details. 2. Use `Jira: Create Jira Issue` to create a new bug in the engineering team's project. 3. Use `ServiceNow: Update Incident` to add a comment to the original ticket with the new Jira issue ID, ensuring the support and engineering teams are linked."
+  },
+  {
+    "useCaseId": "119",
+    "agentName": "Jira Sub-task Assigner",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can assign all the sub-tasks of an epic to the epic's owner.",
+        "response": "That's a great way to ensure ownership. The agent can find the epic, identify its owner, and then find all of its sub-tasks and assign them to that person. Is that the logic you want?"
+      },
+      {
+        "request": "Yes. I want to give it an epic ID, and it should assign all open sub-tasks to whoever owns the epic.",
+        "response": "Okay. The agent will be configured to: 1. Find the owner of the provided epic ID. 2. Find all open sub-tasks linked to that epic. 3. For each sub-task, assign it to the epic's owner. Correct?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Sub-task Assigner helps you bulk-assign work. When you provide an Epic ID, it will: 1. Use `Jira: Search Jira Issues` to identify the owner of the epic. 2. Use `Jira: Search Jira Issues` again to find all open sub-tasks within that epic. 3. It will then loop through the sub-tasks and use `Jira: Update Jira Issue` to assign each one to the epic's owner."
+  },
+  {
+    "useCaseId": "120",
+    "agentName": "Team PTO Reporter",
+    "toolSelection": [
+      "Workday: Search Leave Requests",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can send me a weekly summary of my team's approved time off.",
+        "response": "I can do that. The agent can be configured to search Workday for all approved PTO for your direct reports for the upcoming week. Would you like it to email that summary to you?"
+      },
+      {
+        "request": "Yes. Every Friday, I want it to search Workday for next week's PTO and send me the list in an email.",
+        "response": "Understood. The agent will: 1. Search Workday for approved leave for your direct reports for the next 7 days. 2. Format this into a list. 3. Email the list to you. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the one.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Team PTO Reporter helps you stay informed about your team's availability. When you ask, it will: 1. Use a `Workday: Search Leave Requests` capability to find all approved time off for your direct reports for the next 7 days. 2. Use `Gmail: Send Email` to send you a formatted summary of the upcoming leave schedule."
+  },
+  {
+    "useCaseId": "121",
+    "agentName": "Stale Jira Ticket Closer",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me clean up our Jira backlog.",
+        "response": "I can help with that. What are the criteria for a ticket that needs to be closed? For example, tickets that haven't been updated in a long time."
+      },
+      {
+        "request": "Yes. Find all tickets in the 'Infra' project that are in 'To Do' status and haven't been updated in over 90 days. For each one, add a comment saying 'Closing due to inactivity' and then close the ticket.",
+        "response": "Okay, that's a clear cleanup rule. The agent will: 1. Search Jira for 'Infra' tickets in 'To Do' that are older than 90 days. 2. For each, it will add the inactivity comment. 3. It will then change the status to 'Closed'. Is that correct?"
+      },
+      {
+        "request": "Yes, let's do it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Stale Jira Ticket Closer helps you manage your backlog. When run, it will: 1. Use `Jira: Search Jira Issues` to find all tickets in a specified project that are in 'To Do' status and have not been updated in 90 days. 2. For each ticket, it will use `Jira: Update Jira Issue` to add a comment explaining the closure. 3. It will then use `Jira: Update Jira Issue` again to change the ticket's status to 'Closed'."
+  },
+  {
+    "useCaseId": "122",
+    "agentName": "ServiceNow Knowledge Gap Finder",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "Confluence: Search Pages",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can help us identify gaps in our IT knowledge base.",
+        "response": "That's a proactive approach. The agent could search for recently resolved ServiceNow incidents and check if a corresponding knowledge base article exists in Confluence. Would that be helpful?"
+      },
+      {
+        "request": "Yes. Search for all 'Resolved' incidents from the last 7 days. For each one, search Confluence to see if a KB article with the incident number exists. If not, create a Jira task for the IT team to write one.",
+        "response": "Excellent. The agent will: 1. Find resolved ServiceNow incidents from the last week. 2. For each, search Confluence for a matching KB article. 3. If no article is found, create a Jira task for the IT team to document the resolution. Is that the workflow?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Knowledge Gap Finder helps you improve your support documentation. When run, it will: 1. Use a `ServiceNow: Search Incidents` capability to find all 'Resolved' incidents from the past 7 days. 2. For each incident, it will use a `Confluence: Search Pages` capability to check for a KB article mentioning the incident number. 3. If no article is found, it will use `Jira: Create Jira Issue` to create and assign a task for the support team to create one."
+  },
+  {
+    "useCaseId": "123",
+    "agentName": "Recurring Meeting Scheduler",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to schedule our recurring project syncs.",
+        "response": "I can do that. How should the agent get the list of attendees for the meeting?"
+      },
+      {
+        "request": "It should look at the 'Project Phoenix Team' page in Confluence to get the list of team members, and then schedule a 30-minute recurring weekly meeting with them on Google Calendar.",
+        "response": "Okay. The agent will: 1. Get the content of the 'Project Phoenix Team' page from Confluence. 2. Parse the content to identify the list of team members. 3. Schedule a recurring 30-minute weekly meeting with that list of attendees. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Recurring Meeting Scheduler helps you automate meeting setup. When you provide a Confluence page title, it will: 1. Use a `Confluence: Search Pages` capability to find the page and extract the list of team members from its content. 2. Use `Google Calendar: Create Calendar Event` to schedule a recurring weekly 30-minute meeting with all the identified team members."
+  },
+  {
+    "useCaseId": "124",
+    "agentName": "Jira Epic Health Reporter",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can give me a health report on a Jira epic.",
+        "response": "I can do that. What metrics would you consider for a 'health report'? For example, the percentage of completed stories vs. open ones?"
+      },
+      {
+        "request": "Yes. For a given epic ID, it should calculate the percentage of stories that are 'Done', 'In Progress', and 'To Do', and also list any stories that are marked as 'Blocked'. Then it should email me that report.",
+        "response": "A comprehensive report. The agent will: 1. Find all stories in the epic. 2. Categorize them by status (Done, In Progress, To Do, Blocked). 3. Calculate the percentages. 4. Send you a formatted email with this health report. Is that correct?"
+      },
+      {
+        "request": "Yes, that's exactly what I need.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Epic Health Reporter provides a quick overview of your epics. When you provide an Epic ID, it will: 1. Use `Jira: Search Jira Issues` to get all child stories and their statuses. 2. It will then calculate the percentage of stories in each status category (To Do, In Progress, Done) and identify any 'Blocked' stories. 3. Finally, it will use `Gmail: Send Email` to send you a formatted health report."
+  },
+  {
+    "useCaseId": "125",
+    "agentName": "Workday Anniversary Notifier",
+    "toolSelection": [
+      "Workday: Search Anniversaries",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want to build an agent that can send a 'Happy Anniversary!' email to employees on their work anniversary.",
+        "response": "That's a great idea for team morale. The agent can search Workday for anyone whose anniversary is today. Should it send the email directly to the employee?"
+      },
+      {
+        "request": "It should send the email to the employee's manager, so the manager can then personally congratulate them.",
+        "response": "Even better. The agent will: 1. Search Workday for employees whose work anniversary is today. 2. For each employee, find their manager. 3. Send an email to the manager with a message like 'Today is [Employee]'s work anniversary!'. Is that the plan?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Workday Anniversary Notifier helps you recognize your team's milestones. When run, it will: 1. Use a `Workday: Search Anniversaries` capability to find all employees whose work anniversary is today. 2. For each employee, it will identify their manager. 3. It will then use `Gmail: Send Email` to send a notification to the manager, reminding them of their direct report's special day."
+  },
+  {
+    "useCaseId": "126",
+    "agentName": "Interview Feedback Consolidator",
+    "toolSelection": [
+      "Gmail: Search Emails",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me collect interview feedback.",
+        "response": "I can do that. The agent can search your email for feedback and consolidate it somewhere. Where would you like the feedback to be stored?"
+      },
+      {
+        "request": "For a given candidate's Jira ticket, find all emails in my inbox with the ticket number in the subject, and append the body of each email as a comment on that Jira ticket.",
+        "response": "A great way to keep all feedback in one place. The agent will: 1. Take a Jira ticket number. 2. Search your Gmail for emails with that number in the subject. 3. For each email, it will add its content as a new comment on the Jira ticket. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Interview Feedback Consolidator helps you centralize candidate feedback. When you provide a candidate's Jira ticket number, it will: 1. Use a `Gmail: Search Emails` capability to find all emails in your inbox with the ticket number in the subject line. 2. For each email found, it will use `Jira: Update Jira Issue` to add the email's content as a comment to the candidate's ticket."
+  },
+  {
+    "useCaseId": "127",
+    "agentName": "Project Launch Go/No-Go",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to help me make a go/no-go decision for a project launch.",
+        "response": "I can help with that. The agent can check for any release-blocking issues in Jira. What is the project and version you are launching?"
+      },
+      {
+        "request": "Check the 'Phoenix' project, version 'v3.0'. If there are any open P0 bugs, send a 'NO-GO' email to the leadership team with a list of the blocking bugs. Otherwise, send a 'GO' email.",
+        "response": "Okay, a critical check. The agent will: 1. Search Jira for open P0 bugs in project 'Phoenix' with fixVersion 'v3.0'. 2. If it finds any, it will email a 'NO-GO' alert with the bug list. 3. If it finds none, it will email a 'GO for launch' message. Is that the logic?"
+      },
+      {
+        "request": "Yes, that's exactly what I need.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Project Launch Go/No-Go agent helps you make data-driven launch decisions. When you provide a project and version, it will: 1. Use `Jira: Search Jira Issues` to check for any open P0 bugs in that release. 2. Based on the result, it will use `Outlook: Send Email` to send either a 'GO' or a 'NO-GO' email to a predefined leadership list, including the list of blocking bugs in the 'NO-GO' case."
+  },
+  {
+    "useCaseId": "128",
+    "agentName": "Confluence Page Link Checker",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can find broken Jira links in a Confluence page.",
+        "response": "I can do that. The agent can scan a Confluence page for Jira issue keys and then check if those issues still exist. What should it do if it finds a broken link?"
+      },
+      {
+        "request": "It should email me a list of any Jira issue keys mentioned on the page that do not exist or have been moved to a different project.",
+        "response": "Understood. The agent will: 1. Scan a Confluence page for all Jira issue keys. 2. For each key, it will verify its existence in Jira. 3. It will then email you a report of any keys that are invalid or could not be found. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Confluence Page Link Checker helps you maintain documentation quality. When you provide a Confluence page URL, it will: 1. Use a `Confluence: Search Pages` capability to extract all mentioned Jira issue keys. 2. For each key, it will use `Jira: Search Jira Issues` to validate its existence. 3. It will then use `Gmail: Send Email` to send you a report listing any invalid or broken Jira links."
+  },
+  {
+    "useCaseId": "129",
+    "agentName": "ServiceNow Incident Trend Reporter",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can identify trending IT issues.",
+        "response": "I can help with that. The agent can search for incidents over a period of time and group them by category to identify trends. What time frame should it look at?"
+      },
+      {
+        "request": "Search all ServiceNow incidents created in the last 30 days. Group them by category, count them, and create a Confluence page with a summary of the top 5 most common incident categories.",
+        "response": "A great way to spot recurring problems. The agent will: 1. Get all incidents from the last 30 days. 2. Analyze and count them by category. 3. Create a Confluence page with a report on the top 5 categories. Is that the workflow?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident Trend Reporter helps you identify systemic issues. When run, it will: 1. Use a `ServiceNow: Search Incidents` capability to get all incidents from the last 30 days. 2. It will process this data to find the top 5 most frequent incident categories. 3. It will then use `Confluence: Create Page` to generate a report summarizing these trends."
+  },
+  {
+    "useCaseId": "130",
+    "agentName": "Calendar Conflict Resolver",
+    "toolSelection": [
+      "Google Calendar: Search Events",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me resolve a scheduling conflict.",
+        "response": "I can help with that. If you have two meetings that overlap, I can help you notify the organizers. What are the meetings?"
+      },
+      {
+        "request": "I have a 'Team Sync' and a 'Client Call' that overlap tomorrow. Email the organizer of the 'Team Sync', let them know about the conflict, and ask if the meeting can be rescheduled.",
+        "response": "Okay. The agent will: 1. Find the 'Team Sync' event on your calendar to identify the organizer. 2. Send an email to that organizer explaining the conflict with the 'Client Call' and asking to reschedule. Is that correct?"
+      },
+      {
+        "request": "Yes, please do that.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Calendar Conflict Resolver helps you manage your schedule. When you identify a meeting conflict, tell the agent the name of the meeting you want to reschedule. It will: 1. Use a `Google Calendar: Search Events` capability to find the event and its organizer. 2. Use `Gmail: Send Email` to send an email to the organizer, explaining the conflict and requesting to find a new time."
+  },
+  {
+    "useCaseId": "131",
+    "agentName": "Jira Project Scaffolder",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can create a standard set of epics for a new project.",
+        "response": "I can do that. The agent can read a list of standard epics from a template. Where is this template stored?"
+      },
+      {
+        "request": "I have a 'Standard Project Epics' page in Confluence. The agent should read the list of epics from that page and create them in a new Jira project I specify.",
+        "response": "A great way to standardize projects. The agent will: 1. Read the list of epic titles from the 'Standard Project Epics' Confluence page. 2. For each title, create a new epic in the Jira project you provide. Is that the plan?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Project Scaffolder helps you standardize project setup. When you provide a new Jira project key, it will: 1. Use a `Confluence: Search Pages` capability to read a predefined list of epic titles from a template page. 2. For each title in the list, it will use `Jira: Create Jira Issue` to create a new epic in your new project."
+  },
+  {
+    "useCaseId": "132",
+    "agentName": "Workday Birthday Notifier",
+    "toolSelection": [
+      "Workday: Search Birthdays",
+      "Outlook: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want to build an agent that sends a 'Happy Birthday!' email to my team members on their birthday.",
+        "response": "That's a nice idea. The agent can search Workday for anyone on your team whose birthday is today. Should it send the email to the whole team to sign a virtual card?"
+      },
+      {
+        "request": "Yes. It should find anyone on my team with a birthday today, and then send an email to the entire team distribution list letting them know.",
+        "response": "Okay. The agent will: 1. Search Workday for team members with a birthday today. 2. If it finds someone, it will send an email to the team distribution list to celebrate. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Workday Birthday Notifier helps you celebrate your team. When run, it will: 1. Use a `Workday: Search Birthdays` capability to find any of your direct reports whose birthday is today. 2. If a birthday is found, it will use `Outlook: Send Email` to send a celebratory notification to your team's distribution list."
+  },
+  {
+    "useCaseId": "133",
+    "agentName": "Gmail Unread Mail Summarizer",
+    "toolSelection": [
+      "Gmail: Search Emails",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to summarize my unread emails from a specific person.",
+        "response": "I can do that. When you provide a sender's email address, the agent can find all unread emails from them and send you a summary. Is that what you need?"
+      },
+      {
+        "request": "Yes. Find all my unread emails from 'ceo@example.com', and send a single email to me with a list of their subject lines and the time they were sent.",
+        "response": "A good way to prioritize. The agent will: 1. Search your Gmail for all unread emails from 'ceo@example.com'. 2. Compile a list of their subjects and timestamps. 3. Email this summary list to you. Is that correct?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Gmail Unread Mail Summarizer helps you catch up on important emails. When you provide a sender's email address, it will: 1. Use a `Gmail: Search Emails` capability to find all unread emails from that person. 2. It will then use `Gmail: Send Email` to send a summary of those emails (including subject lines and timestamps) directly to you."
+  },
+  {
+    "useCaseId": "134",
+    "agentName": "Jira Dependency Checker",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to check for potential project delays.",
+        "response": "I can help with that. For example, I can find tickets that are blocked by other tickets that are not yet done. Is that what you mean?"
+      },
+      {
+        "request": "Yes. Find all tickets in the 'Mobile-Release' project that are blocked by tickets in other projects. Then, for each blocked ticket, email the owner of the blocking ticket and ask for a status update.",
+        "response": "Okay, that's a proactive way to manage dependencies. The agent will: 1. Search Jira for tickets in 'Mobile-Release' that have external blockers. 2. For each, identify the blocking ticket and its owner. 3. Email the owner of the blocking ticket to ask for an update. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Dependency Checker helps you proactively manage project risks. When you run it for a project, it will: 1. Use `Jira: Search Jira Issues` to find all tickets that are blocked by tickets from other projects. 2. For each dependency found, it will use `Gmail: Send Email` to contact the owner of the blocking ticket and ask for a status update, CC'ing the owner of the blocked ticket for visibility."
+  },
+  {
+    "useCaseId": "135",
+    "agentName": "Confluence Team Roster Updater",
+    "toolSelection": [
+      "Workday: Search Direct Reports",
+      "Confluence: Update Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can keep my team's roster page in Confluence up to date.",
+        "response": "I can do that. The agent can get the latest list of your direct reports from Workday and update a Confluence page with that list. Is that the desired workflow?"
+      },
+      {
+        "request": "Yes. I want to point it at our 'Team Roster' Confluence page, and it should automatically update the page with the current list of my direct reports from Workday.",
+        "response": "Understood. The agent will: 1. Get the list of your direct reports from Workday. 2. Update the specified Confluence page with this new list. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Confluence Team Roster Updater helps you keep your team pages accurate. When you provide a Confluence page URL, it will: 1. Use a `Workday: Search Direct Reports` capability to get the current list of your team members. 2. Use a `Confluence: Update Page` capability to overwrite the content of the page with the new, accurate roster."
+  },
+  {
+    "useCaseId": "136",
+    "agentName": "ServiceNow Incident Categorizer",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "ServiceNow: Update Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me categorize new IT incidents.",
+        "response": "I can help with that. The agent can find all new incidents that don't have a category assigned. What should it do with them?"
+      },
+      {
+        "request": "Find all incidents created today with no category. For each one, I want it to suggest a category based on the title, and I will approve it. For example, if the title contains 'VPN', suggest 'Networking'.",
+        "response": "A smart triage assistant. The agent will: 1. Find new, uncategorized incidents. 2. Analyze the title for keywords and suggest a category for your approval. 3. Once you approve, it will update the incident with the new category. Is that the plan?"
+      },
+      {
+        "request": "Yes, that's a great workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident Categorizer helps you triage new tickets. When run, it will: 1. Use a `ServiceNow: Search Incidents` capability to find all incidents created today without a category. 2. For each incident, it will analyze the title and suggest a category to you. 3. Upon your approval, it will use `ServiceNow: Update Incident` to set the category on the ticket."
+  },
+  {
+    "useCaseId": "137",
+    "agentName": "Jira Story Point Auditor",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to find stories in our backlog that are missing story points.",
+        "response": "I can do that. The agent can search a specific project's backlog for any stories where the 'Story Points' field is empty. What should it do when it finds them?"
+      },
+      {
+        "request": "It should find all unpointed stories in the 'Backend' project backlog and send a single email to the product manager with a list of the tickets that need to be estimated.",
+        "response": "Okay. The agent will: 1. Search Jira for stories in the 'Backend' backlog with no story points. 2. Compile a list of these stories. 3. Email this list to the product manager for review. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Story Point Auditor helps with backlog grooming. When you run it, the agent will: 1. Use `Jira: Search Jira Issues` to find all stories in a specified project's backlog that are missing story points. 2. It will then use `Gmail: Send Email` to send a consolidated list of these unestimated stories to the product manager."
+  },
+  {
+    "useCaseId": "138",
+    "agentName": "Calendar 'Focus Time' Scheduler",
+    "toolSelection": [
+      "Google Calendar: Search Events",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me schedule focus time.",
+        "response": "A great way to protect your time. The agent can find open slots in your calendar and create 'Focus Time' events. How much time are you looking for?"
+      },
+      {
+        "request": "Find four 2-hour open slots on my calendar for next week and create a 'Focus Time' event for each of them.",
+        "response": "Okay. The agent will: 1. Search your Google Calendar for four available 2-hour slots next week. 2. For each slot, it will create a new event titled 'Focus Time'. Is that the plan?"
+      },
+      {
+        "request": "Yes, please do that.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Calendar 'Focus Time' Scheduler helps you block out time for deep work. When you ask, it will: 1. Use a `Google Calendar: Search Events` capability to find available slots of your desired duration on your calendar. 2. It will then use `Google Calendar: Create Calendar Event` to automatically schedule 'Focus Time' events in those open slots."
+  },
+  {
+    "useCaseId": "139",
+    "agentName": "Confluence Meeting Notes Creator",
+    "toolSelection": [
+      "Google Calendar: Search Events",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to create meeting notes pages for me automatically.",
+        "response": "I can do that. The agent can look at your upcoming meetings and create blank Confluence pages for them. Is that what you'd like?"
+      },
+      {
+        "request": "Yes. For all my meetings tomorrow, create a new Confluence page in the 'Meetings' space. The title of the page should be the meeting title, and it should be pre-filled with a list of the attendees.",
+        "response": "A great way to stay organized. The agent will: 1. Find all your meetings on Google Calendar for tomorrow. 2. For each meeting, it will get the title and attendee list. 3. It will then create a new Confluence page with that information. Is that correct?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Confluence Meeting Notes Creator helps you prepare for meetings. When you ask, it will: 1. Use a `Google Calendar: Search Events` capability to find all of your meetings for the next day. 2. For each meeting, it will use `Confluence: Create Page` to create a new notes page, pre-populated with the meeting title and a list of attendees."
+  },
+  {
+    "useCaseId": "140",
+    "agentName": "Jira and ServiceNow Linker",
+    "toolSelection": [
+      "Jira: Update Jira Issue",
+      "ServiceNow: Update Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can link an existing Jira ticket to a ServiceNow incident.",
+        "response": "I can do that. If you provide both the Jira issue ID and the ServiceNow incident number, I can create a bi-directional link between them. Is that what you need?"
+      },
+      {
+        "request": "Yes. I have JIRA-123 and INC456. Add a comment to the Jira ticket with the ServiceNow number, and a comment to the ServiceNow ticket with the Jira number.",
+        "response": "Okay. The agent will: 1. Add a comment to JIRA-123 that references INC456. 2. Add a comment to INC456 that references JIRA-123. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira and ServiceNow Linker helps you connect related tickets across systems. When you provide a Jira issue ID and a ServiceNow incident number, it will: 1. Use `Jira: Update Jira Issue` to add a comment to the Jira ticket with the ServiceNow incident number. 2. Use `ServiceNow: Update Incident` to add a comment to the ServiceNow incident with the Jira issue number, creating a bi-directional link."
+  },
+  {
+    "useCaseId": "141",
+    "agentName": "Release Notes Emailer",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to send out our release notes.",
+        "response": "I can do that. The agent can find a release notes page in Confluence and email it to a distribution list. What is the title of the page?"
+      },
+      {
+        "request": "Find the page titled 'Release Notes v4.2' in our 'Engineering' space, and send the content of that page in an email to 'product-team@example.com'.",
+        "response": "Okay. The agent will: 1. Find the 'Release Notes v4.2' page in Confluence. 2. Get the content of the page. 3. Email that content to the product team. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Release Notes Emailer helps you distribute your release notes. When you provide a Confluence page title, it will: 1. Use a `Confluence: Search Pages` capability to find the page and retrieve its content. 2. Use `Gmail: Send Email` to send the content of the page to a specified distribution list."
+  },
+  {
+    "useCaseId": "142",
+    "agentName": "Jira Sprint Commitment Auditor",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to check if any new work was added to the active sprint after it started.",
+        "response": "That's a good way to track scope creep. The agent can find all tickets in the active sprint that were created after the sprint's start date. What should it do with this list?"
+      },
+      {
+        "request": "It should email a list of those 'scope creep' tickets to the engineering manager.",
+        "response": "Understood. The agent will: 1. Find the start date of the current sprint. 2. Search for any tickets in the sprint that were created after that date. 3. Email a list of these tickets to the engineering manager. Is that the plan?"
+      },
+      {
+        "request": "Yes, that's the one.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Sprint Commitment Auditor helps you track scope creep. When run, it will: 1. Use `Jira: Search Jira Issues` to find the start date of the active sprint. 2. It will then use `Jira: Search Jira Issues` again to find any tickets in that sprint that were created after the sprint started. 3. Finally, it will use `Gmail: Send Email` to send a report of these 'added work' tickets to the engineering manager."
+  },
+  {
+    "useCaseId": "143",
+    "agentName": "ServiceNow Incident to Confluence Post-Mortem",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to create a post-mortem document for a major incident.",
+        "response": "I can do that. The agent can take a ServiceNow incident number and create a post-mortem page in Confluence, pre-filled with the incident's details. Is that what you need?"
+      },
+      {
+        "request": "Yes. For incident INC789, create a new page in our 'Post-Mortems' Confluence space. The page should be titled 'Post-Mortem: INC789' and should be pre-filled with the incident's description, timeline, and resolution from ServiceNow.",
+        "response": "Okay. The agent will: 1. Get all the details for INC789 from ServiceNow. 2. Create a new Confluence page using a post-mortem template, populated with the incident's details. Is that correct?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident to Confluence Post-Mortem agent helps you standardize your incident review process. When you provide a ServiceNow Incident ID, it will: 1. Use a `ServiceNow: Search Incidents` capability to retrieve all the details of that incident. 2. Use `Confluence: Create Page` to create a new post-mortem document, pre-populated with the incident's description, timeline, and resolution, ready for your team to analyze."
+  },
+  {
+    "useCaseId": "144",
+    "agentName": "Gmail Vacation Responder",
+    "toolSelection": [
+      "Workday: Search Leave Requests",
+      "Gmail: Set Vacation Responder"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can set my out-of-office message in Gmail based on my approved time off in Workday.",
+        "response": "That's a great idea. The agent can look up your next approved vacation in Workday and use those dates to set your vacation responder in Gmail. Is that what you'd like?"
+      },
+      {
+        "request": "Yes. It should find my next approved vacation, and then set my Gmail OOO for those dates with a standard message.",
+        "response": "Okay. The agent will: 1. Search Workday for your next approved leave request. 2. Use the dates from that request to enable your Gmail vacation responder. Is that the workflow?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Gmail Vacation Responder helps you automate your out-of-office settings. When you run it, it will: 1. Use a `Workday: Search Leave Requests` capability to find your next approved vacation. 2. It will then use a `Gmail: Set Vacation Responder` capability to automatically enable your out-of-office message for those specific dates."
+  },
+  {
+    "useCaseId": "145",
+    "agentName": "Jira Epic Creator from Confluence",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can turn a project plan in Confluence into epics in Jira.",
+        "response": "I can do that. If you have a Confluence page with a list of epics, the agent can read that page and create the epics in Jira for you. Does that sound right?"
+      },
+      {
+        "request": "Yes. I have a 'Project Apollo Plan' page. The agent should find every H2 heading on that page and create a new epic in the 'APOLLO' Jira project for each one.",
+        "response": "A very efficient way to plan. The agent will: 1. Get the content of the 'Project Apollo Plan' page. 2. Extract all H2 headings. 3. For each heading, create a new epic in the 'APOLLO' project. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Epic Creator from Confluence helps you turn plans into action. When you provide a Confluence page URL, it will: 1. Use a `Confluence: Search Pages` capability to read the page content. 2. It will parse the content to find all H2 headings. 3. For each heading, it will use `Jira: Create Jira Issue` to create a new epic in a specified Jira project."
+  },
+  {
+    "useCaseId": "146",
+    "agentName": "Calendar Interview Packager",
+    "toolSelection": [
+      "Google Calendar: Search Events",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me prepare for an interview I'm conducting.",
+        "response": "I can help with that. The agent can find the interview on your calendar and then gather relevant information for you. What information would be helpful?"
+      },
+      {
+        "request": "Find the 'Candidate X Interview' on my calendar for tomorrow. Then, find the email thread with the recruiter about this candidate and email me a link to that thread.",
+        "response": "Okay. The agent will: 1. Find the 'Candidate X Interview' on your calendar. 2. Search your Gmail for emails with the candidate's name and the recruiter's name. 3. Email you a link to the most relevant email thread it finds. Is that correct?"
+      },
+      {
+        "request": "Yes, that would be very helpful.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Calendar Interview Packager helps you prepare for interviews. When you provide a meeting title, it will: 1. Use a `Google Calendar: Search Events` capability to find the interview details. 2. Use a `Gmail: Search Emails` capability to find the related email thread with the recruiter. 3. Use `Gmail: Send Email` to send you a 'prep package' email containing a link to the relevant email thread."
+  },
+  {
+    "useCaseId": "147",
+    "agentName": "Jira Bug Duplicate Finder",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can help me find and link duplicate bugs.",
+        "response": "I can do that. If you provide two Jira issue IDs, the agent can link them as duplicates. Is that what you need?"
+      },
+      {
+        "request": "Yes. I have two tickets, PROJ-555 and PROJ-567, that are duplicates. Please link them and close the newer one, PROJ-567.",
+        "response": "Understood. The agent will: 1. Link PROJ-555 and PROJ-567 as duplicates. 2. Add a comment to PROJ-567 saying it's a duplicate of PROJ-555. 3. Change the status of PROJ-567 to 'Closed'. Is that the correct workflow?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Bug Duplicate Finder helps you clean up your backlog. When you provide two issue IDs, it will: 1. Use `Jira: Update Jira Issue` to link the two tickets as duplicates. 2. It will then use `Jira: Update Jira Issue` again to add a comment and change the status of the newer ticket to 'Closed'."
+  },
+  {
+    "useCaseId": "148",
+    "agentName": "ServiceNow Bulk Incident Assigner",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "ServiceNow: Update Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me assign a batch of related incidents.",
+        "response": "I can do that. The agent can find all incidents matching a certain criteria and assign them to a specific person. What is the criteria?"
+      },
+      {
+        "request": "Find all unassigned incidents in the 'Database' category that were created in the last 24 hours, and assign them all to 'dba-oncall@example.com'.",
+        "response": "Okay. The agent will: 1. Search ServiceNow for all unassigned incidents in the 'Database' category from the last 24 hours. 2. For each incident found, it will assign it to 'dba-oncall@example.com'. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the process.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Bulk Incident Assigner helps you triage incidents quickly. When you provide a category and an assignee, it will: 1. Use a `ServiceNow: Search Incidents` capability to find all unassigned incidents in that category. 2. It will then loop through the results and use `ServiceNow: Update Incident` to assign each one to the specified person or group."
+  },
+  {
+    "useCaseId": "149",
+    "agentName": "Confluence Project Hub Creator",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can create a central hub page for a new project in Confluence.",
+        "response": "I can do that. The agent can create a page and link to key resources. What resources should it link to?"
+      },
+      {
+        "request": "For the 'Helios' project in Jira, create a new page in Confluence. The page should have the project name as the title, and the content should be a list of all epics and a list of all team members in the project.",
+        "response": "A great way to centralize project info. The agent will: 1. Get all epics and team members for the 'Helios' project from Jira. 2. Create a new Confluence page with this information. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Confluence Project Hub Creator helps you quickly set up new project spaces. When you provide a Jira project key, it will: 1. Use `Jira: Search Jira Issues` to get a list of all epics and team members for that project. 2. Use `Confluence: Create Page` to generate a new hub page, pre-populated with links to the epics and a list of the team members."
+  },
+  {
+    "useCaseId": "150",
+    "agentName": "Gmail Follow-up Scheduler",
+    "toolSelection": [
+      "Gmail: Search Emails",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me remember to follow up on important emails.",
+        "response": "I can help with that. If you give me an email to watch, I can schedule a follow-up reminder for you. What's the email?"
+      },
+      {
+        "request": "Find the email I sent to 'client@example.com' yesterday with the subject 'Project Proposal'. If I haven't received a reply, schedule a 'Follow Up' event on my calendar for 3 days from now.",
+        "response": "Okay. The agent will: 1. Search your Gmail to see if there is a reply to that specific email thread. 2. If there is no reply, it will create a 'Follow Up' event on your Google Calendar. Is that the correct logic?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Gmail Follow-up Scheduler ensures you never drop the ball. When you identify an important email, tell the agent. It will: 1. Use a `Gmail: Search Emails` capability to check if a reply has been received for that conversation. 2. If no reply is found, it will use `Google Calendar: Create Calendar Event` to schedule a 'Follow Up' reminder on your calendar for a future date."
+  },
+  {
+    "useCaseId": "151",
+    "agentName": "Jira Component Lead Notifier",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to notify component leads about new high-priority bugs in their area.",
+        "response": "I can do that. The agent can find new P0 bugs and email the appropriate component lead. Should it search for bugs created in the last 24 hours?"
+      },
+      {
+        "request": "Yes. Find all P0 bugs created in the last 24 hours. For each bug, identify its component, find the lead for that component, and send them a notification email.",
+        "response": "A great way to ensure accountability. The agent will: 1. Find new P0 bugs. 2. For each, get the component and its lead. 3. Email the lead with a link to the new high-priority bug. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Component Lead Notifier ensures urgent bugs are seen by the right people. When run, it will: 1. Use `Jira: Search Jira Issues` to find all P0 bugs created in the last 24 hours. 2. For each bug, it will identify the component lead. 3. It will then use `Gmail: Send Email` to send a high-priority notification directly to that lead."
+  },
+  {
+    "useCaseId": "152",
+    "agentName": "Workday Time-Off Conflict Checker",
+    "toolSelection": [
+      "Workday: Search Leave Requests",
+      "Google Calendar: Search Events",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to check if my approved time off in Workday conflicts with any important meetings on my calendar.",
+        "response": "I can do that. The agent can find your approved leave and then check your calendar for conflicts. What would you consider an 'important' meeting?"
+      },
+      {
+        "request": "Any meeting with my manager or any meeting with more than 10 people. It should find my next approved vacation, check for those conflicts, and email me a list of the meetings I need to reschedule.",
+        "response": "Okay. The agent will: 1. Find your next approved vacation in Workday. 2. Search your Google Calendar during those dates for meetings with your manager or >10 attendees. 3. Email you a list of any conflicting meetings. Is that correct?"
+      },
+      {
+        "request": "Yes, that's a huge help.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Workday Time-Off Conflict Checker helps you prepare for your vacation. When you run it, it will: 1. Use a `Workday: Search Leave Requests` capability to find your next approved time off. 2. Use a `Google Calendar: Search Events` capability to find any important meetings (e.g., with your manager or large groups) that conflict with your leave. 3. Use `Gmail: Send Email` to send you a list of the meetings you need to reschedule."
+  },
+  {
+    "useCaseId": "153",
+    "agentName": "On-Call Schedule Publisher",
+    "toolSelection": [
+      "PagerDuty: Get On-Call Schedule",
+      "Confluence: Create Page"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to publish our on-call schedule.",
+        "response": "I can do that. The agent can get the on-call schedule from a service like PagerDuty and post it to a Confluence page. Is that what you need?"
+      },
+      {
+        "request": "Yes. Get the on-call schedule for the 'Tier-2-Support' team for next week from PagerDuty and create a new Confluence page with that schedule.",
+        "response": "Okay. The agent will: 1. Get the on-call schedule for 'Tier-2-Support' for next week. 2. Create a new Confluence page titled 'On-Call Schedule: Next Week' with the details. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The On-Call Schedule Publisher helps you communicate your team's on-call rotation. When you run it, it will: 1. Use a `PagerDuty: Get On-Call Schedule` capability to retrieve the schedule for a specified team and date range. 2. Use `Confluence: Create Page` to publish this schedule to a central and easily accessible page for the rest of the organization."
+  },
+  {
+    "useCaseId": "154",
+    "agentName": "Jira Sprint Health Checker",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Gmail: Send Email"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to give me a daily health check of our current sprint.",
+        "response": "I can do that. The agent can check for things like new bugs or tickets that are blocked. What should it look for?"
+      },
+      {
+        "request": "Every morning, it should find any new bugs added to the active sprint in the last 24 hours, and any tickets that are currently blocked. It should then email a summary of these 'at-risk' items to the scrum master.",
+        "response": "A great way to start the day. The agent will: 1. Search the active sprint for new bugs and blocked tickets. 2. Compile a list of these items. 3. Email the summary to the scrum master. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Sprint Health Checker helps you stay on top of your sprint. When run, it will: 1. Use `Jira: Search Jira Issues` to find any new bugs added to the active sprint in the last 24 hours and any tickets currently marked as 'Blocked'. 2. It will then use `Gmail: Send Email` to send a daily digest of these potential risk items to the scrum master."
+  },
+  {
+    "useCaseId": "155",
+    "agentName": "ServiceNow Incident Tagger",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "ServiceNow: Update Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me tag incidents based on keywords.",
+        "response": "I can do that. The agent can search for incidents with certain keywords in their description and then apply a tag. What's the rule?"
+      },
+      {
+        "request": "Find all incidents created in the last hour that contain the word 'outage'. For each one, add the 'major-incident' tag to it.",
+        "response": "Okay. The agent will: 1. Search for new incidents containing the word 'outage'. 2. For each incident found, it will add the 'major-incident' tag. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident Tagger helps you automatically categorize incidents. When you provide a keyword and a tag, it will: 1. Use a `ServiceNow: Search Incidents` capability to find all recent incidents containing that keyword. 2. For each incident, it will use `ServiceNow: Update Incident` to apply the specified tag, helping with routing and reporting."
+  },
+  {
+    "useCaseId": "156",
+    "agentName": "Team Meeting Scheduler",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Google Calendar: Create Calendar Event"
+    ],
+    "conversation": [
+      {
+        "request": "I need to schedule a kick-off meeting for a new project.",
+        "response": "I can help with that. How should the agent determine who to invite?"
+      },
+      {
+        "request": "Find all the members of the 'Orion' project in Jira and schedule a 1-hour 'Project Orion Kick-off' meeting with all of them for the first available time slot next week.",
+        "response": "Okay. The agent will: 1. Get the list of all members in the 'Orion' Jira project. 2. Search their calendars for a 1-hour slot next week. 3. Create a calendar event and invite everyone. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the plan.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Team Meeting Scheduler helps you schedule project meetings. When you provide a Jira project key, it will: 1. Use `Jira: Search Jira Issues` to get a list of all project members. 2. Use a `Google Calendar: Search Events` capability to find a common available time slot. 3. Use `Google Calendar: Create Calendar Event` to schedule the meeting and invite all project members."
+  },
+  {
+    "useCaseId": "157",
+    "agentName": "Confluence Page Archiver",
+    "toolSelection": [
+      "Confluence: Search Pages",
+      "Confluence: Archive Page"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent to help me archive old project pages in Confluence.",
+        "response": "I can do that. How should the agent identify which projects are old?"
+      },
+      {
+        "request": "Find all pages in the 'Projects' space that have the word 'Archive' in the title, but haven't been updated in 6 months. For each one it finds, it should archive the page.",
+        "response": "A good cleanup rule. The agent will: 1. Search for pages in the 'Projects' space with 'Archive' in the title and no updates in 6 months. 2. For each page, it will use the archive function. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Confluence Page Archiver helps you keep your Confluence space tidy. When run, it will: 1. Use a `Confluence: Search Pages` capability to find pages with 'Archive' in the title that haven't been updated in 180 days. 2. For each page, it will use a `Confluence: Archive Page` capability to archive it."
+  },
+  {
+    "useCaseId": "158",
+    "agentName": "Gmail Large Attachment Finder",
+    "toolSelection": [
+      "Gmail: Search Emails",
+      "Jira: Create Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent to help me find large attachments in my email that I need to follow up on.",
+        "response": "I can do that. The agent can search for emails with large attachments. What should it do when it finds them?"
+      },
+      {
+        "request": "Find all emails I've received in the last week with attachments larger than 10MB. For each one, create a Jira task for me to 'Review Large Attachment' and include the email subject in the task description.",
+        "response": "Okay. The agent will: 1. Search your Gmail for emails with attachments >10MB from the last week. 2. For each, it will create a Jira task for you to review it. Is that the workflow?"
+      },
+      {
+        "request": "Yes, that's perfect.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Gmail Large Attachment Finder helps you manage your inbox. When run, it will: 1. Use a `Gmail: Search Emails` capability to find all emails from the last 7 days with attachments larger than 10MB. 2. For each email found, it will use `Jira: Create Jira Issue` to create a task assigned to you, reminding you to review the large attachment."
+  },
+  {
+    "useCaseId": "159",
+    "agentName": "ServiceNow Incident Duplicator",
+    "toolSelection": [
+      "ServiceNow: Search Incidents",
+      "ServiceNow: Create Incident"
+    ],
+    "conversation": [
+      {
+        "request": "I need an agent that can duplicate a ServiceNow incident for a different team.",
+        "response": "I can do that. If you provide a ServiceNow incident ID, the agent can copy its details and create a new incident. Is that what you need?"
+      },
+      {
+        "request": "Yes. Take incident INC123, and create a new incident with the same title and description, but assign it to the 'Networking' team.",
+        "response": "Okay. The agent will: 1. Get the details of INC123. 2. Create a new incident with the same details but a different assignment group. Is that correct?"
+      },
+      {
+        "request": "Yes, that's it.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The ServiceNow Incident Duplicator helps you re-assign issues to different teams. When you provide an incident ID and a new assignment group, it will: 1. Use a `ServiceNow: Search Incidents` capability to get the details of the original incident. 2. Use `ServiceNow: Create Incident` to create a new incident with the same title and description, but assigned to the new team."
+  },
+  {
+    "useCaseId": "160",
+    "agentName": "Jira Epic Status Updater",
+    "toolSelection": [
+      "Jira: Search Jira Issues",
+      "Jira: Update Jira Issue"
+    ],
+    "conversation": [
+      {
+        "request": "I want an agent that can automatically close an epic when all its stories are done.",
+        "response": "I can do that. The agent can check an epic, and if all its child stories are 'Done', it can close the epic itself. Is that the logic you want?"
+      },
+      {
+        "request": "Yes. For the epic PROJ-100, check if all its stories are closed. If they are, add a comment 'All stories complete.' to the epic and then close it.",
+        "response": "Understood. The agent will: 1. Find all stories in epic PROJ-100. 2. Check if they are all in a 'Done' or 'Closed' state. 3. If so, it will comment on and close the parent epic. Is that correct?"
+      },
+      {
+        "request": "Yes, that's the workflow.",
+        "response": null
+      }
+    ],
+    "agentInstructions": "The Jira Epic Status Updater helps you automate your workflow. When you provide an Epic ID, it will: 1. Use `Jira: Search Jira Issues` to get the status of all child stories. 2. If all stories are complete, it will use `Jira: Update Jira Issue` to add a concluding comment and change the epic's status to 'Done'."
   }
 ]
