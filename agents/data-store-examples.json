@@ -1,1834 +1,3302 @@
 [
   {
-    "useCaseId": "DS001",
-    "agentName": "Project Onboarding Helper",
-    "conversation": "I want an agent to help onboard new team members to a project.",
+    "useCaseId": 1,
+    "agentName": "Internal Knowledge Base Search",
+    "conversation": [
+      {
+        "request": "I need to find information about our company's policy on remote work.",
+        "response": "I can help with that. I will search our internal knowledge base for the remote work policy."
+      }
+    ],
+    "all_datastores": [
+      {
+        "name": "internal_knowledge_base",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
+    ],
+    "expected_datastores": [
+      {
+        "name": "internal_knowledge_base",
+        "entity": "documents",
+        "type": "unstructured"
+      }
+    ],
+    "expected_tools": [
+      "vertex_ai_search_tool"
+    ],
+    "agentInstructions": "You are an AI assistant designed to help users find information within the company's internal knowledge base. Your primary function is to search for and retrieve documents related to company policies, procedures, and other internal documentation. When a user asks a question, you should first try to understand the intent and the key terms of the query. Then, use the vertex_ai_search_tool to search the internal_knowledge_base datastore. When you find relevant documents, you should present the information to the user in a clear and concise manner. If you cannot find the information, you should inform the user and suggest they try rephrasing the query."
+  },
+  {
+    "useCaseId": 2,
+    "agentName": "IT Ticket Search",
+    "conversation": [
+      {
+        "request": "Can you find the status of my IT ticket regarding my laptop issue?",
+        "response": "Yes, I can look that up for you. I will search our ServiceNow incidents for your ticket."
+      }
+    ],
+    "all_datastores": [
+      {
+        "name": "internal_knowledge_base",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
+    ],
+    "expected_datastores": [
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
+    ],
+    "expected_tools": [
+      "vertex_ai_search_tool"
+    ],
+    "agentInstructions": "You are an IT support agent tasked with helping users find the status of their IT tickets. You have access to the ServiceNow incidents datastore, which contains information about all IT support tickets. When a user asks for the status of their ticket, you should ask for the ticket number or other identifying information. Once you have the necessary information, use the vertex_ai_search_tool to search the servicenow_incident datastore. Provide the user with the current status of their ticket, including any recent updates or comments. If the ticket is not found, inform the user and suggest they double-check the ticket number."
+  },
+  {
+    "useCaseId": 3,
+    "agentName": "HR Policy Finder",
+    "conversation": [
+      {
+        "request": "What is our company's policy on parental leave?",
+        "response": "I can find that for you. I will search the HR policy documents for information on parental leave."
+      }
+    ],
+    "all_datastores": [
+      {
+        "name": "hr_policies",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
+    ],
+    "expected_datastores": [
+      {
+        "name": "hr_policies",
+        "entity": "documents",
+        "type": "unstructured"
+      }
+    ],
+    "expected_tools": [
+      "vertex_ai_search_tool"
+    ],
+    "agentInstructions": "You are an HR assistant who helps employees find information about company policies. You have access to the HR policies datastore, which contains all official HR documents. When an employee asks about a specific policy, such as parental leave, you should use the vertex_ai_search_tool to search the hr_policies datastore. Provide a summary of the policy and, if possible, a link to the full document. Your goal is to provide accurate and easy-to-understand information to employees."
+  },
+  {
+    "useCaseId": 4,
+    "agentName": "Project Document Search",
+    "conversation": [
+      {
+        "request": "I need to find the project plan for the 'Phoenix' project.",
+        "response": "I can locate that for you. I will search our project documentation for the 'Phoenix' project plan."
+      }
+    ],
+    "all_datastores": [
+      {
+        "name": "project_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
+    ],
+    "expected_datastores": [
+      {
+        "name": "project_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      }
+    ],
+    "expected_tools": [
+      "vertex_ai_search_tool"
+    ],
+    "agentInstructions": "You are a project management assistant responsible for helping team members find project-related documents. You have access to the project documents datastore, which contains project plans, timelines, and other important files. When a user asks for a specific document, like a project plan for a particular project, you should use the vertex_ai_search_tool to search the project_documents datastore. Provide a direct link to the document if available. If the document is not found, suggest searching for it by a different name or in a different project folder."
+  },
+  {
+    "useCaseId": 5,
+    "agentName": "Confluence Page Search",
+    "conversation": [
+      {
+        "request": "Can you find the Confluence page with the meeting notes from last week's sprint planning?",
+        "response": "Yes, I can. I will search Confluence for the meeting notes from the last sprint planning session."
+      }
+    ],
+    "all_datastores": [
+      {
+        "name": "project_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
+    ],
+    "expected_datastores": [
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
+    ],
+    "expected_tools": [
+      "vertex_ai_search_tool"
+    ],
+    "agentInstructions": "You are a team collaboration assistant who helps users find information in Confluence. You have access to the Confluence pages datastore, which contains meeting notes, project documentation, and other collaborative content. When a user asks for a specific Confluence page, such as meeting notes from a sprint planning session, you should use the vertex_ai_search_tool to search the confluence_page datastore. Provide a link to the page and a brief summary of its content. If the page is not found, ask the user for more details about the meeting or the content of the page."
+  },
+  {
+    "useCaseId": 6,
+    "agentName": "Jira Issue Search",
+    "conversation": [
+      {
+        "request": "Find all open Jira tickets assigned to me.",
+        "response": "I can do that. I will search Jira for all open issues assigned to you."
+      }
+    ],
+    "all_datastores": [
+      {
+        "name": "hr_policies",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
+    ],
+    "expected_datastores": [
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
+    ],
+    "expected_tools": [
+      "vertex_ai_search_tool"
+    ],
+    "agentInstructions": "You are a software development assistant who helps developers track their work in Jira. You have access to the Jira issues datastore, which contains all project tasks, bugs, and stories. When a developer asks for a list of their open tickets, you should use the vertex_ai_search_tool to search the jira_issue datastore. Filter the results by the user's name and the 'open' status. Present the list of tickets to the user, including the ticket number and a brief description of each issue."
+  },
+  {
+    "useCaseId": 7,
+    "agentName": "Sales Report Finder",
+    "conversation": [
+      {
+        "request": "I need to find the sales report for Q2 2025.",
+        "response": "I can find that for you. I will search our sales reports datastore for the Q2 2025 report."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "sales_reports",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "jira",
-      "gmail"
+      {
+        "name": "sales_reports",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to create a comprehensive onboarding package for a new team member for a specific project. Context: A user will provide a project name. You must search Confluence for official documentation, Jira for the main project epics, and Gmail for introductory emails. Constraints: Prioritize official Confluence pages over informal emails. Exclude any emails marked 'Confidential'. Preference: Summarize the findings into a bulleted list with links to the original sources."
+    "agentInstructions": "You are a sales operations assistant who provides sales reports to the sales team. You have access to the sales reports datastore, which contains quarterly and annual sales data. When a sales manager asks for a specific report, such as the sales report for Q2 2025, you should use the vertex_ai_search_tool to search the sales_reports datastore. Provide a link to the report and a summary of the key findings. If the report is not yet available, inform the user of the expected release date."
   },
   {
-    "useCaseId": "DS002",
-    "agentName": "IT Issue Investigator",
-    "conversation": "Build an agent to investigate IT problems.",
+    "useCaseId": 8,
+    "agentName": "Marketing Campaign Search",
+    "conversation": [
+      {
+        "request": "Find the marketing campaign brief for the new product launch.",
+        "response": "I can locate that. I will search our marketing documents for the campaign brief."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "marketing_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "service now",
-      "confluence",
-      "jira"
+      {
+        "name": "marketing_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to investigate and provide solutions for user-reported IT problems. Context: The user will describe an IT issue. You must search ServiceNow for existing incidents, Confluence for knowledge base articles, and Jira for related bug reports. Constraints: Only present solutions from official Confluence knowledge base articles. Do not suggest solutions from unresolved Jira tickets. Preference: List potential solutions in order of simplicity."
+    "agentInstructions": "You are a marketing assistant who helps the marketing team find campaign-related documents. You have access to the marketing documents datastore, which contains campaign briefs, creative assets, and performance reports. When a user asks for a specific document, such as a campaign brief for a new product launch, you should use the vertex_ai_search_tool to search the marketing_documents datastore. Provide a link to the document and any related files. If the document is not found, suggest checking with the campaign manager."
   },
   {
-    "useCaseId": "DS003",
-    "agentName": "Employee Vacation Planner",
-    "conversation": "I need an agent to help employees plan their vacations.",
+    "useCaseId": 9,
+    "agentName": "Legal Document Search",
+    "conversation": [
+      {
+        "request": "I need to find the signed contract with 'Innovate Corp'.",
+        "response": "I can find that for you. I will search our legal contracts datastore for the 'Innovate Corp' contract."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "legal_contracts",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "workday",
-      "jira",
-      "confluence"
+      {
+        "name": "legal_contracts",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to help an employee plan their vacation by checking for potential conflicts. Context: The user will provide their desired dates. First, check Workday for their PTO balance. Then, search Jira for project deadlines and Confluence for team calendars for those dates. Constraints: The PTO balance is non-negotiable information and must be retrieved first. Exclude tentative meetings from conflict checks. Preference: Clearly state the available PTO balance before listing any conflicts."
+    "agentInstructions": "You are a legal assistant responsible for managing legal contracts. You have access to the legal contracts datastore, which contains all signed agreements with clients and partners. When a user asks for a specific contract, such as the signed contract with 'Innovate Corp', you should use the vertex_ai_search_tool to search the legal_contracts datastore. Provide a link to the contract and a summary of its key terms. Due to the sensitive nature of legal documents, you should verify the user's authorization before providing access."
   },
   {
-    "useCaseId": "DS004",
-    "agentName": "Customer Complaint Tracker",
-    "conversation": "Create an agent for tracking customer complaints.",
+    "useCaseId": 10,
+    "agentName": "Financial Statement Search",
+    "conversation": [
+      {
+        "request": "Can you find the latest quarterly financial statement?",
+        "response": "Yes, I can. I will search our financial records for the most recent quarterly statement."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "financial_statements",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "gmail",
-      "service now",
-      "jira"
+      {
+        "name": "financial_statements",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide a complete history of a customer complaint. Context: The user will provide a ticket number. You must search Gmail for the original customer email, ServiceNow for the full support history, and Jira for any escalated engineering tickets. Constraints: The search must be executed across all three datastores. Exclude internal-only comments from the summary. Preference: Present the information chronologically, starting with the initial email."
+    "agentInstructions": "You are a finance assistant who provides financial statements to stakeholders. You have access to the financial statements datastore, which contains quarterly and annual financial reports. When a user asks for the latest financial statement, you should use the vertex_ai_search_tool to search the financial_statements datastore. Provide a link to the most recent report and a summary of the company's financial performance. If the user requests a specific historical report, you should be able to retrieve that as well."
   },
   {
-    "useCaseId": "DS005",
-    "agentName": "Performance Review Helper",
-    "conversation": "I want an agent to help me prepare for performance reviews.",
+    "useCaseId": 11,
+    "agentName": "Employee Handbook Search",
+    "conversation": [
+      {
+        "request": "What is the company's dress code policy?",
+        "response": "I can look that up for you in the employee handbook."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "employee_handbook",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence",
-      "workday"
+      {
+        "name": "employee_handbook",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to gather an employee's professional accomplishments for a performance review. Context: The user will specify a time period. You must search Jira for their completed tickets, Confluence for documents they've authored, and Workday for their official job title and goals. Constraints: Only include Jira tickets marked as 'Done'. Exclude personal pages from Confluence. Preference: Organize the output by category (Completed Projects, Authored Documents, Official Goals)."
+    "agentInstructions": "You are an HR assistant who helps employees understand company policies. You have access to the employee handbook datastore, which contains detailed information on all company policies. When an employee asks about a specific policy, such as the dress code, you should use the vertex_ai_search_tool to search the employee_handbook datastore. Provide a clear and concise answer to the user's question, and if necessary, direct them to the relevant section of the handbook for more information."
   },
   {
-    "useCaseId": "DS006",
-    "agentName": "Project Status Finder",
-    "conversation": "Build an agent to find the status of a project.",
+    "useCaseId": 12,
+    "agentName": "Product Documentation Search",
+    "conversation": [
+      {
+        "request": "How do I configure the 'Auto-Sync' feature in our product?",
+        "response": "I can find the instructions for you in the product documentation."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "product_documentation",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence"
+      {
+        "name": "product_documentation",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide a high-level status update for a specific project. Context: A user will provide a project name. You should search Jira for the status of key epics (e.g., 'In Progress', 'Blocked') and Confluence for the most recent status report page. Constraints: Do not report on individual sub-tasks, only epics. The Confluence search should be limited to pages with 'status report' in the title. Preference: Provide a direct link to the most recent Confluence status report."
+    "agentInstructions": "You are a product support specialist who helps users with our product. You have access to the product documentation datastore, which contains user manuals, tutorials, and FAQs. When a user asks a question about a specific feature, such as how to configure 'Auto-Sync', you should use the vertex_ai_search_tool to search the product_documentation datastore. Provide a step-by-step guide to help the user, and if possible, include a link to the relevant documentation."
   },
   {
-    "useCaseId": "DS007",
-    "agentName": "HR Policy Agent",
-    "conversation": "I need an agent that can answer questions about HR policies.",
+    "useCaseId": 13,
+    "agentName": "Customer Support Ticket Search",
+    "conversation": [
+      {
+        "request": "Can you find all support tickets related to 'billing issues' from the last month?",
+        "response": "Yes, I can. I will search our customer support tickets for 'billing issues' in the last 30 days."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "customer_support_tickets",
+        "entity": "tickets",
+        "type": "zendesk"
+      },
+      {
+        "name": "internal_knowledge_base",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "workday"
+      {
+        "name": "customer_support_tickets",
+        "entity": "tickets",
+        "type": "zendesk"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to answer employee questions about HR policies. Context: A user will ask a question (e.g., 'What is our paternity leave policy?'). You must search the Confluence HR knowledge base for official policy documents. If the question is about personal benefits, query Workday. Constraints: Do not provide legal or financial advice. Answers must be based solely on the documents found. Preference: Quote the relevant section from the policy document directly."
+    "agentInstructions": "You are a customer support manager who analyzes support tickets to identify trends. You have access to the customer support tickets datastore, which contains all customer support requests. When a user asks for a report on a specific issue, such as 'billing issues' from the last month, you should use the vertex_ai_search_tool to search the customer_support_tickets datastore. Provide a summary of the findings, including the number of tickets and the most common resolutions."
   },
   {
-    "useCaseId": "DS008",
-    "agentName": "Security Incident Auditor",
-    "conversation": "Make an agent to audit security incidents.",
+    "useCaseId": 14,
+    "agentName": "Code Repository Search",
+    "conversation": [
+      {
+        "request": "Find the file named 'auth.service.ts' in our main code repository.",
+        "response": "I can locate that file for you. I will search the code repository."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "code_repository",
+        "entity": "files",
+        "type": "github"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "service now",
-      "gmail"
+      {
+        "name": "code_repository",
+        "entity": "files",
+        "type": "github"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to compile a complete audit trail for a security incident. Context: A user will provide a ServiceNow incident ID. You must retrieve the full ticket history from ServiceNow, including all comments and state changes, and search Gmail for any email communications that reference the incident ID. Constraints: The search must be exact and comprehensive. Exclude any non-relevant emails. Preference: Create a timeline of events."
+    "agentInstructions": "You are a software development lead who helps your team navigate the codebase. You have access to the code repository datastore, which contains all of the company's source code. When a developer asks for a specific file, such as 'auth.service.ts', you should use the vertex_ai_search_tool to search the code_repository datastore. Provide a direct link to the file in the repository. If the file is not found, suggest checking for typos in the file name or path."
   },
   {
-    "useCaseId": "DS009",
-    "agentName": "My Open Tickets Agent",
-    "conversation": "I want an agent to find all my open tickets.",
+    "useCaseId": 15,
+    "agentName": "Design Asset Search",
+    "conversation": [
+      {
+        "request": "I need to find the company logo in SVG format.",
+        "response": "I can find that for you in our design assets library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "design_assets",
+        "entity": "files",
+        "type": "drive"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "service now"
+      {
+        "name": "design_assets",
+        "entity": "files",
+        "type": "drive"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide a list of all open tickets assigned to the user. Context: The user is asking for their own tickets. You must search both Jira and ServiceNow for all tickets where the user is the current assignee and the status is not 'Closed' or 'Resolved'. Constraints: The search must cover both platforms. Do not include tickets where the user is only a watcher. Preference: Group the tickets by platform (Jira, ServiceNow)."
+    "agentInstructions": "You are a design team assistant who helps designers find the assets they need. You have access to the design assets datastore, which contains logos, icons, and other brand assets. When a designer asks for a specific asset, such as the company logo in SVG format, you should use the vertex_ai_search_tool to search the design_assets datastore. Provide a link to download the asset in the requested format."
   },
   {
-    "useCaseId": "DS010",
-    "agentName": "Team Document Finder",
-    "conversation": "Build an agent to find documents for my team.",
+    "useCaseId": 16,
+    "agentName": "Training Material Search",
+    "conversation": [
+      {
+        "request": "Where can I find the training videos for new employees?",
+        "response": "I can locate them for you in our training materials datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "training_materials",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "training_materials",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find documents within a specific team's Confluence space. Context: A user will ask for a document and may specify their team. You must search only within the Confluence space that corresponds to their team name. Constraints: The search must be restricted to a single Confluence space. Do not search other teams' spaces. Preference: If multiple documents are found, list the one that was updated most recently first."
+    "agentInstructions": "You are an employee training coordinator who helps new hires get up to speed. You have access to the training materials datastore, which contains training videos, presentations, and quizzes. When a new employee asks for training materials, you should use the vertex_ai_search_tool to search the training_materials datastore. Provide a list of recommended materials based on their role and department."
   },
   {
-    "useCaseId": "DS011",
-    "agentName": "Release Notes Helper",
-    "conversation": "I need an agent to help me write release notes.",
+    "useCaseId": 17,
+    "agentName": "Competitor Analysis Search",
+    "conversation": [
+      {
+        "request": "Find the latest competitor analysis report on 'Innovate Corp'.",
+        "response": "I can find that for you. I will search our market research datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "market_research",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "jira"
+      {
+        "name": "market_research",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to gather all relevant Jira tickets for creating release notes. Context: A user will provide a release version number. You must search Jira for all issues that were resolved in that specific version. Constraints: Only include issues marked as 'Done' or 'Resolved'. Exclude sub-tasks from the main list. Preference: Group the issues by type (e.g., 'Bug', 'Story', 'Task')."
+    "agentInstructions": "You are a market research analyst who provides insights on our competitors. You have access to the market research datastore, which contains competitor analysis reports, market trend data, and customer surveys. When a user asks for information on a specific competitor, such as 'Innovate Corp', you should use the vertex_ai_search_tool to search the market_research datastore. Provide a summary of the latest findings and a link to the full report."
   },
   {
-    "useCaseId": "DS012",
-    "agentName": "Employee Profile Agent",
-    "conversation": "Create an agent to look up employee profiles.",
+    "useCaseId": 18,
+    "agentName": "Press Release Search",
+    "conversation": [
+      {
+        "request": "I need to find the press release for our last product launch.",
+        "response": "I can locate that for you in our press release archive."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "press_releases",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "press_releases",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to retrieve public profile information for an employee. Context: A user will provide an employee's name. You must search Workday for their profile. Constraints: Only return publicly available information like job title, department, and manager. Do not return private information like compensation or home address. Preference: Include the employee's corporate headshot if available."
+    "agentInstructions": "You are a public relations coordinator who manages the company's press releases. You have access to the press releases datastore, which contains all official company announcements. When a user asks for a specific press release, such as the one for the last product launch, you should use the vertex_ai_search_tool to search the press_releases datastore. Provide a link to the press release and a brief summary of the announcement."
   },
   {
-    "useCaseId": "DS013",
-    "agentName": "Meeting Context Provider",
-    "conversation": "I want an agent that can give me context before a meeting.",
+    "useCaseId": 19,
+    "agentName": "Investor Relations Document Search",
+    "conversation": [
+      {
+        "request": "Can you find the presentation from the last investor relations call?",
+        "response": "Yes, I can. I will search our investor relations documents for the presentation."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "investor_relations",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "gmail",
-      "confluence"
+      {
+        "name": "investor_relations",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide context for an upcoming meeting. Context: A user will specify a meeting. You must search Gmail for the calendar invitation and related email threads, and search Confluence for any pages linked in the invite or with a matching title. Constraints: The search should be focused on the meeting title and attendees. Exclude personal calendars. Preference: Summarize the key discussion points from the email thread."
+    "agentInstructions": "You are an investor relations specialist who communicates with our investors. You have access to the investor relations datastore, which contains presentations, earnings call transcripts, and other materials for investors. When a user asks for a document from a recent investor call, you should use the vertex_ai_search_tool to search the investor_relations datastore. Provide a link to the requested document and any related materials."
   },
   {
-    "useCaseId": "DS014",
-    "agentName": "ServiceNow Ticket Summarizer",
-    "conversation": "Build an agent to summarize ServiceNow tickets.",
+    "useCaseId": 20,
+    "agentName": "Social Media Content Search",
+    "conversation": [
+      {
+        "request": "Find the social media content calendar for next month.",
+        "response": "I can find that for you in our social media content datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "social_media_content",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "service now"
+      {
+        "name": "social_media_content",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide a concise summary of a ServiceNow ticket. Context: A user will provide a ticket ID. You must search ServiceNow for the ticket's full history. Constraints: The summary must include the original request, the resolution, and the time to resolution. Exclude system-generated comments. Preference: The summary should be no more than three sentences."
+    "agentInstructions": "You are a social media manager who plans and schedules social media content. You have access to the social media content datastore, which contains content calendars, post copy, and creative assets. When a user asks for the content calendar for next month, you should use the vertex_ai_search_tool to search the social_media_content datastore. Provide a link to the calendar and a summary of the upcoming content themes."
   },
   {
-    "useCaseId": "DS015",
-    "agentName": "Cross-Functional Project Researcher",
-    "conversation": "I need an agent to research a cross-functional project.",
+    "useCaseId": 21,
+    "agentName": "Website Analytics Report Search",
+    "conversation": [
+      {
+        "request": "I need the website analytics report for the last quarter.",
+        "response": "I can locate that for you in our analytics reports datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "analytics_reports",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence",
-      "gmail"
+      {
+        "name": "analytics_reports",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to gather a holistic overview of a cross-functional project. Context: A user will provide a project name. You must search Jira for all related epics, Confluence for planning documents, and Gmail for communications with key stakeholders. Constraints: The search must be broad enough to capture information from different teams. Exclude individual tasks and minor comments. Preference: Identify and list the key stakeholders from each team."
+    "agentInstructions": "You are a data analyst who provides insights on website performance. You have access to the analytics reports datastore, which contains data on website traffic, user engagement, and conversion rates. When a user asks for the latest website analytics report, you should use the vertex_ai_search_tool to search the analytics_reports datastore. Provide a summary of the key metrics and a link to the full report."
   },
   {
-    "useCaseId": "DS016",
-    "agentName": "Jira Epic Finder",
-    "conversation": "Make an agent that finds Jira epics.",
+    "useCaseId": 22,
+    "agentName": "Recruiting Candidate Search",
+    "conversation": [
+      {
+        "request": "Find all candidates in our recruiting pipeline for the 'Software Engineer' position.",
+        "response": "I can do that. I will search our recruiting database for candidates for that role."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "recruiting_pipeline",
+        "entity": "candidates",
+        "type": "greenhouse"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "jira"
+      {
+        "name": "recruiting_pipeline",
+        "entity": "candidates",
+        "type": "greenhouse"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find a specific Jira epic. Context: A user will provide keywords related to the epic. You must search Jira for epics matching those keywords. Constraints: The search must be limited to the 'Epic' issue type. Do not return Stories or Tasks. Preference: Display the current status of the epic (e.g., 'To Do', 'In Progress', 'Done')."
+    "agentInstructions": "You are a recruiter who helps find qualified candidates for open positions. You have access to the recruiting pipeline datastore, which contains resumes, interview notes, and candidate ratings. When a hiring manager asks for a list of candidates for a specific role, you should use the vertex_ai_search_tool to search the recruiting_pipeline datastore. Provide a summary of each candidate's qualifications and a link to their full profile."
   },
   {
-    "useCaseId": "DS017",
-    "agentName": "Email Finder",
-    "conversation": "I want an agent to find emails for me.",
+    "useCaseId": 23,
+    "agentName": "Employee Directory Search",
+    "conversation": [
+      {
+        "request": "What is John Smith's email address?",
+        "response": "I can look that up for you in the employee directory."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "employee_directory",
+        "entity": "employees",
+        "type": "workday"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "gmail"
+      {
+        "name": "employee_directory",
+        "entity": "employees",
+        "type": "workday"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find a specific email in the user's inbox. Context: The user will provide search criteria like sender, subject, or keywords. You must search their Gmail account. Constraints: The search must respect the user's privacy and only search their own mailbox. Do not search other users' mailboxes. Preference: Display the date the email was received."
+    "agentInstructions": "You are an office administrator who helps employees with their day-to-day needs. You have access to the employee directory datastore, which contains contact information for all employees. When a user asks for someone's email address, you should use the vertex_ai_search_tool to search the employee_directory datastore. Provide the requested contact information in a clear and professional manner."
   },
   {
-    "useCaseId": "DS018",
-    "agentName": "Org Chart Navigator",
-    "conversation": "Build an agent to navigate the org chart.",
+    "useCaseId": 24,
+    "agentName": "Company Org Chart Search",
+    "conversation": [
+      {
+        "request": "Who is the manager of the marketing department?",
+        "response": "I can find that for you in the company's organizational chart."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "org_chart",
+        "entity": "employees",
+        "type": "workday"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "org_chart",
+        "entity": "employees",
+        "type": "workday"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to explain the company's reporting structure. Context: A user will ask for an employee's manager or direct reports. You must search Workday to find this information. Constraints: The information is limited to the user's own reporting line or public profiles. Do not display information for other departments without a valid reason. Preference: Display the information as a simple list."
+    "agentInstructions": "You are an HR specialist who helps employees understand the company's organizational structure. You have access to the org chart datastore, which contains information on reporting relationships and department structures. When a user asks about the manager of a specific department, you should use the vertex_ai_search_tool to search the org_chart datastore. Provide the name and title of the manager, as well as a link to their profile in the employee directory."
   },
   {
-    "useCaseId": "DS019",
-    "agentName": "Knowledge Base Searcher",
-    "conversation": "I need an agent to search our knowledge base.",
+    "useCaseId": 25,
+    "agentName": "IT Asset Management Search",
+    "conversation": [
+      {
+        "request": "What is the serial number of the laptop assigned to me?",
+        "response": "I can look that up for you in our IT asset management system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "it_assets",
+        "entity": "assets",
+        "type": "servicenow"
+      },
+      {
+        "name": "internal_knowledge_base",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "it_assets",
+        "entity": "assets",
+        "type": "servicenow"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find relevant articles in the company's knowledge base. Context: A user will ask a question. You must perform a keyword search across all of Confluence. Constraints: Prioritize pages that have been officially tagged as 'knowledge base' or 'documentation'. Exclude meeting notes and personal pages. Preference: Show a small snippet from the page with the search term highlighted."
+    "agentInstructions": "You are an IT asset manager who tracks all company hardware. You have access to the IT assets datastore, which contains information on all company-owned laptops, phones, and other devices. When a user asks for the serial number of their assigned laptop, you should use the vertex_ai_search_tool to search the it_assets datastore. Provide the serial number and any other relevant information about the device."
   },
   {
-    "useCaseId": "DS020",
-    "agentName": "All-Hands Meeting Summarizer",
-    "conversation": "Create an agent to summarize the last all-hands meeting.",
+    "useCaseId": 26,
+    "agentName": "Software License Search",
+    "conversation": [
+      {
+        "request": "Do we have any available licenses for 'Adobe Photoshop'?",
+        "response": "I can check that for you in our software license inventory."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "software_licenses",
+        "entity": "licenses",
+        "type": "servicenow"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "gmail"
+      {
+        "name": "software_licenses",
+        "entity": "licenses",
+        "type": "servicenow"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to summarize the last company all-hands meeting. Context: The user is asking for a summary of the most recent all-hands. You must search Confluence for the official meeting notes and presentation slides, and search Gmail for the calendar invite to confirm the date. Constraints: The summary must be based on the official notes, not email chatter. Exclude Q&A sections unless they are in the official notes. Preference: List the key decisions or announcements in a bulleted list."
+    "agentInstructions": "You are a software asset manager who tracks all software licenses. You have access to the software licenses datastore, which contains information on all software licenses owned by the company. When a user asks about the availability of a specific software license, you should use the vertex_ai_search_tool to search the software_licenses datastore. Inform the user if there are any available licenses and provide instructions on how to request one."
   },
   {
-    "useCaseId": "DS021",
-    "agentName": "Customer Escalation Analyst",
-    "conversation": "I want an agent to analyze customer escalations.",
+    "useCaseId": 27,
+    "agentName": "Vendor Contract Search",
+    "conversation": [
+      {
+        "request": "When does our contract with 'Salesforce' expire?",
+        "response": "I can find that information for you in our vendor contract database."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "vendor_contracts",
+        "entity": "contracts",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "service now",
-      "jira",
-      "gmail"
+      {
+        "name": "vendor_contracts",
+        "entity": "contracts",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide a full analysis of a customer escalation. Context: A user will provide a customer name or ticket number. You must find the high-priority incident in ServiceNow, the corresponding bug in Jira, and the initial communication thread in Gmail. Constraints: The analysis requires data from all three sources. Exclude low-priority tickets. Preference: Identify the root cause of the escalation if mentioned in the tickets."
+    "agentInstructions": "You are a procurement specialist who manages vendor contracts. You have access to the vendor contracts datastore, which contains all contracts with our suppliers and partners. When a user asks about the expiration date of a specific contract, you should use the vertex_ai_search_tool to search the vendor_contracts datastore. Provide the expiration date and any other relevant details about the contract."
   },
   {
-    "useCaseId": "DS022",
-    "agentName": "Benefits Information Agent",
-    "conversation": "Build an agent to provide benefits information.",
+    "useCaseId": 28,
+    "agentName": "Customer Relationship Management (CRM) Search",
+    "conversation": [
+      {
+        "request": "What is the contact information for our primary contact at 'Global Corp'?",
+        "response": "I can look that up for you in our CRM system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "crm_contacts",
+        "entity": "contacts",
+        "type": "salesforce"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday",
-      "confluence"
+      {
+        "name": "crm_contacts",
+        "entity": "contacts",
+        "type": "salesforce"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide employees with information about their benefits. Context: A user will ask a question about benefits. You must search Workday for their personal benefit selections and Confluence for general benefits documentation. Constraints: Personal benefit information is confidential and should only be shown to the employee asking. Do not display one employee's information to another. Preference: Provide links to the official documents in Confluence."
+    "agentInstructions": "You are a sales account manager who maintains relationships with our customers. You have access to the CRM contacts datastore, which contains contact information for all of our customers. When a user asks for the contact information of a specific customer, you should use the vertex_ai_search_tool to search the crm_contacts datastore. Provide the requested information and any relevant notes about the customer relationship."
   },
   {
-    "useCaseId": "DS023",
-    "agentName": "Design Document Locator",
-    "conversation": "I need an agent to locate design documents.",
+    "useCaseId": 29,
+    "agentName": "Supply Chain Logistics Search",
+    "conversation": [
+      {
+        "request": "What is the status of our shipment with tracking number '12345'?",
+        "response": "I can check the status for you in our logistics and supply chain system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "supply_chain_logistics",
+        "entity": "shipments",
+        "type": "sap"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "jira"
+      {
+        "name": "supply_chain_logistics",
+        "entity": "shipments",
+        "type": "sap"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find design documents for a specific feature. Context: A user will provide a feature or project name. You must search Confluence for design specification pages and Jira for epics or stories that have design documents attached or linked. Constraints: Prioritize documents in the official 'Design' space in Confluence. Exclude draft or archived pages. Preference: If available, show the date the design was last updated."
+    "agentInstructions": "You are a logistics coordinator who tracks all inbound and outbound shipments. You have access to the supply chain logistics datastore, which contains real-time information on all of our shipments. When a user asks for the status of a specific shipment, you should use the vertex_ai_search_tool to search the supply_chain_logistics datastore. Provide the current location of the shipment and its estimated delivery date."
   },
   {
-    "useCaseId": "DS024",
-    "agentName": "IT Change Request Researcher",
-    "conversation": "Make an agent to research IT change requests.",
+    "useCaseId": 30,
+    "agentName": "Inventory Management Search",
+    "conversation": [
+      {
+        "request": "How many units of product 'X' do we have in stock at the main warehouse?",
+        "response": "I can check the inventory for you in our inventory management system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "inventory_management",
+        "entity": "products",
+        "type": "sap"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "service now",
-      "confluence"
+      {
+        "name": "inventory_management",
+        "entity": "products",
+        "type": "sap"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to research the history and justification for an IT change request. Context: A user will provide a change request ID. You must search ServiceNow for the full ticket details and Confluence for any related planning or architecture documents linked in the ticket. Constraints: The research must be thorough. Exclude any change requests that were rejected. Preference: Summarize the reason for the change request."
+    "agentInstructions": "You are an inventory manager who tracks all of our products. You have access to the inventory management datastore, which contains real-time information on our stock levels. When a user asks about the availability of a specific product, you should use the vertex_ai_search_tool to search the inventory_management datastore. Provide the current stock level and any information on upcoming shipments."
   },
   {
-    "useCaseId": "DS025",
-    "agentName": "My Contributions Agent",
-    "conversation": "I want an agent to find my contributions for the year.",
+    "useCaseId": 31,
+    "agentName": "Facilities Management Search",
+    "conversation": [
+      {
+        "request": "I need to book a conference room for a meeting tomorrow at 10 AM.",
+        "response": "I can help with that. I will search for available conference rooms in our facilities management system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "facilities_management",
+        "entity": "rooms",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence"
+      {
+        "name": "facilities_management",
+        "entity": "rooms",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to compile a list of the user's contributions over a specific period. Context: The user is asking for their own work history. You must search Jira for all tickets they completed and Confluence for all pages they created or significantly edited. Constraints: The time frame for the search is mandatory. Exclude minor edits or comments. Preference: Present the information as two lists: 'Completed Jira Tickets' and 'Authored Confluence Pages'."
+    "agentInstructions": "You are a facilities manager who helps employees book conference rooms and other shared spaces. You have access to the facilities management datastore, which contains information on all of our conference rooms and their availability. When a user asks to book a room, you should use the vertex_ai_search_tool to search the facilities_management datastore for available rooms. Provide a list of available rooms and help the user book the one that best suits their needs."
   },
   {
-    "useCaseId": "DS026",
-    "agentName": "Team PTO Calendar Agent",
-    "conversation": "Build an agent to see my team's PTO.",
+    "useCaseId": 32,
+    "agentName": "Travel and Expense Policy Search",
+    "conversation": [
+      {
+        "request": "What is the daily per diem for meals when traveling to New York?",
+        "response": "I can find that for you in our travel and expense policy documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "travel_expense_policy",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "travel_expense_policy",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to display the team's vacation schedule. Context: A user will ask to see their team's PTO calendar. You must search Confluence for the shared team calendar page. Constraints: Only display the publicly shared team calendar. Do not access individual calendars. Preference: Display the information for the current and next month."
+    "agentInstructions": "You are an HR benefits specialist who helps employees understand their travel and expense benefits. You have access to the travel and expense policy datastore, which contains detailed information on our travel and expense policies. When a user asks about a specific policy, such as the per diem for meals, you should use the vertex_ai_search_tool to search the travel_expense_policy datastore. Provide a clear and concise answer to the user's question and direct them to the relevant section of the policy for more information."
   },
   {
-    "useCaseId": "DS027",
-    "agentName": "Bug Duplicate Checker",
-    "conversation": "I need an agent to check for duplicate bugs.",
+    "useCaseId": 33,
+    "agentName": "Health and Safety Document Search",
+    "conversation": [
+      {
+        "request": "Where can I find the emergency evacuation plan for our office?",
+        "response": "I can locate that for you in our health and safety documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "health_safety_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "jira"
+      {
+        "name": "health_safety_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to prevent the creation of duplicate bug reports. Context: A user will provide a title or description of a new bug. You must search Jira for existing issues with similar keywords. Constraints: The search should look at open and recently closed bugs. Exclude issues that are more than a year old. Preference: If potential duplicates are found, provide links to the top 3 matches."
+    "agentInstructions": "You are a health and safety officer who ensures a safe working environment for all employees. You have access to the health and safety documents datastore, which contains our emergency evacuation plans and other safety procedures. When a user asks for a specific safety document, you should use the vertex_ai_search_tool to search the health_safety_documents datastore. Provide a link to the document and a summary of the key procedures."
   },
   {
-    "useCaseId": "DS028",
-    "agentName": "Manager's Briefing Agent",
-    "conversation": "Create an agent to give me a briefing on my direct reports.",
+    "useCaseId": 34,
+    "agentName": "Compliance Document Search",
+    "conversation": [
+      {
+        "request": "I need to find our company's data privacy policy.",
+        "response": "I can find that for you in our compliance documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "compliance_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday",
-      "jira"
+      {
+        "name": "compliance_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide a manager with a performance snapshot of their direct reports. Context: The user is a manager. First, use Workday to identify their direct reports. Then, for each report, search Jira for their in-progress and recently completed tickets. Constraints: This agent is only for users who are listed as managers in Workday. Exclude tickets that are in the backlog. Preference: For each direct report, provide a count of in-progress and completed tickets."
+    "agentInstructions": "You are a compliance officer who ensures that the company adheres to all relevant laws and regulations. You have access to the compliance documents datastore, which contains our data privacy policy and other compliance-related documents. When a user asks for a specific policy, you should use the vertex_ai_search_tool to search the compliance_documents datastore. Provide a link to the policy and a summary of its key provisions."
   },
   {
-    "useCaseId": "DS029",
-    "agentName": "System Outage Investigator",
-    "conversation": "I want an agent to investigate the last system outage.",
+    "useCaseId": 35,
+    "agentName": "Patent and Trademark Search",
+    "conversation": [
+      {
+        "request": "Do we have a patent for the 'Auto-Sync' technology?",
+        "response": "I can check that for you in our patent and trademark database."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "patents_trademarks",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "service now",
-      "confluence",
-      "gmail"
+      {
+        "name": "patents_trademarks",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to compile a report on the most recent system outage. Context: The user is asking for details on the last major outage. You must search ServiceNow for the P0 or P1 incident, Confluence for the post-mortem report, and Gmail for the initial alert emails. Constraints: The investigation is limited to the most recent qualifying incident. Exclude unrelated maintenance notifications. Preference: The report should include the timeline of the event, from initial alert to resolution."
+    "agentInstructions": "You are an intellectual property lawyer who manages the company's patents and trademarks. You have access to the patents and trademarks datastore, which contains all of our patent and trademark filings. When a user asks about a specific patent or trademark, you should use the vertex_ai_search_tool to search the patents_trademarks datastore. Provide the filing number and a summary of the intellectual property."
   },
   {
-    "useCaseId": "DS030",
-    "agentName": "Acronym Definer",
-    "conversation": "Build an agent to define company acronyms.",
+    "useCaseId": 36,
+    "agentName": "Research and Development (R&D) Document Search",
+    "conversation": [
+      {
+        "request": "Find the research paper on 'Quantum Computing' from our R&D department.",
+        "response": "I can locate that for you in our R&D document repository."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "research_development_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "research_development_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to define internal company acronyms. Context: A user will provide an acronym. You must search the company's Confluence knowledge base for a page that defines it, often called a glossary or dictionary. Constraints: The answer must come from an official glossary page if one exists. Do not guess the meaning. Preference: If no definition is found, say so clearly."
+    "agentInstructions": "You are an R&D scientist who contributes to the company's research and development efforts. You have access to the research and development docs datastore, which contains all of our research papers and project documentation. When a user asks for a specific research paper, you should use the vertex_ai_search_tool to search the research_development_docs datastore. Provide a link to the paper and a summary of its findings."
   },
   {
-    "useCaseId": "DS031",
-    "agentName": "Hiring Status Checker",
-    "conversation": "I need an agent to check the status of a job requisition.",
+    "useCaseId": 37,
+    "agentName": "Customer Feedback Search",
+    "conversation": [
+      {
+        "request": "What is the most common feature request from our customers in the last quarter?",
+        "response": "I can analyze customer feedback for you. I will search our customer feedback datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "customer_feedback",
+        "entity": "feedback",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "customer_feedback",
+        "entity": "feedback",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the current status of a job requisition. Context: A user will provide a job title or requisition ID. You must search Workday for the current stage of the hiring process (e.g., 'Open', 'Interviewing', 'Offer Extended'). Constraints: This information is only available to the hiring manager or HR personnel. Do not show this information to other employees. Preference: Include the date the requisition was opened."
+    "agentInstructions": "You are a product manager who gathers and analyzes customer feedback. You have access to the customer feedback datastore, which contains all of the feedback we receive from our customers. When a user asks for a summary of recent customer feedback, you should use the vertex_ai_search_tool to search the customer_feedback datastore. Provide a summary of the most common themes and a list of the most requested features."
   },
   {
-    "useCaseId": "DS032",
-    "agentName": "Project Dependencies Finder",
-    "conversation": "Make an agent to find project dependencies.",
+    "useCaseId": 38,
+    "agentName": "Employee Performance Review Search",
+    "conversation": [
+      {
+        "request": "I need to find the performance review template for managers.",
+        "response": "I can find that for you in our HR performance review documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "performance_reviews",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence"
+      {
+        "name": "performance_reviews",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to identify dependencies for a given project. Context: A user will provide a project name. You must search Jira for linked issues and 'is blocked by' relationships. Also, search Confluence for project planning documents that explicitly mention dependencies. Constraints: The search should focus on explicit, documented dependencies. Do not infer dependencies. Preference: List the dependencies as a list of blocking Jira tickets or Confluence pages."
+    "agentInstructions": "You are an HR manager who oversees the employee performance review process. You have access to the performance reviews datastore, which contains all of our performance review templates and guidelines. When a manager asks for a performance review template, you should use the vertex_ai_search_tool to search the performance_reviews datastore. Provide a link to the template and any relevant guidelines."
   },
   {
-    "useCaseId": "DS033",
-    "agentName": "Expense Report Policy Agent",
-    "conversation": "I want an agent to answer questions about expense reports.",
+    "useCaseId": 39,
+    "agentName": "Corporate Communications Search",
+    "conversation": [
+      {
+        "request": "Find the latest all-hands meeting recording.",
+        "response": "I can locate that for you in our corporate communications archive."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "corporate_communications",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "corporate_communications",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to answer employee questions about the expense report policy. Context: A user will ask a question about what is or is not an allowable expense. You must search the Confluence knowledge base for the official expense policy guidelines. Constraints: Do not provide financial advice. Answers must be based solely on the official policy. Preference: Quote the specific line item from the policy document that answers the user's question."
+    "agentInstructions": "You are a corporate communications manager who keeps employees informed about company news and events. You have access to the corporate communications datastore, which contains all of our internal announcements and all-hands meeting recordings. When a user asks for a specific announcement or recording, you should use the vertex_ai_search_tool to search the corporate_communications datastore. Provide a link to the requested content and a summary of its key messages."
   },
   {
-    "useCaseId": "DS040",
-    "agentName": "QBR Data Collector",
-    "conversation": "Build an agent to collect data for the QBR.",
+    "useCaseId": 40,
+    "agentName": "Public Relations (PR) Media Kit Search",
+    "conversation": [
+      {
+        "request": "Where can I find our company's official media kit for the press?",
+        "response": "I can find that for you in our public relations datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "public_relations_kit",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence",
-      "service now"
+      {
+        "name": "public_relations_kit",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to collect performance data for the Quarterly Business Review (QBR). Context: The user needs data for the last quarter. You must search Jira for key project milestones achieved, Confluence for quarterly summary reports, and ServiceNow for customer satisfaction scores. Constraints: The data must be from the previous fiscal quarter only. Exclude anecdotal evidence. Preference: Present the data with clear headings for each source system."
+    "agentInstructions": "You are a public relations manager who works with the media to promote the company. You have access to the public relations kit datastore, which contains our official media kit and other press materials. When a journalist asks for our media kit, you should use the vertex_ai_search_tool to search the public_relations_kit datastore. Provide a link to the media kit and any other relevant information."
   },
   {
-    "useCaseId": "DS041",
-    "agentName": "New Hire Ticket Creator",
-    "conversation": "I need an agent to find the right new hire tickets to create.",
+    "useCaseId": 41,
+    "agentName": "Event Management Document Search",
+    "conversation": [
+      {
+        "request": "I need to find the budget for the upcoming annual conference.",
+        "response": "I can locate that for you in our event management documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "event_management_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "event_management_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to identify the standard set of IT tickets required for a new hire. Context: A manager is onboarding a new employee. You must search Confluence for the 'New Hire Onboarding' standard operating procedure (SOP) to find the list of required Jira and ServiceNow tickets. Constraints: The agent should only reference the official, most current SOP. Do not use outdated versions. Preference: List the required tickets with a brief description of each."
+    "agentInstructions": "You are an event manager who plans and executes company events. You have access to the event management docs datastore, which contains all of our event budgets, plans, and other related documents. When a user asks for a specific event document, you should use the vertex_ai_search_tool to search the event_management_docs datastore. Provide a link to the document and a summary of its contents."
   },
   {
-    "useCaseId": "DS042",
-    "agentName": "Code of Conduct Agent",
-    "conversation": "Create an agent to find our code of conduct.",
+    "useCaseId": 42,
+    "agentName": "Business Continuity Plan Search",
+    "conversation": [
+      {
+        "request": "What is our company's business continuity plan in case of a natural disaster?",
+        "response": "I can find that for you in our business continuity planning documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "business_continuity_plans",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "business_continuity_plans",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide employees with the company's Code of Conduct. Context: A user is asking for the code of conduct. You must search the Confluence HR space for the official, most recently updated Code of Conduct document. Constraints: You must only return the official document, not drafts or discussions about it. Preference: Provide a direct link to the Confluence page."
+    "agentInstructions": "You are a business continuity planner who prepares the company for potential disruptions. You have access to the business continuity plans datastore, which contains our disaster recovery and emergency plans. When a user asks for a specific plan, you should use the vertex_ai_search_tool to search the business_continuity_plans datastore. Provide a link to the plan and a summary of its key procedures."
   },
   {
-    "useCaseId": "DS043",
-    "agentName": "Customer Feedback Summarizer",
-    "conversation": "I want an agent to summarize customer feedback.",
+    "useCaseId": 43,
+    "agentName": "Insurance Policy Search",
+    "conversation": [
+      {
+        "request": "I need to find our company's liability insurance policy.",
+        "response": "I can locate that for you in our insurance policy documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "insurance_policies",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "gmail",
-      "service now"
+      {
+        "name": "insurance_policies",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to summarize customer sentiment about a specific product. Context: A user will provide a product name. You must search Gmail for emails in the 'Feedback' folder and ServiceNow for support tickets that mention the product. Constraints: The summary should be balanced, including both positive and negative feedback. Exclude feedback that is not product-specific. Preference: Identify the top 3 most common themes in the feedback."
+    "agentInstructions": "You are a risk manager who oversees the company's insurance policies. You have access to the insurance policies datastore, which contains all of our insurance policy documents. When a user asks for a specific policy, you should use the vertex_ai_search_tool to search the insurance_policies datastore. Provide a link to the policy and a summary of its coverage."
   },
   {
-    "useCaseId": "DS044",
-    "agentName": "Team Goal Tracker",
-    "conversation": "Build an agent to track our team's goals.",
+    "useCaseId": 44,
+    "agentName": "Real Estate Lease Search",
+    "conversation": [
+      {
+        "request": "When does the lease for our New York office expire?",
+        "response": "I can find that information for you in our real estate lease agreements."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "real_estate_leases",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "jira"
+      {
+        "name": "real_estate_leases",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to report on the progress of a team's quarterly goals. Context: A user will specify their team. You must search Confluence for the team's quarterly goals page, then search Jira for the epics and tasks that are linked to those goals to check their status. Constraints: The agent must first identify the goals from Confluence before checking progress in Jira. Exclude personal goals. Preference: Calculate and display the percentage of completion for each goal."
+    "agentInstructions": "You are a real estate manager who oversees the company's properties. You have access to the real estate leases datastore, which contains all of our lease agreements. When a user asks about a specific lease, you should use the vertex_ai_search_tool to search the real_estate_leases datastore. Provide the lease expiration date and any other relevant details."
   },
   {
-    "useCaseId": "DS045",
-    "agentName": "Compliance Document Finder",
-    "conversation": "I need an agent to find compliance documents.",
+    "useCaseId": 45,
+    "agentName": "Fleet Management Search",
+    "conversation": [
+      {
+        "request": "Which employee is assigned to the company vehicle with license plate 'XYZ 123'?",
+        "response": "I can look that up for you in our fleet management system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "fleet_management",
+        "entity": "vehicles",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "fleet_management",
+        "entity": "vehicles",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find official compliance and legal documents. Context: A user will ask for a specific compliance document (e.g., 'SOC 2 report'). You must search the secure 'Legal and Compliance' space in Confluence. Constraints: Access to this agent may be restricted. Do not search any other space for these documents. Preference: If the document exists, state the date it was last certified or updated."
+    "agentInstructions": "You are a fleet manager who oversees the company's vehicles. You have access to the fleet management datastore, which contains information on all of our company vehicles. When a user asks about a specific vehicle, you should use the vertex_ai_search_tool to search the fleet_management datastore. Provide the vehicle's license plate number and the name of the employee it is assigned to."
   },
   {
-    "useCaseId": "DS046",
-    "agentName": "Product FAQ Agent",
-    "conversation": "Make an agent that can answer product FAQs.",
+    "useCaseId": 46,
+    "agentName": "Procurement and Purchasing Search",
+    "conversation": [
+      {
+        "request": "What is the status of purchase order #67890?",
+        "response": "I can check the status for you in our procurement and purchasing system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "procurement_purchasing",
+        "entity": "orders",
+        "type": "sap"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "procurement_purchasing",
+        "entity": "orders",
+        "type": "sap"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to answer frequently asked questions about a product. Context: A user will ask a question about a specific product. You must search the Confluence knowledge base for the official FAQ document for that product and find the relevant question-answer pair. Constraints: Answers must come directly from the FAQ document. Do not attempt to answer based on other sources. Preference: If a direct answer isn't found, provide a link to the full FAQ document."
+    "agentInstructions": "You are a procurement manager who oversees the company's purchasing. You have access to the procurement and purchasing datastore, which contains all of our purchase orders. When a user asks about a specific purchase order, you should use the vertex_ai_search_tool to search the procurement_purchasing datastore. Provide the status of the order and its estimated delivery date."
   },
   {
-    "useCaseId": "DS047",
-    "agentName": "Interview Feedback Collector",
-    "conversation": "I want an agent to collect interview feedback.",
+    "useCaseId": 47,
+    "agentName": "Accounts Payable and Receivable Search",
+    "conversation": [
+      {
+        "request": "Has invoice #12345 been paid?",
+        "response": "I can check the payment status for you in our accounts payable system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "accounts_payable_receivable",
+        "entity": "invoices",
+        "type": "sap"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "gmail"
+      {
+        "name": "accounts_payable_receivable",
+        "entity": "invoices",
+        "type": "sap"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to collect all interview feedback for a specific candidate. Context: A hiring manager will provide a candidate's name and the job role. You must search Gmail for all emails sent to the hiring alias that contain feedback for that candidate. Constraints: The search must be confidential and only initiated by the hiring manager or recruiter. Exclude scheduling emails. Preference: List the feedback from each interviewer separately."
+    "agentInstructions": "You are an accounts payable specialist who processes payments to our vendors. You have access to the accounts payable and receivable datastore, which contains all of our invoices. When a user asks about a specific invoice, you should use the vertex_ai_search_tool to search the accounts_payable_receivable datastore. Provide the payment status of the invoice and the date it was paid."
   },
   {
-    "useCaseId": "DS048",
-    "agentName": "Service Health Checker",
-    "conversation": "Build an agent to check the health of a service.",
+    "useCaseId": 48,
+    "agentName": "Tax Document Search",
+    "conversation": [
+      {
+        "request": "I need to find our company's tax identification number.",
+        "response": "I can find that for you in our tax documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "tax_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "service now"
+      {
+        "name": "tax_documents",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to report the current health of an internal service. Context: A user will provide a service name. You must search ServiceNow for any open, high-priority incidents related to that service. Constraints: Only P0 or P1 incidents should be considered as impacting service health. Exclude scheduled maintenance. Preference: If there are no open incidents, respond with 'The service is currently healthy.'"
+    "agentInstructions": "You are a tax accountant who manages the company's tax filings. You have access to the tax documents datastore, which contains all of our tax documents. When a user asks for a specific tax document, you should use the vertex_ai_search_tool to search the tax_documents datastore. Provide a link to the document and a summary of its contents."
   },
   {
-    "useCaseId": "DS049",
-    "agentName": "My Training History Agent",
-    "conversation": "Create an agent to find my training history.",
+    "useCaseId": 49,
+    "agentName": "Internal Audit Report Search",
+    "conversation": [
+      {
+        "request": "Find the internal audit report for the finance department from last year.",
+        "response": "I can locate that for you in our internal audit reports."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "internal_audit_reports",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "internal_audit_reports",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to retrieve the user's completed training history. Context: The user is asking for their own training records. You must search their Workday profile for a list of all completed courses and certifications. Constraints: This is a private search and must only return the data for the user making the request. Do not show in-progress courses. Preference: List the courses with their completion dates."
+    "agentInstructions": "You are an internal auditor who reviews the company's financial records. You have access to the internal audit reports datastore, which contains all of our internal audit reports. When a user asks for a specific report, you should use the vertex_ai_search_tool to search the internal_audit_reports datastore. Provide a link to the report and a summary of its findings."
   },
   {
-    "useCaseId": "DS050",
-    "agentName": "Sprint Retrospective Helper",
-    "conversation": "I need an agent to help with our sprint retrospective.",
+    "useCaseId": 50,
+    "agentName": "Quality Assurance (QA) Document Search",
+    "conversation": [
+      {
+        "request": "I need to find the QA test plan for the upcoming software release.",
+        "response": "I can find that for you in our quality assurance documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "quality_assurance_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence"
+      {
+        "name": "quality_assurance_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to gather data for a sprint retrospective meeting. Context: A user will specify a sprint. You must search Jira for all stories completed and not completed in that sprint. You should also search Confluence for the notes from the previous retrospective. Constraints: The data must be specific to the sprint in question. Exclude data from other sprints. Preference: Calculate the percentage of completed work for the sprint."
+    "agentInstructions": "You are a quality assurance engineer who tests our software to ensure it meets our quality standards. You have access to the quality assurance docs datastore, which contains all of our test plans and other QA-related documents. When a user asks for a specific test plan, you should use the vertex_ai_search_tool to search the quality_assurance_docs datastore. Provide a link to the test plan and a summary of its contents."
   },
   {
-    "useCaseId": "DS051",
-    "agentName": "Vendor Contract Agent",
-    "conversation": "I want an agent to find information on vendor contracts.",
+    "useCaseId": 51,
+    "agentName": "Manufacturing Process Search",
+    "conversation": [
+      {
+        "request": "What is the standard operating procedure for assembling product 'Y'?",
+        "response": "I can find that for you in our manufacturing process documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "manufacturing_processes",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "manufacturing_processes",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find the contract details for a specific vendor. Context: A user will provide a vendor name. You must search the secure procurement space in Confluence for the relevant contract documents. Constraints: Access to this agent is restricted to the finance and legal teams. Do not search outside the designated Confluence space. Preference: Display the contract's expiration date."
+    "agentInstructions": "You are a manufacturing engineer who designs and improves our manufacturing processes. You have access to the manufacturing processes datastore, which contains all of our standard operating procedures. When a user asks for a specific SOP, you should use the vertex_ai_search_tool to search the manufacturing_processes datastore. Provide a link to the SOP and a summary of its key steps."
   },
   {
-    "useCaseId": "DS052",
-    "agentName": "A/B Test Results Finder",
-    "conversation": "Build an agent to find A/B test results.",
+    "useCaseId": 52,
+    "agentName": "Philanthropy and Corporate Social Responsibility (CSR) Search",
+    "conversation": [
+      {
+        "request": "Find our company's latest CSR report.",
+        "response": "I can locate that for you in our philanthropy and CSR documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "philanthropy_csr_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "jira"
+      {
+        "name": "philanthropy_csr_docs",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find the results of a specific A/B test. Context: A user will provide the name of the test or feature. You must search Confluence for the test analysis page and Jira for the ticket that was used to implement and track the test. Constraints: Prioritize the official analysis in Confluence as the source of truth. Exclude preliminary results. Preference: State the outcome of the test (e.g., 'Variant B was successful')."
+    "agentInstructions": "You are a corporate social responsibility manager who oversees the company's philanthropic efforts. You have access to the philanthropy and CSR docs datastore, which contains all of our CSR reports and other related documents. When a user asks for a specific report, you should use the vertex_ai_search_tool to search the philanthropy_csr_docs datastore. Provide a link to the report and a summary of its key findings."
   },
   {
-    "useCaseId": "DS053",
-    "agentName": "IT Asset Lookup Agent",
-    "conversation": "I need an agent to look up my assigned IT assets.",
+    "useCaseId": 53,
+    "agentName": "Employee Benefits Search",
+    "conversation": [
+      {
+        "request": "What are the details of our company's 401(k) plan?",
+        "response": "I can find that information for you in our employee benefits documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "employee_benefits",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "service now"
+      {
+        "name": "employee_benefits",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to list the IT assets assigned to the user. Context: The user is asking for their own assets. You must search ServiceNow's configuration management database (CMDB) for all hardware and software assigned to them. Constraints: This is a private search and must only return data for the user making the request. Do not show assets assigned to others. Preference: Include the asset tag for each piece of hardware."
+    "agentInstructions": "You are an employee benefits administrator who helps employees with their benefits. You have access to the employee benefits datastore, which contains information on our 401(k) plan, health insurance, and other benefits. When a user asks about a specific benefit, you should use the vertex_ai_search_tool to search the employee_benefits datastore. Provide a clear and concise answer to the user's question and direct them to the relevant section of the benefits guide for more information."
   },
   {
-    "useCaseId": "DS054",
-    "agentName": "Marketing Campaign Analyst",
-    "conversation": "Create an agent to analyze marketing campaigns.",
+    "useCaseId": 54,
+    "agentName": "Executive Biography Search",
+    "conversation": [
+      {
+        "request": "I need to find the official biography of our CEO.",
+        "response": "I can locate that for you in our executive biographies datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "executive_biographies",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "jira"
+      {
+        "name": "executive_biographies",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide an overview of a marketing campaign. Context: A user will provide a campaign name. You must search Confluence for the campaign strategy document and Jira for the tasks and epics that were executed as part of the campaign. Constraints: The analysis should focus on the plan versus the execution. Exclude financial data. Preference: List the key performance indicators (KPIs) mentioned in the strategy document."
+    "agentInstructions": "You are a corporate communications specialist who helps prepare our executives for public appearances. You have access to the executive biographies datastore, which contains the official biographies of our company's leaders. When a user asks for a specific biography, you should use the vertex_ai_search_tool to search the executive_biographies datastore. Provide a link to the biography and a summary of the executive's career highlights."
   },
   {
-    "useCaseId": "DS055",
-    "agentName": "Compensation Statement Agent",
-    "conversation": "I want an agent to find my compensation statement.",
+    "useCaseId": 55,
+    "agentName": "Company History Search",
+    "conversation": [
+      {
+        "request": "When was our company founded?",
+        "response": "I can find that for you in our company history documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "company_history",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "company_history",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to retrieve the user's most recent compensation statement. Context: The user is asking for their own private financial information. You must search their private documents within their Workday profile. Constraints: This is a highly confidential search and must only be accessible by the user themselves. The agent must not cache or store this information. Preference: Provide the document in a downloadable format if possible."
+    "agentInstructions": "You are a company historian who documents the company's history. You have access to the company history datastore, which contains information on the company's founding, milestones, and other key events. When a user asks about the company's history, you should use the vertex_ai_search_tool to search the company_history datastore. Provide a summary of the company's history and a link to any relevant documents or articles."
   },
   {
-    "useCaseId": "DS056",
-    "agentName": "API Documentation Finder",
-    "conversation": "Build an agent to find API documentation.",
+    "useCaseId": 56,
+    "agentName": "Brand Guidelines Search",
+    "conversation": [
+      {
+        "request": "What are the official colors and fonts for our company's branding?",
+        "response": "I can find that for you in our brand guidelines."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "brand_guidelines",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "brand_guidelines",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find API documentation for developers. Context: A developer will ask for documentation for a specific service or endpoint. You must search the engineering space in Confluence for the relevant developer guides. Constraints: Prioritize documents marked as the 'latest' or 'current' version. Exclude deprecated API docs. Preference: Provide a direct link to the specific endpoint documentation if possible."
+    "agentInstructions": "You are a brand manager who ensures that all of our marketing materials are consistent with our brand guidelines. You have access to the brand guidelines datastore, which contains our official colors, fonts, and other branding information. When a user asks about our brand guidelines, you should use the vertex_ai_search_tool to search the brand_guidelines datastore. Provide a link to the guidelines and a summary of our brand's key attributes."
   },
   {
-    "useCaseId": "DS057",
-    "agentName": "Sales Lead Context Agent",
-    "conversation": "I need an agent to get context on a sales lead.",
+    "useCaseId": 57,
+    "agentName": "User Manual Search",
+    "conversation": [
+      {
+        "request": "I need the user manual for the 'Pro' version of our software.",
+        "response": "I can locate that for you in our user manual repository."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "user_manuals",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "gmail"
+      {
+        "name": "user_manuals",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide a sales representative with the full communication history of a sales lead. Context: A user will provide a lead's name or email address. You must search the user's Gmail for all previous email correspondence with that lead. Constraints: The search is limited to the user's own mailbox to respect privacy. Do not search other reps' mailboxes. Preference: List the emails in reverse chronological order (newest first)."
+    "agentInstructions": "You are a technical writer who creates user manuals for our products. You have access to the user manuals datastore, which contains all of our user manuals. When a user asks for a specific manual, you should use the vertex_ai_search_tool to search the user_manuals datastore. Provide a link to the manual and a summary of its contents."
   },
   {
-    "useCaseId": "DS058",
-    "agentName": "On-Call Schedule Agent",
-    "conversation": "Create an agent to find the on-call schedule.",
+    "useCaseId": 58,
+    "agentName": "API Documentation Search",
+    "conversation": [
+      {
+        "request": "How do I authenticate with your company's public API?",
+        "response": "I can find the authentication instructions for you in our API documentation."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "api_documentation",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "api_documentation",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to identify who is currently on-call for a specific team. Context: A user will ask who is on-call for a team. You must search Confluence for the team's on-call rotation page or calendar. Constraints: The information should be for the current date and time. Do not show the schedule for next week unless asked. Preference: State the name of the person who is currently on-call."
+    "agentInstructions": "You are a developer advocate who helps developers use our public API. You have access to the API documentation datastore, which contains all of our API documentation. When a developer asks a question about our API, you should use the vertex_ai_search_tool to search the api_documentation datastore. Provide a clear and concise answer to the user's question and direct them to the relevant section of the documentation for more information."
   },
   {
-    "useCaseId": "DS059",
-    "agentName": "Feature Request Tracker",
-    "conversation": "I want an agent to track a feature request.",
+    "useCaseId": 59,
+    "agentName": "Software Development Kit (SDK) Search",
+    "conversation": [
+      {
+        "request": "Where can I download the latest version of your iOS SDK?",
+        "response": "I can find the download link for you in our SDK documentation."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "sdk_documentation",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "jira"
+      {
+        "name": "sdk_documentation",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find the current status of a feature request. Context: A user will provide a feature name or ID. You must search Jira for the corresponding epic or issue to find its current status in the development lifecycle. Constraints: The search should be limited to feature requests, not bugs. Exclude requests that have been closed as 'Won't Do'. Preference: Provide a link to the Jira ticket for more details."
+    "agentInstructions": "You are a software engineer who develops our iOS SDK. You have access to the SDK documentation datastore, which contains all of our SDK documentation. When a developer asks a question about our SDK, you should use the vertex_ai_search_tool to search the sdk_documentation datastore. Provide a clear and concise answer to the user's question and direct them to the relevant section of the documentation for more information."
   },
   {
-    "useCaseId": "DS060",
-    "agentName": "Travel Policy Agent",
-    "conversation": "Build an agent to answer questions about the travel policy.",
+    "useCaseId": 60,
+    "agentName": "Whitepaper and Case Study Search",
+    "conversation": [
+      {
+        "request": "I need to find a case study on how 'Global Corp' uses our product.",
+        "response": "I can locate that for you in our whitepapers and case studies datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "whitepapers_case_studies",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "whitepapers_case_studies",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to answer employee questions about the company's travel policy. Context: A user will ask a specific question about travel (e.g., 'What is the per diem for international travel?'). You must search the Confluence HR space for the official travel policy document and find the relevant section. Constraints: Do not provide advice or opinions, only information from the official policy. Exclude outdated policy documents. Preference: Quote the relevant sentence or paragraph from the document."
+    "agentInstructions": "You are a content marketer who creates whitepapers and case studies to promote our products. You have access to the whitepapers and case studies datastore, which contains all of our whitepapers and case studies. When a user asks for a specific whitepaper or case study, you should use the vertex_ai_search_tool to search the whitepapers_case_studies datastore. Provide a link to the requested content and a summary of its key findings."
   },
   {
-    "useCaseId": "DS061",
-    "agentName": "Security Patch Status Checker",
-    "conversation": "I need an agent to check the status of a security patch.",
+    "useCaseId": 61,
+    "agentName": "Webinar and Presentation Search",
+    "conversation": [
+      {
+        "request": "Where can I find the recording of last month's webinar on 'AI in the Enterprise'?",
+        "response": "I can find that for you in our webinar and presentation archive."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "webinars_presentations",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "service now"
+      {
+        "name": "webinars_presentations",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to check the deployment status of a security patch. Context: A user will provide a patch identifier (e.g., CVE number). You must search Jira for the engineering ticket tracking the patch development and ServiceNow for the change request ticket tracking its deployment. Constraints: The agent needs to check both systems for a complete picture. Exclude patches that have been superseded. Preference: State the current status in both the development and deployment pipelines."
+    "agentInstructions": "You are a marketing events manager who organizes webinars and other promotional events. You have access to the webinars and presentations datastore, which contains all of our webinar recordings and presentation slides. When a user asks for a specific recording or presentation, you should use the vertex_ai_search_tool to search the webinars_presentations datastore. Provide a link to the requested content and a summary of its key takeaways."
   },
   {
-    "useCaseId": "DS062",
-    "agentName": "Employee Referral Agent",
-    "conversation": "Create an agent to find information about employee referrals.",
+    "useCaseId": 62,
+    "agentName": "Blog and Article Search",
+    "conversation": [
+      {
+        "request": "I'm looking for a blog post on our company's website about 'the future of work'.",
+        "response": "I can find that for you on our company blog."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "company_blog",
+        "entity": "articles",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "workday"
+      {
+        "name": "company_blog",
+        "entity": "articles",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide information about the employee referral program. Context: A user will ask about the referral program. You must search Confluence for the official referral policy document and Workday for the status of the user's past referrals. Constraints: The user's referral history is private and should only be shown to them. Do not display other employees' referral data. Preference: First, explain the referral bonus amount from the policy document."
+    "agentInstructions": "The agent should search the company blog for specific articles."
   },
   {
-    "useCaseId": "DS063",
-    "agentName": "UI Mockup Finder",
-    "conversation": "I want an agent to find UI mockups for a feature.",
+    "useCaseId": 63,
+    "agentName": "Podcast and Audio Search",
+    "conversation": [
+      {
+        "request": "Where can I find the latest episode of our company's podcast?",
+        "response": "I can find that for you in our podcast and audio library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "podcasts_audio",
+        "entity": "audio",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "podcasts_audio",
+        "entity": "audio",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find the latest UI mockups for a specific feature. Context: A user will provide a feature name. You must search the design team's space in Confluence for any related mockup or prototype pages. Constraints: Prioritize pages marked as 'Final' or 'Approved'. Exclude pages marked as 'Draft' or 'Archived'. Preference: If possible, display a preview image of the mockup."
+    "agentInstructions": "The agent should search the podcast and audio datastore for specific episodes."
   },
   {
-    "useCaseId": "DS064",
-    "agentName": "Legal Document Searcher",
-    "conversation": "Build an agent to search for legal documents.",
+    "useCaseId": 64,
+    "agentName": "Video and Multimedia Search",
+    "conversation": [
+      {
+        "request": "I need to find the promotional video for our new product.",
+        "response": "I can locate that for you in our video and multimedia library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "videos_multimedia",
+        "entity": "videos",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "videos_multimedia",
+        "entity": "videos",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find specific legal documents for authorized users. Context: A user from the legal or leadership team will ask for a document (e.g., 'NDA template'). You must search the secure legal space in Confluence. Constraints: Access to this agent must be strictly controlled. The search must be confined to the 'Legal' Confluence space. Preference: Display the version number and last updated date of the document."
+    "agentInstructions": "The agent should search the video and multimedia datastore for specific videos."
   },
   {
-    "useCaseId": "DS065",
-    "agentName": "Support Runbook Agent",
-    "conversation": "I need an agent to find support runbooks.",
+    "useCaseId": 65,
+    "agentName": "Photo and Image Library Search",
+    "conversation": [
+      {
+        "request": "Where can I find approved photos of our company's headquarters?",
+        "response": "I can find those for you in our photo and image library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "photos_images",
+        "entity": "images",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "photos_images",
+        "entity": "images",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find the correct support runbook for a given issue. Context: A support engineer will describe an issue or alert. You must search the Confluence knowledge base for the runbook or standard operating procedure (SOP) that matches the issue. Constraints: The search should prioritize documents titled 'Runbook' or 'SOP'. Exclude general troubleshooting guides. Preference: Provide a direct link to the runbook page."
+    "agentInstructions": "The agent should search the photo and image library for approved company photos."
   },
   {
-    "useCaseId": "DS066",
-    "agentName": "Payslip Finder",
-    "conversation": "Create an agent to find my latest payslip.",
+    "useCaseId": 66,
+    "agentName": "Infographic and Data Visualization Search",
+    "conversation": [
+      {
+        "request": "I need to find the infographic that explains our company's growth over the last five years.",
+        "response": "I can locate that for you in our infographic and data visualization library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "infographics_data_visualizations",
+        "entity": "images",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "infographics_data_visualizations",
+        "entity": "images",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to retrieve the user's most recent payslip. Context: The user is asking for their own confidential financial data. You must search their private documents within their Workday profile. Constraints: This is a highly confidential search. The agent must not cache the document and can only be used by the employee themselves. Preference: Find the payslip for the most recent pay period."
+    "agentInstructions": "The agent should search the infographic and data visualization datastore for specific assets."
   },
   {
-    "useCaseId": "DS067",
-    "agentName": "Post-Mortem Documenter",
-    "conversation": "I want an agent to help me document a post-mortem.",
+    "useCaseId": 67,
+    "agentName": "Template and Form Search",
+    "conversation": [
+      {
+        "request": "Where can I find the template for submitting a new project proposal?",
+        "response": "I can find that for you in our templates and forms library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "templates_forms",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "service now",
-      "jira",
-      "confluence"
+      {
+        "name": "templates_forms",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to gather all necessary information to document a post-mortem report. Context: A user will provide an incident ID. You must pull the incident timeline from ServiceNow, find related bug reports in Jira, and retrieve the official post-mortem template from Confluence. Constraints: The agent should only gather data, not write the narrative. Exclude customer-facing comments. Preference: Organize the gathered information into sections that match the post-mortem template."
+    "agentInstructions": "The agent should search the templates and forms datastore for specific documents."
   },
   {
-    "useCaseId": "DS068",
-    "agentName": "Team Charter Agent",
-    "conversation": "Build an agent to find my team's charter.",
+    "useCaseId": 68,
+    "agentName": "Survey and Poll Search",
+    "conversation": [
+      {
+        "request": "I need to find the results of the latest employee satisfaction survey.",
+        "response": "I can locate those for you in our surveys and polls datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "surveys_polls",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "surveys_polls",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find a team's official charter document. Context: A user will ask for their team's charter. You must search their team's specific Confluence space for a document titled 'Team Charter'. Constraints: The search must be limited to the user's team space to avoid confusion. Do not return other teams' charters. Preference: Display the mission statement from the charter if the document is found."
+    "agentInstructions": "The agent should search the surveys and polls datastore for survey results."
   },
   {
-    "useCaseId": "DS069",
-    "agentName": "IT Satisfaction Survey Agent",
-    "conversation": "I need an agent to find the latest IT satisfaction survey results.",
+    "useCaseId": 69,
+    "agentName": "FAQ and Help Center Search",
+    "conversation": [
+      {
+        "request": "How do I reset my password?",
+        "response": "I can find the answer for you in our FAQ and help center."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "faq_help_center",
+        "entity": "articles",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "gmail"
+      {
+        "name": "faq_help_center",
+        "entity": "articles",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find the results of the most recent IT satisfaction survey. Context: A user is asking for the latest survey results. You must search Confluence for a page containing the results and analysis, and search Gmail for the company-wide announcement email. Constraints: Only return the results for the most recent survey, not historical ones. Exclude individual responses. Preference: State the overall satisfaction score if it is mentioned in the report."
+    "agentInstructions": "The agent should search the FAQ and help center to answer common user questions."
   },
   {
-    "useCaseId": "DS070",
-    "agentName": "Stock Information Agent",
-    "conversation": "Create an agent to find my stock grant information.",
+    "useCaseId": 70,
+    "agentName": "Glossary and Terminology Search",
+    "conversation": [
+      {
+        "request": "What does the acronym 'KPI' stand for?",
+        "response": "I can define that for you from our company's glossary of terms."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "glossary_terminology",
+        "entity": "terms",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "glossary_terminology",
+        "entity": "terms",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to retrieve the user's stock grant information. Context: The user is asking for their own confidential compensation data. You must search their compensation and stock profile in Workday. Constraints: This is a highly confidential search that must only be accessible by the user themselves. The agent must not cache this information. Preference: Display the vesting schedule for their grants."
+    "agentInstructions": "The agent should search the glossary and terminology datastore to define acronyms and terms."
   },
   {
-    "useCaseId": "DS071",
-    "agentName": "User Research Finder",
-    "conversation": "I want an agent to find user research for a product.",
+    "useCaseId": 71,
+    "agentName": "Directory and Contact List Search",
+    "conversation": [
+      {
+        "request": "I need the phone number for our legal department.",
+        "response": "I can find that for you in our company directory."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "company_directory",
+        "entity": "contacts",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "company_directory",
+        "entity": "contacts",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find user research related to a specific product or feature. Context: A user will provide a product or feature name. You must search the user research team's Confluence space for user interview notes, usability test results, and survey analyses. Constraints: Prioritize research that is less than one year old. Exclude research participant's personal information. Preference: Summarize the key findings from the most relevant research report."
+    "agentInstructions": "The agent should search the company directory for departmental contact information."
   },
   {
-    "useCaseId": "DS072",
-    "agentName": "Service Dependency Mapper",
-    "conversation": "Build an agent to map service dependencies.",
+    "useCaseId": 72,
+    "agentName": "Calendar and Schedule Search",
+    "conversation": [
+      {
+        "request": "When is the next company holiday?",
+        "response": "I can check the company calendar for you."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "company_calendar",
+        "entity": "events",
+        "type": "google_calendar"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "company_calendar",
+        "entity": "events",
+        "type": "google_calendar"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to identify the dependencies for a given microservice. Context: An engineer will provide a service name. You must search the engineering Confluence space for architecture diagrams and service manifest files that describe the service's dependencies. Constraints: The information must be sourced from official architecture documents. Do not infer dependencies from code. Preference: List both upstream and downstream dependencies."
+    "agentInstructions": "The agent should search the company calendar for information about holidays and other company-wide events."
   },
   {
-    "useCaseId": "DS073",
-    "agentName": "Hardware Request Status Agent",
-    "conversation": "I need an agent to check the status of my hardware request.",
+    "useCaseId": 73,
+    "agentName": "Map and Floor Plan Search",
+    "conversation": [
+      {
+        "request": "Where is conference room 'Apollo' located in our building?",
+        "response": "I can find that for you on the office floor plan."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "office_floor_plan",
+        "entity": "locations",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "service now"
+      {
+        "name": "office_floor_plan",
+        "entity": "locations",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the status of a user's hardware request. Context: The user is asking about their own request. You must search ServiceNow for any open hardware request tickets associated with the user. Constraints: The search is limited to the user's own tickets. Do not show requests for other employees. Preference: Provide the estimated delivery date if it is available in the ticket."
+    "agentInstructions": "The agent should search the office floor plan to help users find locations within the building."
   },
   {
-    "useCaseId": "DS074",
-    "agentName": "Competitive Analysis Agent",
-    "conversation": "Create an agent to find competitive analysis.",
+    "useCaseId": 74,
+    "agentName": "Product Catalog Search",
+    "conversation": [
+      {
+        "request": "What are the specifications of our 'Enterprise' product tier?",
+        "response": "I can find that for you in our product catalog."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "product_catalog",
+        "entity": "products",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "product_catalog",
+        "entity": "products",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find competitive analysis reports. Context: A user will ask for information about a competitor. You must search the product management and marketing Confluence spaces for analysis documents. Constraints: Prioritize documents created or updated in the last six months. Exclude sales battle cards. Preference: List the key strengths and weaknesses of the competitor as noted in the analysis."
+    "agentInstructions": "The agent should search the product catalog for information about product specifications and features."
   },
   {
-    "useCaseId": "DS075",
-    "agentName": "Job Description Finder",
-    "conversation": "I want an agent to find the job description for a role.",
+    "useCaseId": 75,
+    "agentName": "Pricing and SKU Search",
+    "conversation": [
+      {
+        "request": "What is the price of our 'Pro' software license?",
+        "response": "I can find that for you in our pricing and SKU list."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "pricing_sku_list",
+        "entity": "products",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "pricing_sku_list",
+        "entity": "products",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to retrieve the official job description for a specific role. Context: A user will provide a job title. You must search Workday for the official, approved job description and responsibilities for that role. Constraints: Do not return draft or unapproved job descriptions. The search should be for current roles only. Preference: Include the job level or grade if available."
+    "agentInstructions": "The agent should search the pricing and SKU list for product pricing information."
   },
   {
-    "useCaseId": "DS076",
-    "agentName": "Data Breach Investigator",
-    "conversation": "Build an agent to investigate a potential data breach.",
+    "useCaseId": 76,
+    "agentName": "Customer Account Information Search",
+    "conversation": [
+      {
+        "request": "What is the account number for 'Global Corp'?",
+        "response": "I can look that up for you in our customer account database."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "customer_accounts",
+        "entity": "accounts",
+        "type": "salesforce"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "service now",
-      "gmail",
-      "jira"
+      {
+        "name": "customer_accounts",
+        "entity": "accounts",
+        "type": "salesforce"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to gather initial information for a potential data breach investigation. Context: A security analyst will trigger the investigation. You must search ServiceNow for critical security incidents, Gmail for user-reported suspicious emails, and Jira for any emergency engineering tickets. Constraints: This agent is highly restricted and logs all queries. The search must be broad and time-sensitive. Preference: Correlate events across the different systems into a single timeline."
+    "agentInstructions": "The agent should search the customer account datastore for account numbers and other customer information."
   },
   {
-    "useCaseId": "DS077",
-    "agentName": "Brand Guidelines Agent",
-    "conversation": "I need an agent to find our brand guidelines.",
+    "useCaseId": 77,
+    "agentName": "Partner and Reseller Search",
+    "conversation": [
+      {
+        "request": "I need to find a list of our authorized resellers in California.",
+        "response": "I can find that for you in our partner and reseller directory."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "partners_resellers",
+        "entity": "partners",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "partners_resellers",
+        "entity": "partners",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide employees with the company's brand guidelines. Context: A user will ask for branding information, like logos or color palettes. You must search the marketing space in Confluence for the official brand style guide. Constraints: Only provide assets and guidelines from the official, most current style guide. Do not provide outdated assets. Preference: Provide a direct link to download the logo package."
+    "agentInstructions": "The agent should search the partner and reseller datastore to find authorized partners in a specific region."
   },
   {
-    "useCaseId": "DS078",
-    "agentName": "Software License Agent",
-    "conversation": "Create an agent to check for available software licenses.",
+    "useCaseId": 78,
+    "agentName": "Affiliate and Influencer Search",
+    "conversation": [
+      {
+        "request": "Who are our top-performing affiliates for the last quarter?",
+        "response": "I can find that information for you in our affiliate and influencer marketing platform."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "affiliates_influencers",
+        "entity": "affiliates",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "service now"
+      {
+        "name": "affiliates_influencers",
+        "entity": "affiliates",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to check for the availability of software licenses. Context: A user will request a specific software product. You must search ServiceNow's asset management database to see if there are any available licenses. Constraints: The agent can only check for availability, not assign a license. Exclude licenses that are reserved. Preference: If no licenses are available, state when the next renewal date is, if that information is available."
+    "agentInstructions": "The agent should search the affiliate and influencer datastore for performance data."
   },
   {
-    "useCaseId": "DS079",
-    "agentName": "Employee Anniversary Agent",
-    "conversation": "I want an agent to find employee work anniversaries.",
+    "useCaseId": 79,
+    "agentName": "Media and Advertising Search",
+    "conversation": [
+      {
+        "request": "I need to find the ad copy for our upcoming social media campaign.",
+        "response": "I can locate that for you in our media and advertising assets."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "media_advertising_assets",
+        "entity": "assets",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "media_advertising_assets",
+        "entity": "assets",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to find upcoming employee work anniversaries. Context: A user will ask for anniversaries, perhaps for their team. You must search Workday for employee start dates. Constraints: Do not display the year of the start date, only the month and day to protect age privacy. Exclude employees who have left the company. Preference: List the anniversaries for the current month."
+    "agentInstructions": "The agent should search the media and advertising datastore for ad copy and other campaign assets."
   },
   {
-    "useCaseId": "DS080",
-    "agentName": "Test Environment Status Checker",
-    "conversation": "Build an agent to check the status of a test environment.",
+    "useCaseId": 80,
+    "agentName": "Sponsorship and Donation Search",
+    "conversation": [
+      {
+        "request": "What was the total amount of our company's charitable donations last year?",
+        "response": "I can find that information for you in our sponsorship and donation records."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "sponsorships_donations",
+        "entity": "records",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "jira",
-      "confluence"
+      {
+        "name": "sponsorships_donations",
+        "entity": "records",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to report the status of a specific test environment. Context: A QA engineer or developer will provide an environment name. You must search Jira for any open tickets related to that environment (e.g., 'QA-environment-3 is down') and Confluence for the environment's maintenance schedule. Constraints: The status should be based on open, blocking Jira tickets. Exclude resolved tickets. Preference: If there is scheduled maintenance, state the start and end times."
+    "agentInstructions": "The agent should search the sponsorship and donation datastore for information on charitable giving."
   },
   {
-    "useCaseId": "DS081",
-    "agentName": "Product Roadmap Agent",
-    "conversation": "I need an agent to find the product roadmap.",
+    "useCaseId": 81,
+    "agentName": "Award and Recognition Search",
+    "conversation": [
+      {
+        "request": "I need a list of all the awards our company has won.",
+        "response": "I can find that for you in our awards and recognitions database."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "awards_recognitions",
+        "entity": "awards",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "jira"
+      {
+        "name": "awards_recognitions",
+        "entity": "awards",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the current product roadmap. Context: A user will ask for the roadmap. You must search Confluence for the official roadmap presentation or page, and search Jira for the epics that are scheduled for upcoming quarters. Constraints: Only the official roadmap from the product team's Confluence space should be considered the source of truth. Do not show unscheduled backlog items. Preference: Display the roadmap by quarter."
+    "agentInstructions": "The agent should search the awards and recognitions datastore for a list of company awards."
   },
   {
-    "useCaseId": "DS082",
-    "agentName": "Office Map Finder",
-    "conversation": "Create an agent to find the office map.",
+    "useCaseId": 82,
+    "agentName": "Testimonial and Quote Search",
+    "conversation": [
+      {
+        "request": "Find a positive customer testimonial about our 'Pro' software.",
+        "response": "I can find one for you in our testimonials and quotes library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "testimonials_quotes",
+        "entity": "quotes",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "testimonials_quotes",
+        "entity": "quotes",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the office floor plan. Context: A user will ask for the office map or a colleague's location. You must search the facilities space in Confluence for the floor plan document. Constraints: Only show the map for the user's designated office location. Do not show maps for other offices unless specified. Preference: If a specific colleague's desk is requested, highlight that area on the map if the data is available."
+    "agentInstructions": "The agent should search the testimonials and quotes datastore for positive customer feedback."
   },
   {
-    "useCaseId": "DS083",
-    "agentName": "Emergency Contact Agent",
-    "conversation": "I want an agent to find my emergency contact information.",
+    "useCaseId": 83,
+    "agentName": "Permission and Consent Form Search",
+    "conversation": [
+      {
+        "request": "I need to find the consent form for using a customer's logo on our website.",
+        "response": "I can locate that for you in our permissions and consent forms."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "permissions_consent_forms",
+        "entity": "forms",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "permissions_consent_forms",
+        "entity": "forms",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to retrieve the user's designated emergency contacts. Context: The user is asking for their own confidential information. You must search their private profile information in Workday. Constraints: This is a highly confidential search. The agent must not cache the information and can only be used by the employee themselves to view their own data. Preference: Display the name and primary phone number for the emergency contact."
+    "agentInstructions": "The agent should search the permissions and consent forms datastore for specific legal forms."
   },
   {
-    "useCaseId": "DS084",
-    "agentName": "Launch Calendar Agent",
-    "conversation": "Build an agent to find the launch calendar.",
+    "useCaseId": 84,
+    "agentName": "Release Note and Changelog Search",
+    "conversation": [
+      {
+        "request": "What were the new features in the latest version of our software?",
+        "response": "I can find that for you in the release notes and changelog."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "release_notes_changelog",
+        "entity": "notes",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "release_notes_changelog",
+        "entity": "notes",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the schedule for upcoming product launches. Context: A user will ask about upcoming launches. You must search Confluence for the shared product launch calendar. Constraints: Only display public launch dates. Do not display internal-only target dates or unannounced projects. Preference: List the launches for the current and next quarter."
+    "agentInstructions": "The agent should search the release notes and changelog for information about new features and bug fixes."
   },
   {
-    "useCaseId": "DS085",
-    "agentName": "Data Retention Policy Agent",
-    "conversation": "I need an agent to find our data retention policy.",
+    "useCaseId": 85,
+    "agentName": "Roadmap and Feature Request Search",
+    "conversation": [
+      {
+        "request": "Is 'dark mode' on the product roadmap for our mobile app?",
+        "response": "I can check the product roadmap for you."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "product_roadmap",
+        "entity": "features",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "product_roadmap",
+        "entity": "features",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the company's official data retention policy. Context: A user will ask a question about data retention. You must search the legal space in Confluence for the official policy document. Constraints: The agent must only quote from the most recently updated, official policy. Do not interpret the policy. Preference: If the user asks about a specific type of data, find the relevant section in the policy."
+    "agentInstructions": "The agent should search the product roadmap to see if a specific feature is planned."
   },
   {
-    "useCaseId": "DS086",
-    "agentName": "Mentorship Program Agent",
-    "conversation": "Create an agent to find information on the mentorship program.",
+    "useCaseId": 86,
+    "agentName": "Bug and Issue Tracker Search",
+    "conversation": [
+      {
+        "request": "Is there a known bug related to the 'export to PDF' feature?",
+        "response": "I can check our bug and issue tracker for you."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "bug_issue_tracker",
+        "entity": "issues",
+        "type": "jira"
+      },
+      {
+        "name": "internal_knowledge_base",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "bug_issue_tracker",
+        "entity": "issues",
+        "type": "jira"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide information about the company's mentorship program. Context: A user will ask how to get involved in the mentorship program. You must search the HR space in Confluence for program details, eligibility requirements, and sign-up forms. Constraints: Do not provide contact information for individual mentors. The user must use the official sign-up process. Preference: Provide a direct link to the sign-up form."
+    "agentInstructions": "The agent should search the bug and issue tracker for known issues."
   },
   {
-    "useCaseId": "DS087",
-    "agentName": "Cloud Cost Anomaly Detector",
-    "conversation": "I want an agent to find cloud cost anomalies.",
+    "useCaseId": 87,
+    "agentName": "System Status and Outage Search",
+    "conversation": [
+      {
+        "request": "Is our main website currently experiencing any outages?",
+        "response": "I can check the system status page for you."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "system_status_page",
+        "entity": "status",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "gmail",
-      "jira"
+      {
+        "name": "system_status_page",
+        "entity": "status",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to identify potential cloud cost anomalies. Context: A user on the finance or engineering leadership team will ask about cost spikes. You must search Gmail for automated billing alerts from cloud providers and Jira for any high-priority tickets related to unexpected increases in cloud spend. Constraints: Access to this agent should be restricted. Exclude routine, expected cost increases. Preference: Correlate billing alerts with specific Jira tickets if possible."
+    "agentInstructions": "The agent should search the system status page for information on current outages."
   },
   {
-    "useCaseId": "DS088",
-    "agentName": "Mobile Device Policy Agent",
-    "conversation": "Build an agent to find the mobile device policy.",
+    "useCaseId": 88,
+    "agentName": "Security and Vulnerability Report Search",
+    "conversation": [
+      {
+        "request": "I need to find the latest security vulnerability report for our software.",
+        "response": "I can locate that for you in our security and vulnerability reports."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "security_vulnerability_reports",
+        "entity": "reports",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "security_vulnerability_reports",
+        "entity": "reports",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the company's policy on using mobile devices for work. Context: A user will ask about the mobile device policy. You must search the IT knowledge base in Confluence for the relevant document. Constraints: The agent should provide the policy, not technical support for mobile devices. Exclude carrier-specific information. Preference: Quote the section related to security requirements."
+    "agentInstructions": "The agent should search the security and vulnerability datastore for the latest reports."
   },
   {
-    "useCaseId": "DS089",
-    "agentName": "Employee Discount Agent",
-    "conversation": "I need an agent to find employee discounts.",
+    "useCaseId": 89,
+    "agentName": "Data and Analytics Search",
+    "conversation": [
+      {
+        "request": "What was our website's bounce rate last month?",
+        "response": "I can find that for you in our data and analytics platform."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "data_analytics_platform",
+        "entity": "metrics",
+        "type": "google_analytics"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "data_analytics_platform",
+        "entity": "metrics",
+        "type": "google_analytics"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to inform employees about available discounts. Context: A user will ask about employee perks or discounts. You must search the HR space in Confluence for the perks and benefits page. Constraints: Do not provide discount codes directly. The user must follow the instructions on the page to obtain them. Exclude expired offers. Preference: List the discounts by category (e.g., 'Fitness', 'Travel')."
+    "agentInstructions": "The agent should search the data and analytics datastore for specific metrics."
   },
   {
-    "useCaseId": "DS090",
-    "agentName": "Accessibility Guidelines Agent",
-    "conversation": "Create an agent to find our accessibility guidelines.",
+    "useCaseId": 90,
+    "agentName": "A/B Test and Experiment Search",
+    "conversation": [
+      {
+        "request": "What were the results of the A/B test on the new homepage design?",
+        "response": "I can find the results for you in our A/B testing and experimentation platform."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "ab_testing_platform",
+        "entity": "experiments",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "ab_testing_platform",
+        "entity": "experiments",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the company's accessibility (a11y) guidelines. Context: A designer or developer will ask about accessibility standards. You must search the design system space in Confluence for the official guidelines. Constraints: The agent should provide the company's internal standards, not general WCAG guidelines unless referenced. Exclude bug reports related to accessibility. Preference: Provide a link to the component library examples."
+    "agentInstructions": "The agent should search the A/B testing and experimentation datastore for test results."
   },
   {
-    "useCaseId": "DS091",
-    "agentName": "Grievance Policy Agent",
-    "conversation": "I want an agent to find the employee grievance policy.",
+    "useCaseId": 91,
+    "agentName": "User Research and Persona Search",
+    "conversation": [
+      {
+        "request": "I need to find the user persona for our 'small business owner' customer segment.",
+        "response": "I can locate that for you in our user research and personas datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "user_research_personas",
+        "entity": "personas",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "user_research_personas",
+        "entity": "personas",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the official employee grievance policy. Context: A user will ask about filing a grievance or complaint. You must search the HR space in Confluence for the official policy document. Constraints: The agent must not provide legal advice or interpret the policy. It should remain neutral and only provide the document. Preference: Provide contact information for the HR department as listed in the document."
+    "agentInstructions": "The agent should search the user research and personas datastore for specific user personas."
   },
   {
-    "useCaseId": "DS092",
-    "agentName": "IP Policy Agent",
-    "conversation": "Build an agent to find the company's IP policy.",
+    "useCaseId": 92,
+    "agentName": "Journey Map and Flowchart Search",
+    "conversation": [
+      {
+        "request": "Where can I find the customer journey map for our e-commerce website?",
+        "response": "I can find that for you in our journey maps and flowcharts library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "journey_maps_flowcharts",
+        "entity": "diagrams",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "journey_maps_flowcharts",
+        "entity": "diagrams",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the company's intellectual property (IP) policy. Context: A user will ask about IP ownership or open source contributions. You must search the legal space in Confluence for the official IP policy. Constraints: The agent must not provide legal advice. It should only provide the policy document. Preference: If the user asks about a specific clause, try to find that section within the document."
+    "agentInstructions": "The agent should search the journey maps and flowcharts datastore for specific diagrams."
   },
   {
-    "useCaseId": "DS093",
-    "agentName": "Social Media Policy Agent",
-    "conversation": "I need an agent to find the social media policy.",
+    "useCaseId": 93,
+    "agentName": "Wireframe and Mockup Search",
+    "conversation": [
+      {
+        "request": "I need to find the latest wireframes for the new mobile app design.",
+        "response": "I can locate those for you in our wireframes and mockups library."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "wireframes_mockups",
+        "entity": "designs",
+        "type": "figma"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "wireframes_mockups",
+        "entity": "designs",
+        "type": "figma"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the company's social media policy. Context: A user will ask about the rules for posting on social media. You must search the marketing or HR space in Confluence for the official policy. Constraints: The agent should provide the policy, not approve posts. Exclude personal opinions or examples. Preference: Quote the 'dos and don'ts' section of the policy."
+    "agentInstructions": "The agent should search the wireframes and mockups datastore for specific design files."
   },
   {
-    "useCaseId": "DS094",
-    "agentName": "Remote Work Policy Agent",
-    "conversation": "Create an agent to find the remote work policy.",
+    "useCaseId": 94,
+    "agentName": "Prototype and Design System Search",
+    "conversation": [
+      {
+        "request": "Where can I find the interactive prototype for the new website redesign?",
+        "response": "I can find that for you in our prototypes and design systems."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "prototypes_design_systems",
+        "entity": "designs",
+        "type": "figma"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "prototypes_design_systems",
+        "entity": "designs",
+        "type": "figma"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the official remote work policy. Context: A user will ask about the policy for working from home or remotely. You must search the HR space in Confluence for the official document. Constraints: The policy may differ by country or role; try to find the most relevant version for the user if possible. Exclude informal team agreements. Preference: State the policy on equipment reimbursement if it's mentioned."
+    "agentInstructions": "The agent should search the prototypes and design systems datastore for interactive prototypes."
   },
   {
-    "useCaseId": "DS095",
-    "agentName": "Procurement Process Agent",
-    "conversation": "I want an agent to explain the procurement process.",
+    "useCaseId": 95,
+    "agentName": "Usability Test and Feedback Search",
+    "conversation": [
+      {
+        "request": "I need to find the results of the latest usability test on our mobile app.",
+        "response": "I can locate those for you in our usability testing and feedback datastore."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "usability_testing_feedback",
+        "entity": "feedback",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "usability_testing_feedback",
+        "entity": "feedback",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to explain how to purchase goods or services. Context: A user will ask how to buy something for work. You must search the finance space in Confluence for the official procurement process document. Constraints: The agent should not approve purchases. It should only provide the process. Exclude information about specific vendors. Preference: Outline the steps of the process in a numbered list."
+    "agentInstructions": "The agent should search the usability testing and feedback datastore for test results and user feedback."
   },
   {
-    "useCaseId": "DS096",
-    "agentName": "Crisis Management Plan Agent",
-    "conversation": "Build an agent to find the crisis management plan.",
+    "useCaseId": 96,
+    "agentName": "Accessibility and WCAG Compliance Search",
+    "conversation": [
+      {
+        "request": "Where can I find our company's accessibility statement and WCAG compliance report?",
+        "response": "I can find that for you in our accessibility and WCAG compliance documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "accessibility_wcag_compliance",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "accessibility_wcag_compliance",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the official crisis management plan to authorized users. Context: A user on the leadership or communications team will ask for the plan during an emergency. You must search the secure leadership space in Confluence for the document. Constraints: Access to this agent must be strictly limited. The search must be confined to the 'Leadership' space. Preference: Display the contact list for the crisis response team."
+    "agentInstructions": "The agent should search the accessibility and WCAG compliance datastore for relevant reports and statements."
   },
   {
-    "useCaseId": "DS097",
-    "agentName": "Internal Mobility Agent",
-    "conversation": "I need an agent to find internal job openings.",
+    "useCaseId": 97,
+    "agentName": "Localization and Translation Search",
+    "conversation": [
+      {
+        "request": "I need to find the translated version of our website's homepage in Spanish.",
+        "response": "I can locate that for you in our localization and translation files."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "localization_translation_files",
+        "entity": "files",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "workday"
+      {
+        "name": "localization_translation_files",
+        "entity": "files",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to help employees find internal job opportunities. Context: A user will ask about internal mobility or open roles. You must search Workday for all current, open internal job requisitions. Constraints: The search must exclude external-only job postings. Do not show roles that have already been filled. Preference: Allow the user to filter the search by department or job level."
+    "agentInstructions": "The agent should search the localization and translation datastore for translated content."
   },
   {
-    "useCaseId": "DS098",
-    "agentName": "Password Policy Agent",
-    "conversation": "Create an agent to find the password policy.",
+    "useCaseId": 98,
+    "agentName": "Style Guide and Voice and Tone Search",
+    "conversation": [
+      {
+        "request": "What is the correct way to format a date in our company's blog posts?",
+        "response": "I can find that for you in our style guide and voice and tone documents."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "style_guide_voice_tone",
+        "entity": "documents",
+        "type": "unstructured"
+      },
+      {
+        "name": "jira_issue",
+        "entity": "Issue",
+        "type": "jira"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "style_guide_voice_tone",
+        "entity": "documents",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide the company's password policy. Context: A user will ask about password requirements (e.g., length, complexity). You must search the IT knowledge base in Confluence for the official policy. Constraints: The agent should not help reset passwords, only provide the policy. Exclude system-specific password rules unless asked. Preference: List the password requirements in a simple, easy-to-understand format."
+    "agentInstructions": "The agent should search the style guide and voice and tone datastore for formatting and writing guidelines."
   },
   {
-    "useCaseId": "DS099",
-    "agentName": "Health and Safety Agent",
-    "conversation": "I want an agent to find our health and safety policies.",
+    "useCaseId": 99,
+    "agentName": "Content Management System (CMS) Search",
+    "conversation": [
+      {
+        "request": "I need to find the draft of the new blog post titled 'The Future of AI'.",
+        "response": "I can locate that for you in our content management system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "content_management_system",
+        "entity": "articles",
+        "type": "unstructured"
+      },
+      {
+        "name": "confluence_page",
+        "entity": "Page",
+        "type": "confluence"
+      }
     ],
     "expected_datastores": [
-      "confluence"
+      {
+        "name": "content_management_system",
+        "entity": "articles",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to provide employees with health and safety information. Context: A user will ask about workplace safety procedures. You must search the facilities or HR space in Confluence for the health and safety manual. Constraints: In case of an emergency, the agent must advise the user to contact emergency services or the designated safety officer. Do not provide medical advice. Preference: Provide the contact information for the company's safety officer."
+    "agentInstructions": "The agent should search the content management system for drafts and published content."
   },
   {
-    "useCaseId": "DS100",
-    "agentName": "OKRs Tracking Agent",
-    "conversation": "Build an agent to track our company OKRs.",
+    "useCaseId": 100,
+    "agentName": "Digital Asset Management (DAM) Search",
+    "conversation": [
+      {
+        "request": "Where can I find the high-resolution images from our last marketing photoshoot?",
+        "response": "I can find those for you in our digital asset management system."
+      }
+    ],
     "all_datastores": [
-      "gmail",
-      "jira",
-      "service now",
-      "confluence",
-      "workday"
+      {
+        "name": "digital_asset_management",
+        "entity": "assets",
+        "type": "unstructured"
+      },
+      {
+        "name": "servicenow_incident",
+        "entity": "incident",
+        "type": "servicenow"
+      }
     ],
     "expected_datastores": [
-      "confluence",
-      "jira"
+      {
+        "name": "digital_asset_management",
+        "entity": "assets",
+        "type": "unstructured"
+      }
     ],
     "expected_tools": [
       "vertex_ai_search_tool"
     ],
-    "expected_agentInstructions": "Your primary goal is to report on the progress of company-level Objectives and Key Results (OKRs). Context: A user will ask for the status of the company OKRs. You must first search Confluence for the page defining the quarterly OKRs. Then, for each Key Result, search Jira for the epics or projects that are tagged with that KR to determine their status. Constraints: The agent must start with the official OKRs defined in Confluence. Do not track team-level or individual OKRs. Preference: For each Objective, list the Key Results and their percentage of completion."
+    "agentInstructions": "The agent should search the digital asset management system for high-resolution images and other digital assets."
   }
 ]
