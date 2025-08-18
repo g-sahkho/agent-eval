@@ -1,0 +1,202 @@
+[
+  {
+    "useCaseId": "TL001",
+    "agentName": "Incident Reporter",
+    "description": "Creates a ServiceNow incident and sends a notification email.",
+    "conversation": "I need an agent to report a critical IT incident for me.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["service now", "gmail"],
+    "expected_tools": ["create_servicenow_incident", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to report a critical IT incident and notify a stakeholder. Context: A user will describe an IT problem and provide a recipient's email. You must use the `create_servicenow_incident` tool to log the issue. Afterwards, use the `send_email` tool to send a confirmation. Constraints: The problem description must be detailed. The email can only be sent after the incident is successfully created. Preference: Include the new incident number in the email's subject line."
+  },
+  {
+    "useCaseId": "TL002",
+    "agentName": "Vacation Booker",
+    "description": "Books time off in Workday and creates a corresponding calendar event.",
+    "conversation": "I want an agent to book my vacation time.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["workday", "gmail"],
+    "expected_tools": ["create_calendar_event", "request_time_off"],
+    "expected_agentInstructions": "Your primary goal is to schedule vacation time. Context: A user will provide their desired vacation dates. You must use the `request_time_off` tool in Workday to submit the request. Then, use the `create_calendar_event` tool to block off those dates on their calendar. Constraints: The start date must be in the future. The request cannot exceed 20 business days. Preference: Title the calendar event 'Vacation'."
+  },
+  {
+    "useCaseId": "TL003",
+    "agentName": "Bug Submitter",
+    "description": "Submits a new bug report to Jira after checking for duplicates.",
+    "conversation": "Build an agent to submit a bug report.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["jira"],
+    "expected_tools": ["vertex_ai_search_tool", "create_jira_issue"],
+    "expected_agentInstructions": "Your primary goal is to create a new bug report in Jira. Context: A user will describe a software bug. First, search Jira to see if a similar bug has already been reported. If not, use the `create_jira_issue` tool to create a new bug report. Constraints: A bug description is mandatory. If a duplicate is found, provide the link to the user instead of creating a new one. Preference: Assign the new bug a 'Medium' priority by default."
+  },
+  {
+    "useCaseId": "TL004",
+    "agentName": "Meeting Followup",
+    "description": "Sends a follow-up email, creates a Confluence page for notes, and creates Jira action items.",
+    "conversation": "I need an agent to handle meeting follow-ups.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["jira", "gmail", "confluence"],
+    "expected_tools": ["create_jira_issue", "send_email", "create_confluence_page"],
+    "expected_agentInstructions": "Your primary goal is to perform post-meeting actions. Context: A user will provide meeting notes, attendees, and action items. You must use `create_confluence_page` for the notes, `send_email` to distribute them, and `create_jira_issue` for each action item. Constraints: At least one action item must be provided. The Confluence page must be created before the email is sent. Preference: Link the Jira tickets in the Confluence page."
+  },
+  {
+    "useCaseId": "TL005",
+    "agentName": "PTO Notifier",
+    "description": "Requests time off in Workday and sends an email to the user's team.",
+    "conversation": "Create an agent to notify my team when I take PTO.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["workday", "gmail"],
+    "expected_tools": ["request_time_off", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to request PTO and notify the user's team. Context: A user will provide dates and their team's email address. Use the `request_time_off` tool in Workday. After it's approved, use the `send_email` tool to notify the team. Constraints: The team email address must be a valid distribution list. The request must be for a valid date range. Preference: The email subject should be 'PTO Notification: [User Name]'."
+  },
+  {
+    "useCaseId": "TL006",
+    "agentName": "Incident Escalator",
+    "description": "Updates the priority of a ServiceNow incident and emails the on-call manager.",
+    "conversation": "I want an agent to escalate critical IT incidents.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["service now", "gmail"],
+    "expected_tools": ["update_servicenow_incident", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to escalate a critical IT incident. Context: A user will provide a ServiceNow incident ID. You must use the `update_servicenow_incident` tool to change the priority to 'Critical'. Then, use the `send_email` tool to notify the on-call manager. Constraints: The incident ID must be valid. The priority can only be changed to 'Critical'. Preference: Include the incident summary in the notification email."
+  },
+  {
+    "useCaseId": "TL007",
+    "agentName": "Task Updater",
+    "description": "Adds a comment to an existing Jira ticket.",
+    "conversation": "Build an agent to update my Jira tasks.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["jira"],
+    "expected_tools": ["update_jira_issue"],
+    "expected_agentInstructions": "Your primary goal is to add a comment to a Jira ticket. Context: A user will provide a Jira ticket ID and a comment. You must use the `update_jira_issue` tool to add the comment to the ticket. Constraints: The Jira ticket must exist and be open. The comment cannot be empty. Preference: None."
+  },
+  {
+    "useCaseId": "TL008",
+    "agentName": "Outage Communicator",
+    "description": "Creates a P0 incident in ServiceNow and sends a company-wide email.",
+    "conversation": "I need an agent to communicate a major service outage.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["service now", "gmail"],
+    "expected_tools": ["create_servicenow_incident", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to communicate a major outage. Context: A user will provide details of the outage. You must use `create_servicenow_incident` to create a P0 incident. Then, use `send_email` to send a company-wide notification. Constraints: The incident priority must be P0. The email recipient list must be 'all-employees@company.com'. Preference: The email should have the subject 'Service Outage Alert'."
+  },
+  {
+    "useCaseId": "TL009",
+    "agentName": "Event Coordinator",
+    "description": "Schedules a calendar event and sends a separate email with the agenda.",
+    "conversation": "Create an agent to coordinate team events.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["gmail"],
+    "expected_tools": ["create_calendar_event", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to schedule a team event and distribute the agenda. Context: A user will provide event details, attendees, and an agenda. You must use `create_calendar_event` to schedule the meeting. Then, use `send_email` to send the agenda to the attendees. Constraints: The event must have at least two attendees. The agenda cannot be empty. Preference: Attach the agenda as a document in the email if possible."
+  },
+  {
+    "useCaseId": "TL010",
+    "agentName": "Project Kickoff",
+    "description": "Creates a project overview page in Confluence and the main epic in Jira.",
+    "conversation": "I want an agent to help me kick off a new project.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["jira", "confluence"],
+    "expected_tools": ["create_jira_issue", "create_confluence_page"],
+    "expected_agentInstructions": "Your primary goal is to initialize a new project. Context: A user will provide project details. You must use `create_confluence_page` to create a project overview page. Then, use `create_jira_issue` to create the main epic for the project. Constraints: The project name must be provided. The Jira issue type must be 'Epic'. Preference: Link the Confluence page in the Jira epic's description."
+  },
+  {
+    "useCaseId": "TL011",
+    "agentName": "Status Reporter",
+    "description": "Searches for updated Jira issues and sends a summary email.",
+    "conversation": "I need an agent to automate my weekly status reports.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["jira", "gmail"],
+    "expected_tools": ["vertex_ai_search_tool", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to send a weekly project status email. Context: A user will specify a Jira project and stakeholders. First, search Jira for issues updated in the last 7 days. Then, use the `send_email` tool to send a summary to the stakeholders. Constraints: The user must approve the email before it is sent. The search must be limited to the specified project. Preference: Format the email with 'Completed' and 'In Progress' sections."
+  },
+  {
+    "useCaseId": "TL012",
+    "agentName": "Retro Planner",
+    "description": "Creates a retrospective page in Confluence and schedules the meeting.",
+    "conversation": "Build an agent to set up our sprint retrospectives.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["confluence", "gmail"],
+    "expected_tools": ["create_calendar_event", "create_confluence_page"],
+    "expected_agentInstructions": "Your primary goal is to organize a sprint retrospective. Context: A user will provide sprint details. You must use `create_confluence_page` to create the retro page. Then, use `create_calendar_event` to schedule the meeting and invite the team. Constraints: The team must have at least 3 members. The Confluence page must use the 'Retrospective' template. Preference: Link the Confluence page in the calendar invitation."
+  },
+  {
+    "useCaseId": "TL013",
+    "agentName": "Bug Notifier",
+    "description": "Files a bug in Jira and notifies another team about it via email.",
+    "conversation": "I need an agent to file a bug and notify the responsible team.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["jira", "gmail"],
+    "expected_tools": ["create_jira_issue", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to report a bug and notify the relevant team. Context: A user will describe a bug and specify a team to notify. You must use `create_jira_issue` to create the bug report. Then, use `send_email` to notify the team. Constraints: The bug report must include steps to reproduce. The notification email must be sent to a valid team alias. Preference: Include the new Jira ticket link in the email."
+  },
+  {
+    "useCaseId": "TL014",
+    "agentName": "Leave Coordinator",
+    "description": "Handles extended leave requests by booking time, blocking calendars, and sending notifications.",
+    "conversation": "Build an agent to handle my extended leave of absence.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["workday", "gmail"],
+    "expected_tools": ["create_calendar_event", "request_time_off", "send_email"],
+    "expected_agentInstructions": "Your primary goal is to coordinate an extended leave of absence. Context: A user will provide their leave dates. You must use `request_time_off` in Workday, `create_calendar_event` to block their work calendar, and `send_email` to send an out-of-office notification to their team. Constraints: The leave must be for 5 or more consecutive days. All three actions must be completed. Preference: The out-of-office email should include the return date."
+  },
+  {
+    "useCaseId": "TL015",
+    "agentName": "Desk Automator",
+    "description": "Creates a ServiceNow ticket for a new issue and drafts a knowledge base article in Confluence.",
+    "conversation": "I want an agent for our service desk that also helps with documentation.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["service now", "confluence"],
+    "expected_tools": ["create_servicenow_incident", "create_confluence_page"],
+    "expected_agentInstructions": "Your primary goal is to log a new IT issue and prepare for its documentation. Context: A user will report a new type of issue. You must use `create_servicenow_incident` to log the ticket. Then, use `create_confluence_page` to create a draft knowledge base article. Constraints: This should only be used for new, undocumented issues. The Confluence page must be created in the 'Drafts' space. Preference: Title the Confluence page 'KB Draft: [Incident Summary]'."
+  },
+  {
+    "useCaseId": "TL016",
+    "agentName": "Release Drafter",
+    "description": "Searches for completed Jira issues and drafts a release notes page in Confluence.",
+    "conversation": "I need to automate drafting our release notes.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["jira", "confluence"],
+    "expected_tools": ["vertex_ai_search_tool", "create_confluence_page"],
+    "expected_agentInstructions": "Your primary goal is to draft a release notes page. Context: A user will specify a release version. First, search Jira for all completed issues in that version. Then, use `create_confluence_page` to create a draft release notes page with the results. Constraints: The Jira search must be for a specific version. The Confluence page must be created, not updated. Preference: Organize the release notes by issue type (Bugs, Features)."
+  },
+  {
+    "useCaseId": "TL017",
+    "agentName": "PTO Commenter",
+    "description": "Requests PTO in Workday and adds an out-of-office comment to all open Jira tickets.",
+    "conversation": "Build an agent that requests my PTO and comments on my Jira tickets.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["workday", "jira"],
+    "expected_tools": ["update_jira_issue", "request_time_off"],
+    "expected_agentInstructions": "Your primary goal is to notify your team about your PTO on Jira. Context: A user will request PTO. First, use `request_time_off` in Workday. Then, search Jira for all open tickets assigned to the user and use `update_jira_issue` to add a comment to each. Constraints: The comment must be added to all open tickets. Do not close any tickets. Preference: The comment should state 'I will be out of office from [start date] to [end date].'"
+  },
+  {
+    "useCaseId": "TL018",
+    "agentName": "Handoff Assistant",
+    "description": "Creates a Confluence page for on-call handoff notes and emails it to the next engineer.",
+    "conversation": "I need an agent to help with my on-call handoff.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["confluence", "gmail"],
+    "expected_tools": ["send_email", "create_confluence_page"],
+    "expected_agentInstructions": "Your primary goal is to facilitate the on-call handoff. Context: A user will provide a summary of the week's events. You must use `create_confluence_page` to create a handoff summary page. Then, use `send_email` to email a link to the page to the next on-call engineer. Constraints: The user must provide the recipient's email. The Confluence page must be created before the email is sent. Preference: Use the subject 'On-Call Handoff Summary'."
+  },
+  {
+    "useCaseId": "TL019",
+    "agentName": "Ticket Commenter",
+    "description": "Adds a user-provided update to a ServiceNow ticket.",
+    "conversation": "I want a simple agent to add updates to ServiceNow tickets.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["service now"],
+    "expected_tools": ["update_servicenow_incident"],
+    "expected_agentInstructions": "Your primary goal is to add a comment to a ServiceNow ticket. Context: A user will provide an incident number and a comment. You must use the `update_servicenow_incident` tool to add the comment to the existing ticket. Constraints: The incident must exist and be in an open state. The comment cannot be empty. Preference: None."
+  },
+  {
+    "useCaseId": "TL020",
+    "agentName": "Brainstorm Organizer",
+    "description": "Sets up a brainstorming session by creating a Confluence page and a calendar event.",
+    "conversation": "Build me an agent to set up a brainstorming session.",
+    "all_datastores": ["gmail", "jira", "service now", "confluence", "workday"],
+    "expected_datastores": ["confluence", "gmail"],
+    "expected_tools": ["create_calendar_event", "create_confluence_page"],
+    "expected_agentInstructions": "Your primary goal is to organize a brainstorming session. Context: A user will provide the session details. You must use `create_confluence_page` to create a new page for the session. Then, use `create_calendar_event` to schedule the meeting and invite the team. Constraints: The session must have a clear topic. The invite must include at least two people. Preference: Link the Confluence page in the calendar invitation."
+  }
+]
